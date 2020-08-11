@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 18:03:55 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/05 21:42:30 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/11 11:24:43 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int		ft_atoi(char *str)
 		num_end++;
 	}
 	num_start = num_end;
+	if (str[num_start] < '0' || str[num_start] > '9')
+		return (0);
 	while (str[num_end] <= '9' && str[num_end] >= '0')
 		answer = answer * 10 + (str[num_end++] - '0');
 	if (minusc % 2 == 0)
