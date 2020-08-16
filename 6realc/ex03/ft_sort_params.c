@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 13:50:09 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/08 13:50:24 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/12 11:56:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		main(int argc, char *argv[])
 		y = x + 1;
 		while (y < argc)
 		{
-			if (comp_str(argc[x], argv[y]) > 0)
+			if (comp_str(argv[x], argv[y]) > 0)
 			{
 				temp = argv[x];
 				argv[x] = argv[y];

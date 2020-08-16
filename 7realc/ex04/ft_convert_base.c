@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 14:04:35 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/11 14:25:54 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/12 11:51:51 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ int		is_valid(char *base)
 	while (base[x])
 	{
 		if (base[x] == '+' || base[x] == '-'
-				|| base[x] == '\t' || base[x] == '\f' 
-				|| base[x] == '\n' || base[x] == '\v' 
-				|| base[x] == '\r' || base[x] == ' ')
+		|| base[x] == '\t' || base[x] == '\f'
+		|| base[x] == '\n' || base[x] == '\v'
+		|| base[x] == '\r' || base[x] == ' ')
 			return (0);
 		y = x + 1;
 		while (base[y])
 		{
-			if (base[x] ==  base[y])
+			if (base[x] == base[y])
 				return (0);
 			y++;
 		}
@@ -50,7 +50,7 @@ int		check_char(char c, char *base)
 
 	x = 0;
 	if (c == '\t' || c == '\f' || c == '\n'
-			|| c == '\v'|| c =='\r' || c ==' ')
+	|| c == '\v' || c == '\r' || c == ' ')
 		return (1);
 	if (c == '-')
 		return (-1);
@@ -71,22 +71,22 @@ int		base_to_int(char *str, char *base, int length)
 	int rslt;
 
 	idx = 0;
-	while (check_char(str[idx],base) == 1)
+	while (check_char(str[idx], base) == 1)
 		idx++;
 	cnt = 1;
-	while (check_char(str[idx],base) < 0)
+	while (check_char(str[idx], base) < 0)
 	{
-		if (check_char(str[idx],base) == -1)
+		if (check_char(str[idx], base) == -1)
 			cnt = cnt * -1;
 		idx++;
 	}
 	if (check_char(str[idx], base) != 2)
 		return (0);
-	rslt = get_base_num(str[idx++],base);
+	rslt = get_base_num(str[idx++], base);
 	length = get_len(base);
 	while (check_char(str[idx], base) == 2)
 		rslt = rslt * length + get_base_num(str[idx++], base);
-	return (rslt * count);	
+	return (rslt * cnt);
 }
 
 char	*int_to_base(int nbr, char *base, int len)
@@ -126,5 +126,5 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	if (!is_valid(base_from) || !is_valid(base_to))
 		return (0);
 	tmp = base_to_int(nbr, base_from, len_from);
-	return (int_to_base(temp, base_to, len_to));
+	return (int_to_base(tmp, base_to, len_to));
 }

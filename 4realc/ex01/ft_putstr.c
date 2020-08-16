@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:40:06 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/05 17:51:41 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/12 23:59:30 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	ft_putstr(char *str)
 
 	size = 0;
 	while (str[size] != '\0')
+	{
+		write(1, &str[size], 1);
 		size++;
-	write(1, str, size + 1);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 14:36:41 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/11 14:38:32 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/12 11:53:42 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	compact(char *arr, int interval)
 
 	i = 0;
 	if (arr[0] == '-')
-	{				
-		i++;								
+	{
+		i++;
 		interval--;
 	}
 	while (i + interval < 34)
@@ -40,7 +40,7 @@ void	compact(char *arr, int interval)
 		i++;
 	}
 	while (i < 34)
-		arr[i++] = '\0';				
+		arr[i++] = '\0';
 }
 
 void	init_arr(char *arr, int size)

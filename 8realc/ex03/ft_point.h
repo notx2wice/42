@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_interative_factorial.c                          :+:      :+:    :+:   */
+/*   ft_point.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/06 10:44:51 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/06 10:48:52 by ukim             ###   ########.fr       */
+/*   Created: 2020/08/16 00:40:56 by ukim              #+#    #+#             */
+/*   Updated: 2020/08/16 00:44:07 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_interative_factorial(int nb)
-{
-	int idx;
-	int	result;
+#ifndef FT_POINT_H
+# define FT_POINT_H
 
-	if (nb < 0)
-		return (0);
-	result = 1;
-	idx = 2;
-	while (idx <= nb)
-	{
-		result = result * idx;
-		idx++;
-	}
-	return (result);
-}
+typedef struct	s_point {
+	int	x;
+	int y;
+}				t_point;
+
+#endif

@@ -6,73 +6,77 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 18:56:35 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/09 06:30:45 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/15 14:12:10 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	*null_str(void)
+int		get_length(char *str)
 {
-	char	*tans;
+	int i;
 
-	tans = (char*)malloc(sizeof(char));
-	*tans = 0;
-	return (tans);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
-int		get_long(char *str)
+int		str_cat(char *dest, int index, char *src)
 {
-	int		idx;
+	int i;
 
-	idx = 0;
-	while (str[idx])
+	i = 0;
+	while (src[i])
 	{
-		idx++;
+		dest[index + i] = src[i];
+		i++;
 	}
-	return (idx);
+	return (index + i);
 }
 
-void	merge(char **strs, char *sep, char *ans, int size)
+char	*make_blank_str(void)
 {
-	int		x;
-	int		y;
-	int		asn_idx;
+	char *result;
 
-	x = 0;
-	y = 0;
-	ans_idx = 0;
-	while (x < size)
+	result = (char *)malloc(sizeof(char) * 1);
+	result[0] = 0;
+	return (result);
+}
+
+void	cat_strs(char **strs, char *sep, char *result, int size)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (i < size)
 	{
-		y = 0;
-		while (y < get_long(strs[x]))
-			ans[ans_idx++] = strs[x][y++];
-		if (x < size - 1)
-		{
-			y = 0;
-			while (y < get_long(sep))
-				ans[ans_idx++] = sep[y++];
-		}
+		j = str_cat(result, j, strs[i]);
+		if (i < size - 1)
+			j = str_cat(result, j, sep);
+		i++;
 	}
-	ans[ans_idx] = '\0';
+	result[j] = '\0';
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
-	int		idx;
-	int		ans_long;
-	char	*ans;
+	int		i;
+	int		length;
+	char	*result;
 
-	idx = 0;
 	if (size == 0)
 	{
-		ans = null_str();
-		return (ans);
+		result = make_blank_str();
+		return (result);
 	}
-	ans_long = get_long(sep) * (size - 1);
-	while (idx < size)
-		ans_long += get_long(strs[idx++]);
-	ans = (char*)malloc(sizeof(char) * (length + 1));
-	merge(strs, sep, result, size);
-	return (ans);
+	length = get_length(sep) * (size - 1);
+	i = 0;
+	while (i < size)
+		length += get_length(strs[i++]);
+	result = (char *)malloc(sizeof(char) * (length + 1));
+	cat_strs(strs, sep, result, size);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 12:30:57 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/08 12:33:37 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/15 12:39:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		main(int argc, char *argv[])
 	int x;
 
 	x = 0;
-	while (argv[0][x])
+	while (argv[argc - 1][x])
 	{
 		write(1, &argv[0][x], 1);
 		x++;
