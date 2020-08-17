@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/16 14:56:59 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/16 15:02:13 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/16 18:17:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_stock_str			*get_stock_str(t_stock_str *tab, char *str)
 	return (tab);
 }
 
-void				free_tab(t_stock_str *tab, int size)
+void				memo_free_tab(t_stock_str *tab, int size)
 {
 	int i;
 
@@ -67,7 +67,7 @@ void				free_tab(t_stock_str *tab, int size)
 struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
 	t_stock_str	*result;
-	t_stock_str	*temp;
+	t_stock_str	*tmp;
 	int			i;
 
 	result = (t_stock_str *)malloc(sizeof(t_stock_str) * (ac + 1));
@@ -77,10 +77,10 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 	i = 0;
 	while (i < ac)
 	{
-		temp = get_stock_str(result + i, av[i]);
-		if (temp == 0)
+		tmp = get_stock_str(result + i, av[i]);
+		if (tmp == 0)
 		{
-			free_tab(result, i);
+			memo_free_tab(result, i);
 			return (0);
 		}
 		i++;
