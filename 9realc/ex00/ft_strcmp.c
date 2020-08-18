@@ -6,26 +6,20 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 13:39:47 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/05 14:36:58 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/18 13:04:49 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
-	int	x;
+	int index;
 
-	x = 0;
-	while ((s1[x] != '\0') && (s2[x] != '\0'))
+	index = 0;
+	while (s1[index] != '\0' && s2[index] != '\0')
 	{
-		if (s1[x] > s2[x])
-			return (1);
-		else if (s1[x] < s2[x])
-			return (-1);
-		x++;
+		if (s1[index] != s2[index])
+			return (s1[index] - s2[index]);
+		index++;
 	}
-	if (s1[x] == s2[x])
-		return (0);
-	if (s1[x] == '\0')
-		return (-1);
-	return (1);
+	return (s1[index] - s2[index]);
 }
