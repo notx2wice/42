@@ -6,11 +6,11 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/19 09:59:55 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/19 10:06:47 by ukim             ###   ########.fr       */
+/*   Updated: 2020/08/19 13:36:50 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_froeach(int *tab, int length, void (*f)(int))
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
 	int x;
 
