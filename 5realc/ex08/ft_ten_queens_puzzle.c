@@ -125,3 +125,8 @@ int		ft_ten_queens_puzzle(void)
 	dfs(0, answer, visited, &count);
 	return (count);
 }
+
+int main()
+{
+	ft_ten_queens_puzzle();
+}
