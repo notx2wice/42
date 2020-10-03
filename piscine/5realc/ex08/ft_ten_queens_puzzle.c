@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ten_queens_puzzle.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/10 21:19:50 by ukim              #+#    #+#             */
-/*   Updated: 2020/08/10 22:09:25 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/03 13:46:36 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	print(int answer[])
+void print(int answer[])
 {
-	int		x;
-	char	c;
+	int x;
+	char c;
 
 	x = 0;
 	while (x < 10)
@@ -27,7 +27,7 @@ void	print(int answer[])
 	write(1, "\n", 1);
 }
 
-void	uncheck_visited(int visited[][11], int level, int idx)
+void uncheck_visited(int visited[][11], int level, int idx)
 {
 	int x;
 	int y;
@@ -50,7 +50,7 @@ void	uncheck_visited(int visited[][11], int level, int idx)
 	}
 }
 
-void	check_visited(int visited[][11], int level, int idx)
+void check_visited(int visited[][11], int level, int idx)
 {
 	int x;
 	int y;
@@ -73,7 +73,7 @@ void	check_visited(int visited[][11], int level, int idx)
 	}
 }
 
-void	dfs(int level, int answer[], int visited[][11], int *count)
+void dfs(int level, int answer[], int visited[][11], int *count)
 {
 	int idx;
 
@@ -99,13 +99,13 @@ void	dfs(int level, int answer[], int visited[][11], int *count)
 	}
 }
 
-int		ft_ten_queens_puzzle(void)
+int ft_ten_queens_puzzle(void)
 {
-	int		count;
-	int		answer[11];
-	int		visited[11][11];
-	int		x;
-	int		y;
+	int count;
+	int answer[11];
+	int visited[11][11];
+	int x;
+	int y;
 
 	x = 0;
 	while (x < 11)
@@ -124,9 +124,4 @@ int		ft_ten_queens_puzzle(void)
 	count = 0;
 	dfs(0, answer, visited, &count);
 	return (count);
-}
-
-int main()
-{
-	ft_ten_queens_puzzle();
 }

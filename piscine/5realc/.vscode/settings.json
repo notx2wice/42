@@ -1,0 +1,11 @@
+{
+    //42_header
+    "42header.username": "ukim",
+    "42header.email": "ukim@42seoul.kr",
+    //tab_space_settings
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.renderWhitespace": "all",
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+}
