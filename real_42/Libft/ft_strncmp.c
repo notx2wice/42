@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 21:13:34 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 01:20:14 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 00:34:26 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 01:33:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *ptr, int value, size_t len)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	size_t	i;
+	int				i;
+	unsigned char	s1_letter;
+	unsigned char	s2_letter;
 
-	if (!ptr)
-		return (NULL);
 	i = 0;
-	while (i < len)
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
 	{
-		*(unsigned char*)(ptr + i) = (unsigned char)value;
 		i++;
 	}
-	return (ptr);
+	s1_letter = (unsigned char)s1[i];
+	s2_letter = (unsigned char)s2[i];
+	return (s1_letter - s2_letter);
 }
-/*
-** 바이트 단위로 변경한다. 값을 value의 값으로
-*/

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 21:13:34 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 01:20:14 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 00:34:57 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 01:37:15 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *ptr, int value, size_t len)
+int	ft_isascii(int c)
 {
-	size_t	i;
-
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		*(unsigned char*)(ptr + i) = (unsigned char)value;
-		i++;
-	}
-	return (ptr);
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
-/*
-** 바이트 단위로 변경한다. 값을 value의 값으로
-*/
