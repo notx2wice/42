@@ -1,34 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 23:34:29 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 19:41:47 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 18:50:05 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 20:10:08 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strchr(const char *str, int c)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
+	int		i;
+	int		s1_len;
+	int		s2_len;
+	char	*str;
 
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (str[i])
+	if (s1 && s2)
 	{
-		if (str[i] == (char)c)
-			return ((char*)(str + i));
-		i++;
+		s1_len = ft_strlen(s1);
+		s2_len = ft_strlen(s2);
+		str = (char*)malloc(sizeof(char) * (s1_len + s2_len + 1));
+		if (str == NULL)
+			return (NULL);
+		i = -1;
+		while (s1[++i])
+			str[i] = s1[i];
+		i = -1;
+		while (s2[++i])
+		{
+			str[s1_len] = s2[i];
+			s1_len++;
+		}
+		str[s1_len] = '\0';
+		return (str);
 	}
 	return (NULL);
 }
-
-/*
-** str 에서 c를 제일 왼쪽 부터 찾아 그 위치를 리턴한다.
-** 해당 사항이 없다면 0을 리턴한다.
-*/
