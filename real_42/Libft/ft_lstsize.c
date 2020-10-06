@@ -6,7 +6,21 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 22:01:17 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 22:01:21 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/06 16:07:40 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+int		ft_lstsize(t_list *lst)
+{
+	int		cnt;
+
+	cnt = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		cnt++;
+	}
+	return (cnt);
+}

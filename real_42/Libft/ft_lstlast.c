@@ -6,7 +6,20 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 22:01:03 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 22:01:32 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/06 16:12:25 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	t_list *last;
+
+	while (lst && lst->next)
+	{
+		lst = lst->next;
+	}
+	last = lst;
+	return (last);
+}
