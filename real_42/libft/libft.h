@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:30:48 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/06 16:33:14 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/06 18:15:29 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-void				*memset(void *str, int value, size_t n);
+void				*ft_memset(void *ptr, int value, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
