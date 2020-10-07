@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 18:49:46 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/07 19:44:39 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 20:11:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (size_s && ft_strchr(set, s1[size_s]))
 		size_s--;
 	dest = ft_substr((char*)s1, 0, size_s + 1);
-	if(!dest)
+	if (!dest)
 	{
-		if(!(ans = (char*)malloc(sizeof(char))))
+		if (!(ans = (char*)malloc(sizeof(char))))
 			return (0);
 		ans[0] = '\0';
 		return (ans);
