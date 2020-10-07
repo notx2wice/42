@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 17:30:48 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/06 18:15:29 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 18:29:08 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char				*ft_strchr(const char *str, int c);
 char				*ft_strrchr(const char *str, int c);
 char				*ft_strnstr(const char *str, const char *find, size_t len);
 int					ft_strcmp(const char *s1, const char *s2);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
+
 int					ft_atoi(const char *str);
 int					ft_isascii(int c);
 int					ft_isdigit(int c);
