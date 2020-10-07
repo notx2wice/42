@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 22:55:12 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/03 23:03:02 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 14:16:44 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
 
-	if (!dst)
-		return (NULL);
 	i = 0;
 	while (i < n)
 	{

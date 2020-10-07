@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 23:30:34 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 00:18:17 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 14:17:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*ft_memchr(const void *src, int val, size_t n)
 {
 	size_t	i;
 
-	if (!src)
-		return (NULL);
 	i = 0;
 	while (i < n)
 	{

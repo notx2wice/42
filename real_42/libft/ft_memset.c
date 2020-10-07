@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 21:13:34 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 01:20:14 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 14:15:59 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ void	*ft_memset(void *ptr, int value, size_t len)
 {
 	size_t	i;
 
-	if (!ptr)
-		return (NULL);
 	i = 0;
 	while (i < len)
 	{

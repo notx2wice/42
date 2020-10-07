@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 23:34:29 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 19:41:47 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 14:19:32 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ char	*ft_strchr(const char *str, int c)
 {
 	int	i;
 
-	if (!str)
-		return (NULL);
 	i = 0;
 	while (str[i])
 	{
