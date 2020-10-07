@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 18:49:46 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 22:43:38 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/07 19:44:39 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t		size_s;
 	char		*dest;
+	char		*ans;
 
 	if (!s1 || !set)
 		return (NULL);
@@ -26,6 +27,13 @@ char	*ft_strtrim(char const *s1, char const *set)
 	while (size_s && ft_strchr(set, s1[size_s]))
 		size_s--;
 	dest = ft_substr((char*)s1, 0, size_s + 1);
+	if(!dest)
+	{
+		if(!(ans = (char*)malloc(sizeof(char))))
+			return (0);
+		ans[0] = '\0';
+		return (ans);
+	}
 	return (dest);
 }
 
@@ -38,5 +46,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 ** 	char *test = "!@#hello!@#!@";
 ** 	char *ans = ft_strtrim(test, "!@#");
 ** 	printf("%s\n", ans);
+**	유닛테스트에서 결과 값이 없는것을 표현해야 함 그래서
+**	값이 ""인경우에 값을 재할당한 후 리턴.
 ** }
 */
