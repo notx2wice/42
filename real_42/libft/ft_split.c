@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 22:45:55 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 16:04:51 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/08 20:08:18 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,3 @@ char		**ft_split(char	const *s, char c)
 	splitted = fill(s, words, c, splitted);
 	return (splitted);
 }
-
-/*
-** int			 main(int ac, char **av)
-** {
-** 	(void) ac;
-** 	char **test = ft_split(av[1],'1');
-** 	int i = 0;
-** 	while(test[i])
-** 		printf("%s\n",test[i++]);
-** 연속된 구분자를 처리하는 부분이 필요함 fill의 초반에 구현해야한다.
-*/
