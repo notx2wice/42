@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 22:01:03 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/14 14:45:19 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/14 14:49:48 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 t_list	*ft_lstlast(t_list *lst)
 {
 	t_list *last;
+
 	if (!lst)
 		return (lst);
 	while (lst->next)
