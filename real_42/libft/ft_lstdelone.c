@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/05 22:00:57 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/06 16:29:31 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/20 19:15:02 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *))
 	if (lst != 0)
 	{
 		del(lst->content);
+		free(lst);
 	}
 }
