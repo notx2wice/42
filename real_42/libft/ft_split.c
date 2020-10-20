@@ -6,13 +6,13 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 22:45:55 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:08:18 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/20 22:29:21 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int			count_words(char const *s, char c)
+static	int			count_words(char const *s, char c)
 {
 	int		i;
 	int		words;
@@ -28,7 +28,7 @@ int			count_words(char const *s, char c)
 	return (words);
 }
 
-int			words_len(char const *s, char c)
+static int			words_len(char const *s, char c)
 {
 	int		i;
 	int		len;
@@ -43,7 +43,7 @@ int			words_len(char const *s, char c)
 	return (len);
 }
 
-void		*leak(char **splitted, int words)
+static void			*failed(char **splitted, int words)
 {
 	int	i;
 
@@ -57,7 +57,7 @@ void		*leak(char **splitted, int words)
 	return (NULL);
 }
 
-char		**fill(char const *s, int words, char c, char **splitted)
+static char			**fill(char const *s, int words, char c, char **splitted)
 {
 	int		i;
 	int		j;
@@ -70,7 +70,7 @@ char		**fill(char const *s, int words, char c, char **splitted)
 			s++;
 		len = words_len(s, c);
 		if (!(splitted[i] = (char *)malloc(sizeof(char) * (len + 1))))
-			return (leak(splitted, i));
+			return (failed(splitted, i));
 		j = 0;
 		while (j < len)
 			splitted[i][j++] = *(s++);
@@ -80,7 +80,7 @@ char		**fill(char const *s, int words, char c, char **splitted)
 	return (splitted);
 }
 
-char		**ft_split(char	const *s, char c)
+char				**ft_split(char	const *s, char c)
 {
 	char	**splitted;
 	int		words;
