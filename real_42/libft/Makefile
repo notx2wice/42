@@ -12,7 +12,7 @@ SRC		=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 			ft_toupper.c		ft_isascii.c		ft_itoa.c		\
 			ft_memchr.c
 CC	=	gcc
-CFLAGS	=	-Wall -Wextra -Werror -I
+CFLAGS	=	-Wall -Wextra -Werror
 OBJ		=	$(SRC:.c=.o)
 BONUS	=	ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c	\
 			ft_lstlast.c		ft_lstadd_back.c	ft_lstmap.c		\
