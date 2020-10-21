@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 18:49:52 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/08 20:09:32 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/21 20:25:15 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char	*dest;
 	int		i;
 
-	if (ft_strlen(s) < start)
+	if (!s || ft_strlen(s) < start)
 	{
 		dest = malloc(sizeof(char));
 		*dest = '\0';

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 23:27:23 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/07 19:05:03 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/21 20:32:18 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 {
 	int	i;
 
+	if (!dst && !src)
+		return (0);
 	if (dst > src)
 	{
 		i = (int)n - 1;
