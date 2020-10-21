@@ -6,13 +6,13 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/04 22:45:49 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/05 22:01:58 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/21 08:59:09 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	check_nega(int *n, int *negative)
+static	void	check_nega(int *n, int *negative)
 {
 	if (*n < 0)
 	{
@@ -21,7 +21,7 @@ void	check_nega(int *n, int *negative)
 	}
 }
 
-char	*ft_itoa(int n)
+char			*ft_itoa(int n)
 {
 	int		tmpn;
 	int		len;
