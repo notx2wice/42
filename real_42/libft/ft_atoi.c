@@ -6,32 +6,47 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/04 18:48:04 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/22 16:52:29 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <limits.h>
 
-int	ft_atoi(const char *str)
+static int	is_space(int c)
 {
-	int i;
-	int minus;
-	int ans;
+	if (c == ' ' ||
+		c == '\n' ||
+		c == '\t' ||
+		c == '\v' ||
+		c == '\f' ||
+		c == '\r')
+		return (1);
+	return (0);
+}
 
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
-	|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
-		i++;
-	if (str[i] == '-')
-		minus = -1;
-	else
-		minus = 1;
-	if (minus == -1 || str[i] == '+')
-		i++;
-	ans = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-		ans = (ans * 10) + (str[i++] - '0');
-	return (ans * minus);
+int			ft_atoi(const char *str)
+{
+	unsigned long long	num;
+	int					sign;
+
+	num = 0;
+	sign = 1;
+	while (is_space(*str))
+		str++;
+	if (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			sign *= -1;
+		str++;
+	}
+	while (*str && ft_isdigit(*str))
+	{
+		num *= 10;
+		num += *str - '0';
+		str++;
+	}
+	if (num > LLONG_MAX)
+		return (sign == 1 ? -1 : 0);
+	return (sign * num);
 }

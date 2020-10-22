@@ -13,14 +13,15 @@ SRC		=	ft_atoi.c			ft_bzero.c			ft_calloc.c		\
 			ft_memchr.c
 CC	=	gcc
 CFLAGS	=	-Wall -Wextra -Werror
-OBJ		=	$(SRC:.c=.o)
+
 BONUS	=	ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c	\
 			ft_lstlast.c		ft_lstadd_back.c	ft_lstmap.c		\
 			ft_lstdelone.c		ft_lstclear.c		ft_lstiter.c
+OBJ		=	$(SRC:.c=.o)
 B_OBJ	=	$(BONUS:.c=.o)
 RM		=	rm -rf
 .c.o:
-			${CC} ${CFLAGS} -I -c $< -o ${<:.c=.o}
+			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 $(NAME): 	${OBJ}
 			ar rc ${NAME} ${OBJ}
 all:		${NAME}
