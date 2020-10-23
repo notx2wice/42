@@ -20,8 +20,7 @@ BONUS	=	ft_lstnew.c			ft_lstadd_front.c	ft_lstsize.c	\
 OBJ		=	$(SRC:.c=.o)
 B_OBJ	=	$(BONUS:.c=.o)
 RM		=	rm -rf
-.c.o:
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+.c.o:		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 $(NAME): 	${OBJ}
 			ar rc ${NAME} ${OBJ}
 all:		${NAME}
