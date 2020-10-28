@@ -6,20 +6,18 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/28 23:01:15 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/29 01:01:18 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	int		something_in_st(int a)
+static	int		something_in_st()
 {
-	int a;
-
-	a = 0;
+	// end == 0  fail == -1 normal == 1
 }
 
-static	int		nothing_in_st(int a)
+static	int		nothing_in_st()
 {
 	// end == 0  fail == -1 normal == 1
 }
@@ -37,7 +35,16 @@ int				get_next_line(int fd, char **line)
 		return (-1);
 	if (!st_stored[fd])
 	{
-
+		i = nothing_in_st();
+		if (i == 0)
+		{
+			*line = ft_strdup(&st_stored[fd][i]);
+			free(st_stored[fd]);
+			st_stored[fd] = NULL;
+			return (0);
+		}
+		else if (i == 0)
+			return (-1);
 	}
 	while (st_stored[fd][i] == '\n' || st_stored[fd][i])
 		i++;
