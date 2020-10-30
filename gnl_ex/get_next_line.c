@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/29 21:44:51 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/30 19:07:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static	int		something_in_st(char **st_stored, int fd)// end == 0  fail == -1 nor
 	if (ck == -1)
 		return -1;
 	tmp = ft_strjoin( st_stored[fd],readed);
-	//free(st_stored[fd]);
-	//free(readed);
+	free(st_stored[fd]);//이것도 인듯
+	free(readed);
 	st_stored[fd] = tmp;
 	if (ck < BUFF_SIZE)
 		return (0);
@@ -70,57 +70,43 @@ static	int		nothing_in_st(char **st_stored, int fd)// end == 0  fail == -1 norma
 
 int				get_next_line(int fd, char **line)
 {
-	static char *st_stored[MAX_FILE];
+	static char *st_stored[MAX_FILE+1];
 	char		*tmp_address;
 	int			i;
 
-	//printf("in fd : %s\n" , st_stored[fd]);
 	i = 0;
 	if (fd < 0 || fd >= MAX_FILE || !line || read(fd, st_stored[fd], 0) == -1)
 		return (-1);
-
+    
 	if (!st_stored[fd])
 	{
 		i = nothing_in_st(st_stored, fd);
 		if (i == 0)
 		{
-			*line = ft_strdup(&st_stored[fd][i]);
-			//free(st_stored[fd]);
-			st_stored[fd] = NULL;
+			*line = ft_strdup(st_stored[fd]);
+			free(st_stored[fd]);                        
+			st_stored[fd] = 0;
 			return (0);
 		}
 		if (i == -1)
 			return (-1);
 	}
-// 전에 버퍼에 넥스트라인이 두개들어간 경우 eof인 경우는 이곳에 도달 못함.  read의 반환 값이 다를 경우 끝나는 것으로 하기 때문에
-	i = ft_strlen(st_stored[fd]) - BUFF_SIZE;
-	if (i < (int)ft_strlen(st_stored[fd]))
-		while (st_stored[fd][i] != '\n' && st_stored[fd][i])
-			i++;
-	else
-	{
-		i = 0;
-		while (st_stored[fd][i] != '\n' && st_stored[fd][i])
-			i++;
-	}
-
+	i = 0;
+	while (st_stored[fd][i] != '\n' && st_stored[fd][i])
+		i++;
 	if (st_stored[fd][i] == '\n')
 	{
 		tmp_address = 0;
 		*line = ft_substr(st_stored[fd], 0, i);
-		if (i + 1 < BUFF_SIZE)
-			tmp_address = ft_strdup(&st_stored[fd][i+1]);
-		//free(st_stored[fd]);
+		tmp_address = ft_strdup(&st_stored[fd][i+1]);
+		free(st_stored[fd]);
 		st_stored[fd] = tmp_address;
 		return (1);
 	}
 	i = 1;
 	int j = 0;
 	while (i == 1)
-	{
 		i = something_in_st(st_stored, fd);
-	//	printf("in while fd : %s\n" , st_stored[fd]);
-	}
 	if (i == -1)
 		return (-1);
 	if (i == 2)
@@ -128,10 +114,16 @@ int				get_next_line(int fd, char **line)
 		while (st_stored[fd][j] != '\n')
 			j++;
 		*line = ft_substr(st_stored[fd], 0, j);
-		st_stored[fd] = &st_stored[fd][j+1];
+		tmp_address = ft_strdup(&st_stored[fd][j+1]);
+		free(st_stored[fd]);
+		st_stored[fd] = tmp_address;
 		return (1);
 	}
 	if (i == 0)
+	{
 		*line = ft_substr(st_stored[fd], 0, ft_strlen(st_stored[fd]));
+		free(st_stored[fd]);
+		st_stored[fd] = 0;
+	}
 	return (0);
 }

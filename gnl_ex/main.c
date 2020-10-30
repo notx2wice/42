@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/12/09 16:05:34 by jaleman           #+#    #+#             */
-/*   Updated: 2020/10/29 18:29:11 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/30 19:16:07 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 int main(int argc, char **argv)
 {
 	int fd;
+	int fd1;
 	int ret;
 	int line;
 	char *buff;
@@ -37,16 +38,31 @@ int main(int argc, char **argv)
 			printf("-----------\nError\n");
 		else if (ret == 0)
 			printf("-----------\nEnd of file\n");
+		ret = get_next_line(fd, &buff);
+		printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
+		ret = get_next_line(fd, &buff);
+		printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
 		close(fd);
 	}
-	if (argc == 1)
+	if (argc == 3)
 	{
-		while ((ret = get_next_line(0, &buff)) > 0)
+		fd = open(argv[1], O_RDONLY);
+		fd1 = open(argv[2],O_RDONLY);
+		printf("fd :  %d   fd1 :  %d" , fd, fd1);
+		while ((ret = get_next_line(fd, &buff)) > 0)
+		{
 			printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
+			free(buff);
+		}
+		printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
 		if (ret == -1)
 			printf("-----------\nError\n");
 		else if (ret == 0)
-			printf("-----------\nEnd of stdin\n");
+			printf("-----------\nEnd of file\n");
+		ret = get_next_line(fd, &buff);
+		printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
+		ret = get_next_line(fd, &buff);
+		printf("[Return: %d] Line #%d: %s\n", ret, ++line, buff);
 		close(fd);
 	}
 	return (0);
