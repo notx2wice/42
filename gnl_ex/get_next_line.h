@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/29 03:30:18 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/31 19:49:17 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 int		get_next_line(int const fd, char **line);
 size_t	ft_strlen(const char *s);
