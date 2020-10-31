@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/30 19:07:53 by ukim             ###   ########.fr       */
+/*   Updated: 2020/10/31 16:25:24 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ static	int		something_in_st(char **st_stored, int fd)// end == 0  fail == -1 nor
 		return (0);
 	i = ft_strlen(tmp) - BUFF_SIZE;
 	if(i > 0)
-	{
 		while (i < ft_strlen(tmp))
 		{
 			if (tmp[i] == '\n')
 				return (2);
 			i++;
 		}
-	}
 	return (1);
 }
 
@@ -77,14 +75,14 @@ int				get_next_line(int fd, char **line)
 	i = 0;
 	if (fd < 0 || fd >= MAX_FILE || !line || read(fd, st_stored[fd], 0) == -1)
 		return (-1);
-    
+
 	if (!st_stored[fd])
 	{
 		i = nothing_in_st(st_stored, fd);
 		if (i == 0)
 		{
 			*line = ft_strdup(st_stored[fd]);
-			free(st_stored[fd]);                        
+			free(st_stored[fd]);
 			st_stored[fd] = 0;
 			return (0);
 		}
