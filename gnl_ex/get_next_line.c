@@ -6,31 +6,12 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/31 23:59:53 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 00:16:59 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static	int		check_b_n(char **st_stored, int fd, char **line)
-{
-	int			i;
-	char		*tmp_address;
-
-	i = 0;
-	while (st_stored[fd][i] != '\n' && st_stored[fd][i])
-		i++;
-	if (st_stored[fd][i] == '\n')
-	{
-		tmp_address = 0;
-		*line = ft_substr(st_stored[fd], 0, i);
-		tmp_address = ft_strdup(&st_stored[fd][i + 1]);
-		free(st_stored[fd]);
-		st_stored[fd] = tmp_address;
-		return (1);
-	}
-	return (0);
-}
 static	int		something_in_st(char **st_stored, int fd)
 {
 	char		*tmp;
@@ -54,7 +35,7 @@ static	int		something_in_st(char **st_stored, int fd)
 		return (0);
 	i = ft_strlen(tmp) - BUFF_SIZE;
 	if (i > 0)
-		while (i < ft_strlen(tmp)) /// 마지막 줄에 넥라가 여러개 일때 처리 해야함
+		while (i < ft_strlen(tmp))
 			if (tmp[i++] == '\n')
 				return (2);
 	return (1);
@@ -100,17 +81,16 @@ static	int		fill_something(int fd, char **line, char **st_stored)
 static	int		after_work(int fd, char **line, char **st_stored, int i)
 {
 	char		*tmp_address;
-	int			j;
 
 	if (i == -1)
 		return (-1);
-	j = 0;
 	if (i == 2)
 	{
-		while (st_stored[fd][j] != '\n')
-			j++;
-		*line = ft_substr(st_stored[fd], 0, j);
-		tmp_address = ft_strdup(&st_stored[fd][j + 1]);
+		i = 0;
+		while (st_stored[fd][i] != '\n')
+			i++;
+		*line = ft_substr(st_stored[fd], 0, i);
+		tmp_address = ft_strdup(&st_stored[fd][i + 1]);
 		free(st_stored[fd]);
 		st_stored[fd] = tmp_address;
 		return (1);
@@ -137,7 +117,6 @@ int				get_next_line(int fd, char **line)
 	if (!st_stored[fd])
 		if ((i = fill_something(fd, line, st_stored)) != 1)
 			return (i);
-
 	i = check_b_n(st_stored, fd, line);
 	if (i)
 		return (i);

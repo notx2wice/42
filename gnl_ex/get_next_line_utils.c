@@ -6,11 +6,31 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 17:50:57 by ukim              #+#    #+#             */
-/*   Updated: 2020/10/29 03:30:21 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 00:15:40 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int		check_b_n(char **st_stored, int fd, char **line)
+{
+	int			i;
+	char		*tmp_address;
+
+	i = 0;
+	while (st_stored[fd][i] != '\n' && st_stored[fd][i])
+		i++;
+	if (st_stored[fd][i] == '\n')
+	{
+		tmp_address = 0;
+		*line = ft_substr(st_stored[fd], 0, i);
+		tmp_address = ft_strdup(&st_stored[fd][i + 1]);
+		free(st_stored[fd]);
+		st_stored[fd] = tmp_address;
+		return (1);
+	}
+	return (0);
+}
 
 size_t	ft_strlen(const char *s)
 {
