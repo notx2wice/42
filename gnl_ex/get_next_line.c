@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/01 19:03:45 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 19:54:36 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static	int		something_in_st(char **st_stored, int fd)
 	char		*tmp;
 	char		*readed;
 	int			ck;
-	size_t		i;
+	int			i;
 
 	i = 0;
 	if (!(readed = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
@@ -35,7 +35,7 @@ static	int		something_in_st(char **st_stored, int fd)
 		return (0);
 	i = ft_strlen(tmp) - BUFFER_SIZE;
 	if (i > 0)
-		while (i < ft_strlen(tmp))
+		while (i < (int)ft_strlen(tmp))
 			if (tmp[i++] == '\n')
 				return (2);
 	return (1);

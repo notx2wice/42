@@ -6,13 +6,12 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/01 19:03:57 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 19:54:44 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 8
 # define MAX_FILE 1025
 
 # include <unistd.h>
