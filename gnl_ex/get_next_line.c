@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/01 15:18:03 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 18:54:16 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ static	int		something_in_st(char **st_stored, int fd)
 	size_t		i;
 
 	i = 0;
-	if (!(readed = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
+	if (!(readed = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while (i <= BUFF_SIZE)
+	while (i <= BUFFER_SIZE)
 		readed[i++] = 0;
-	ck = read(fd, readed, BUFF_SIZE);
+	ck = read(fd, readed, BUFFER_SIZE);
 	if (ck == -1)
 		return (-1);
 	tmp = ft_strjoin(st_stored[fd], readed);
 	free(st_stored[fd]);
 	free(readed);
 	st_stored[fd] = tmp;
-	if (ck < BUFF_SIZE)
+	if (ck < BUFFER_SIZE)
 		return (0);
-	i = ft_strlen(tmp) - BUFF_SIZE;
+	i = ft_strlen(tmp) - BUFFER_SIZE;
 	if (i > 0)
 		while (i < ft_strlen(tmp))
 			if (tmp[i++] == '\n')
@@ -49,15 +49,15 @@ static	int		nothing_in_st(char **st_stored, int fd)
 
 	ck = 0;
 	i = 0;
-	if (!(tmp = (char*)malloc(sizeof(char) * (BUFF_SIZE + 1))))
+	if (!(tmp = (char*)malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
-	while (i <= BUFF_SIZE)
+	while (i <= BUFFER_SIZE)
 		tmp[i++] = 0;
-	ck = read(fd, tmp, BUFF_SIZE);
+	ck = read(fd, tmp, BUFFER_SIZE);
 	if (ck == -1)
 		return (-1);
 	st_stored[fd] = tmp;
-	if (ck != BUFF_SIZE)
+	if (ck != BUFFER_SIZE)
 		return (0);
 	return (1);
 }
@@ -112,16 +112,10 @@ int				get_next_line(int fd, char **line)
 	static char	*st_stored[MAX_FILE + 1];
 	int			i;
 
-	i = BUFF_SIZE;
+	i = BUFFER_SIZE;
 	if (fd < 0 || fd >= MAX_FILE || !line
 	|| read(fd, st_stored[fd], 0) == -1 || i <= 0)
 	{
-		*line = 0;
-		if (st_stored[fd])
-		{
-			free(st_stored[fd]);
-			st_stored[fd] = 0;
-		}
 		return (-1);
 	}
 	if (!st_stored[fd])
