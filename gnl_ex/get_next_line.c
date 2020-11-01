@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/01 00:16:59 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 15:18:03 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,18 @@ int				get_next_line(int fd, char **line)
 	static char	*st_stored[MAX_FILE + 1];
 	int			i;
 
-	if (fd < 0 || fd >= MAX_FILE || !line || read(fd, st_stored[fd], 0) == -1)
+	i = BUFF_SIZE;
+	if (fd < 0 || fd >= MAX_FILE || !line
+	|| read(fd, st_stored[fd], 0) == -1 || i <= 0)
+	{
+		*line = 0;
+		if (st_stored[fd])
+		{
+			free(st_stored[fd]);
+			st_stored[fd] = 0;
+		}
 		return (-1);
+	}
 	if (!st_stored[fd])
 		if ((i = fill_something(fd, line, st_stored)) != 1)
 			return (i);
