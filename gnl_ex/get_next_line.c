@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 15:37:14 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/01 19:54:36 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/01 22:17:06 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static	int		something_in_st(char **st_stored, int fd)
 	st_stored[fd] = tmp;
 	if (ck < BUFFER_SIZE)
 		return (0);
-	i = ft_strlen(tmp) - BUFFER_SIZE;
+	i = (int)ft_strlen(tmp) - BUFFER_SIZE;
 	if (i > 0)
 		while (i < (int)ft_strlen(tmp))
 			if (tmp[i++] == '\n')
@@ -62,17 +62,11 @@ static	int		nothing_in_st(char **st_stored, int fd)
 	return (1);
 }
 
-static	int		fill_something(int fd, char **line, char **st_stored)
+static	int		fill_something(int fd, char **st_stored)
 {
 	int			i;
 
 	i = nothing_in_st(st_stored, fd);
-	if (i == 0)
-	{
-		*line = ft_strdup(st_stored[fd]);
-		free(st_stored[fd]);
-		st_stored[fd] = 0;
-	}
 	if (i == -1)
 		free(st_stored[fd]);
 	return (i);
@@ -115,12 +109,13 @@ int				get_next_line(int fd, char **line)
 	i = BUFFER_SIZE;
 	if (fd < 0 || fd >= MAX_FILE || !line
 	|| read(fd, st_stored[fd], 0) == -1 || i <= 0)
-	{
 		return (-1);
-	}
 	if (!st_stored[fd])
-		if ((i = fill_something(fd, line, st_stored)) != 1)
+	{
+		i = fill_something(fd, st_stored);
+		if (i == -1)
 			return (i);
+	}
 	i = check_b_n(st_stored, fd, line);
 	if (i)
 		return (i);
