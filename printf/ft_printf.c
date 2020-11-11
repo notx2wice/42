@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/11 21:53:32 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/11 23:03:42 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 static void		init_flag(t_flags *tf)
 {
 	tf->minus = 0;
-	tf->precision = -1;
-	tf->width = -1;
+	tf->precision = 0;
+	tf->width = 0;
 	tf->zero = 0;
 	tf->star = 0;
 	tf->dot = 0;
@@ -94,7 +94,6 @@ void			set_flag(t_flags *fg ,char **fm)
 int				do_op(t_flags *flag, char *fm, va_list ap)
 {
 	char	c;
-	int		count;
 
 	if (!(c = is_option(fm)))
 		return (0);
@@ -146,5 +145,5 @@ int				ft_printf(const char *format, ...)
 
 int			main()
 {
-	ft_printf("print this : %c\n", 97);
+	ft_printf("print this : %*.*chi\n",-5, 6, 97);
 }

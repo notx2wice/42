@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:37:50 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/11 21:58:27 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/11 22:51:09 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <limits.h>
+#include <stdlib.h>
 
 typedef struct s_flags
 {

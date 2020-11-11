@@ -6,34 +6,34 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:00:29 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/11 21:45:47 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/11 23:02:59 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	change_star(t_flags *flag, va_list ap)
-{//0 , precision 무시 , 그러나 -, width,는 신경 써야함
-	if (flag->star == 2)
-	{
-
-	}
-	else if (flag->star == 1 && flag->dot == 1)
-	{
-
-	}
-	else if (flag->star == 1 && flag->dot != 1)
-	{
-
-	}
-}
-
 int		ft_print_c(t_flags *flag, va_list ap)
 {
-	char c;
+	char 	c;
+	char 	*str;
+	int		i;
 
+	i = 0;
 	change_star(flag, ap);
+	if (flag->width < 0)
+	{
+		flag->minus = 1;
+		flag->width *= -1;
+	}
+	str = (char*)malloc(sizeof(char) * flag->width + 1);
+	while (i < flag->width)
+		str[i++] = ' ';
 	c = va_arg(ap, int);
-	write(1, &c, 1);
-	return (1);
+	if (flag->minus == 1)
+		str[0] = c;
+	else
+		str[flag->width - 1] = c;
+	str[flag->width] = 0;
+	write(1, str, flag->width);
+	return (flag->width);
 }
