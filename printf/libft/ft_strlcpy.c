@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:22:26 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 23:34:23 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/21 20:18:22 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int     ft_print_str(t_flags *flag, va_list ap)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-    
+	size_t	i;
 
+	i = 0;
+	if (!dst)
+		return (0);
+	if (size > 0)
+	{
+		while (src[i] && i < (size - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = 0;
+	}
+	while (src[i])
+		i++;
+	return (i);
 }

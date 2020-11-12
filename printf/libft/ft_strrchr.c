@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:22:26 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/03 21:35:38 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 00:17:57 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int     ft_print_str(t_flags *flag, va_list ap)
+char	*ft_strrchr(const char *str, int c)
 {
-    
+	int	i;
 
+	i = 0;
+	while (str[i])
+		i++;
+	while (i >= 0)
+	{
+		if (str[i] == (char)c)
+			return ((char*)(str + i));
+		i--;
+	}
+	return (NULL);
 }

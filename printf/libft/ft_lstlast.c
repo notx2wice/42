@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:22:26 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/05 22:01:03 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/14 14:49:48 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int     ft_print_str(t_flags *flag, va_list ap)
+t_list	*ft_lstlast(t_list *lst)
 {
-    
+	t_list *last;
 
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	last = lst;
+	return (last);
 }

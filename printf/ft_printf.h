@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:37:50 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/11 22:51:09 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/12 17:55:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
+#include "./libft/libft.h"
 
 typedef struct s_flags
 {
@@ -29,8 +30,8 @@ typedef struct s_flags
     int dot;
 }               t_flags;
 
-int			ft_atoi(char **str);
 int			ft_print_c(t_flags *flag, va_list ap);
+int	        ft_print_digit(t_flags *flag, va_list ap);
 int			ft_print_str(t_flags *flag, va_list ap);
 void		change_star(t_flags *flag, va_list ap);
 

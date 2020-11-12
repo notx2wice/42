@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:22:26 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/05 22:00:54 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/06 16:22:26 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int     ft_print_str(t_flags *flag, va_list ap)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-    
+	t_list	*tmp;
 
+	tmp = 0;
+	if (lst == 0 || *lst == 0)
+		return ;
+	tmp = *lst;
+	while (*lst)
+	{
+		*lst = tmp->next;
+		del(tmp->content);
+		free(tmp);
+		tmp = *lst;
+	}
+	*lst = 0;
 }

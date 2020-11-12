@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/11 23:03:42 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/12 17:20:04 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,11 @@ int				do_op(t_flags *flag, char *fm, va_list ap)
 		return (0);
 	if (c == 'c')
 		ft_print_c(flag, ap);
-    /*
-    else if (c == 's')
-        ft_print_str(flag, ap);
+    //else if (c == 's')
+    //    ft_print_str(flag, ap);
     else if (c == 'd' || c == 'i')
         ft_print_digit(flag, ap);
-    else if (c == 'u')
+    /*else if (c == 'u')
         ft_print_ui(flag, ap);
     else if (c == 'p')
         ft_print_point(flag, ap);
@@ -145,5 +144,5 @@ int				ft_printf(const char *format, ...)
 
 int			main()
 {
-	ft_printf("print this : %*.*chi\n",-5, 6, 97);
+	ft_printf("print_this:%*.*di\n",-2, 6, 1234);
 }

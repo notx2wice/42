@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_str.c                                     :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:22:26 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/04 00:34:57 by ukim              #+#    #+#             */
+/*   Updated: 2020/10/04 01:37:15 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int     ft_print_str(t_flags *flag, va_list ap)
+int	ft_isascii(int c)
 {
-    
-
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
