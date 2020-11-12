@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:20:04 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/12 19:56:38 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,5 @@ int				ft_printf(const char *format, ...)
 
 int			main()
 {
-	ft_printf("print_this:%*.*di\n",-2, 6, 1234);
+	ft_printf("print_this:%*.*di\n",4, 5, -1234);
 }

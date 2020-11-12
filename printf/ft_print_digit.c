@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 17:19:30 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/12 19:56:01 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		ft_print_digit(t_flags *flag, va_list ap)
 	para_int = va_arg(ap, int);
 	istr = ft_itoa(para_int);
 	slen = ft_strlen(istr);
-	write(1, istr, slen);
+	if (slen >= flag->width && slen >= flag->precision)
+		write(1, istr, slen);
 	return (slen);
 }
