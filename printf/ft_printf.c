@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/12 19:56:38 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/13 19:45:17 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static void		init_flag(t_flags *tf)
 	tf->zero = 0;
 	tf->star = 0;
 	tf->dot = 0;
+	tf->wf = 0;
+	tf->pf = 0;
 }
 
 char			is_option(char *fm)
@@ -79,12 +81,14 @@ void			set_flag(t_flags *fg ,char **fm)
 		if (c == 1 && wf == 1 && pf != 1)
 		{
 			fg->width = ft_atoi(fm);
+			fg->wf = 1;
 			wf = 0;
 			continue;
 		}
 		else if (c == 1 && wf == 0 && pf == 1)
 		{
-			fg->precision = ft_atoi(fm); // 여기서 나올 떄는 마지막 숫자를 가르키고 있어야함.
+			fg->precision = ft_atoi(fm);
+			fg->pf = 1;
 			continue;
 		}
 		(*fm)++;
@@ -144,5 +148,5 @@ int				ft_printf(const char *format, ...)
 
 int			main()
 {
-	ft_printf("print_this:%*.*di\n",4, 5, -1234);
+	ft_printf("print_this:%*.5d$\n",12,-12345);
 }
