@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_digit.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:07 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/13 18:45:46 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/16 17:38:00 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	add_zero(char **istr, int minus, t_flags *fg)
 int		ft_print_digit(t_flags *flag, va_list ap)
 {
 	int		slen;
+	int		mf;
 	int		para_int;
 	char	*istr;
 	char	*mstr;
@@ -78,14 +79,13 @@ int		ft_print_digit(t_flags *flag, va_list ap)
 	para_int = va_arg(ap, int);
 	if (para_int < 0)
 	{
-		slen = -1;
+		mf = -1;
 		para_int *= -1;
 	}
 	istr = ft_itoa(para_int);
+	slen = ft_strlen(istr);
 	add_zero(&istr, slen, flag);
-	if (slen >= flag->width && slen >= flag->precision)
-		write(1, istr, slen);
-	if (slen == -1)
+	if (mf == -1)
 	{
 		mstr = ft_strdup("-");
 		istr = ft_free_strjoin(mstr,istr);
