@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/15 17:46:51 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/16 17:59:45 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	recursive_len(long long num, int base_len)
 		return (0);
 }
 
-char		*utoa(unsigned long long num, const char *base)
+char		*change_base_to_string(unsigned long long num, const char *base)
 {
 	int		len;
 	char	*str;
@@ -46,8 +46,9 @@ int			ft_print_ux(t_flags *flag, va_list ap, const char *base)
 	char			*tmp[2];
 	char			c;
 
+	change_star(flag, ap);
 	num = va_arg(ap, unsigned int);
-	str = utoa(num, base);
+	str = change_base_to_string(num, base);
 	if (num == 0 && flag->precision == 0)
 		str[0] = 0;
 	i = flag->precision - (int)ft_strlen(str);
@@ -61,15 +62,17 @@ int			ft_print_ux(t_flags *flag, va_list ap, const char *base)
 	{
 		if (flag->minus)
 		{
-			tmp[0] = *str;
+			tmp[0] = str;
 			tmp[1] = init_c_malloc(' ', i);
 		}
 		else
 		{
 			c = flag->zero && flag->precision < 0 ? '0' : ' ';
-			tmp[0] = string(c, i);
-			tmp[1] = *str;
+			tmp[0] = init_c_malloc(c, i);
+			tmp[1] = str;
 		}
-		*str = ft_free_strjoin(tmp[0], tmp[1]);
+		str = ft_free_strjoin(tmp[0], tmp[1]);
 	}
+	write(1, str, (size_t)ft_strlen(str));
+	return ft_strlen(str);
 }

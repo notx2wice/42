@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:35:44 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/15 17:25:03 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/16 18:19:48 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,11 @@ int				do_op(t_flags *flag, char *fm, va_list ap)
 	else if (c == 'd' || c == 'i')
 		ft_print_digit(flag, ap);
 	else if (c == 'u')
-		ft_print_ux(flag, ap, 'u');
+		ft_print_ux(flag, ap, g_base_10);
 	else if (c == 'x')
-		ft_print_ux(flag, ap, 'x');
+		ft_print_ux(flag, ap, g_base_x);
 	else if (c == 'X')
-		ft_print_ux(flag, ap, 'X');
+		ft_print_ux(flag, ap, g_base_X);
 	/*
 	else if (c == 'p')
 		ft_print_point(flag, ap);
@@ -156,11 +156,15 @@ int				ft_printf(const char *format, ...)
 
 int			main()
 {
-	ft_printf("print_this:%*.0d$\n",12,-12345);
-	printf("print_this:%*.0d$\n",12,-12345);
-	ft_printf("print_this:%*.0d$\n",-12,-12345);
-	printf("print_this:%*.0d$\n",-12,-12345);
-	ft_printf("print_this:%*.*d$\n",16,13,-12345);
-	printf("print_this:%*.*d$\n",16,13,-12345);
+	ft_printf("print_this:%*.0x$\n",12,-12345);
+	printf("print_this:%*.0x$\n",12,-12345);
+	ft_printf("print_this:%*.0x$\n",-12,-12345);
+	printf("print_this:%*.0x$\n",-12,-12345);
+	ft_printf("print_this:%*.*X$\n",16,13,-12345);
+	printf("print_this:%*.*X$\n",16,13,-12345);
+	ft_printf("print_this:%*.*X$\n",6,5,-12345);
+	printf("print_this:%*.*X$\n",6,5,-12345);
+	ft_printf("print_this:%*.*X$\n",7,5,-12345);
+	printf("print_this:%*.*X$\n",7,5,-12345);
 
 }
