@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 16:37:50 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/16 17:42:17 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/23 17:38:17 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ char		*ft_free_strjoin(char *s1, char *s2);
 char		*init_c_malloc(char c, int i);
 char		*utoa(unsigned long long num, const char *base);
 int			ft_print_ux(t_flags *flag, va_list ap, const char *base);
-
+int			str_print_minus(t_flags *flag, char *str, char c);
 
 #endif

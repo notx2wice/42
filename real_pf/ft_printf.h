@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/18 16:00:19 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/23 17:42:22 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ char		*init_c_malloc(char c, int i);
 
 char		*ft_left_strcat(char *str, char c, int width);
 char		*ft_right_strcat(char *str, char c, int width);
-void	    ft_putstr(char *str);
-int     	ull_length(unsigned long long ull, int base);
+void		ft_putstr(char *str);
+int			ull_length(unsigned long long ull, int base);
+int			str_print_minus(t_flags *flag, char *str, char c);
 
 #endif
