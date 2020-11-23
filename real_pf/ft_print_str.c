@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/09 21:23:18 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 17:21:26 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/23 17:28:38 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static char         *make_trim(char *str, int length)
 
 static int          str_print(char *str)
 {
-    write(1, str, ft_strlen(str));
-    return (ft_strlen(str));
+    write(1, str, (int)ft_strlen(str));
+    return ((int)ft_strlen(str));
 }
 
 int              str_print_minus(t_flags *flag, char *str, char c)
@@ -38,11 +38,11 @@ int              str_print_minus(t_flags *flag, char *str, char c)
     int             len;
 
     if (flag->minus == 0)
-        result = ft_left_strcat(str, c, (flag->width - ft_strlen(str)));
+        result = ft_left_strcat(str, c, (flag->width - (int)ft_strlen(str)));
     else
-        result = ft_right_strcat(str, c, (flag->width - ft_strlen(str)));
+        result = ft_right_strcat(str, c, (flag->width - (int)ft_strlen(str)));
     ft_putstr(result);
-    len = ft_strlen(result);
+    len = (int)ft_strlen(result);
     free(result);
     return (len);
 }
@@ -54,14 +54,14 @@ static int          str_precision_width_flag(t_flags *flag, char *str)
     int             m_precision;
     char            *trim;
 
-    len = ft_strlen(str);
+    len =(int)ft_strlen(str);
     m_precision = flag->precision;
     if (flag->precision < 0)
         m_precision *= (-1);
     if (m_precision < len)
     {
         trim = make_trim(str, m_precision);
-        t_len = ft_strlen(trim);
+        t_len = (int)ft_strlen(trim);
         if (flag->width <= t_len)
         {
             ft_putstr(trim);
@@ -81,7 +81,7 @@ static int         str_width_flag(t_flags *flag, char *str)
 {
     if (flag->width != 0)
     {
-        if (flag->width > ft_strlen(str))
+        if (flag->width > (int)ft_strlen(str))
             return (str_print_minus(flag, str, ' '));
     }
     return (str_print(str));
