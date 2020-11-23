@@ -3,80 +3,94 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_str.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/09 21:23:18 by ekim              #+#    #+#             */
-/*   Updated: 2020/11/17 21:17:55 by ekim             ###   ########.fr       */
+/*   Created: 2020/11/09 21:23:18 by ukim              #+#    #+#             */
+/*   Updated: 2020/11/23 17:21:26 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int			str_print_minus(t_flags *flag, char *str)
+static char         *make_trim(char *str, int length)
 {
-    char			*result;
+    char            *trim;
+    int             i;
+
+    if (!(trim = (char *)malloc(sizeof(char) * (length + 1))))
+            return (0);
+    i = 0;
+    while (length--)
+        trim[i++] = *str++;
+    trim[i] = '\0';
+    return (trim);
+}
+
+static int          str_print(char *str)
+{
+    write(1, str, ft_strlen(str));
+    return (ft_strlen(str));
+}
+
+int              str_print_minus(t_flags *flag, char *str, char c)
+{
+    char         *result;
+    int             len;
 
     if (flag->minus == 0)
-        result = ft_left_strcat(str, ' ', (flag->width - ft_strlen(str)));
+        result = ft_left_strcat(str, c, (flag->width - ft_strlen(str)));
     else
-        result = ft_right_strcat(str, ' ', (flag->width - ft_strlen(str)));
+        result = ft_right_strcat(str, c, (flag->width - ft_strlen(str)));
     ft_putstr(result);
+    len = ft_strlen(result);
     free(result);
-    return (ft_strlen(result));
+    return (len);
 }
 
 static int          str_precision_width_flag(t_flags *flag, char *str)
 {
     int             len;
-    int             i;
-    int             j;
+    int             t_len;
+    int             m_precision;
     char            *trim;
 
     len = ft_strlen(str);
-    if (flag->precision < len)
+    m_precision = flag->precision;
+    if (flag->precision < 0)
+        m_precision *= (-1);
+    if (m_precision < len)
     {
-        i = flag->precision;
-        j = 0;
-        if (!(trim = (char *)malloc(sizeof(char) * (i + 1))))
-            return (0);
-        while (i--)
-            trim[j++] = *str++;
-        trim[j] = '\0';
-        if (flag->width <= j)
+        trim = make_trim(str, m_precision);
+        t_len = ft_strlen(trim);
+        if (flag->width <= t_len)
         {
             ft_putstr(trim);
-            return (j);
+            free(trim);
+            return (t_len);
         }
-        return (str_print_minus(flag,  trim));
+        t_len = str_print_minus(flag, trim, ' ');
+        free(trim);
+        return (t_len);
     }
-    if (flag->width - len > 0)
-        return (str_print_minus(flag, str));
-    ft_putstr(str);
-    return (ft_strlen(str));
+    else if (flag->width > len)
+        return (str_print_minus(flag, str, ' '));
+    return (str_print(str));
 }
 
-static int			str_width_flag(t_flags *flag, char *str)
+static int         str_width_flag(t_flags *flag, char *str)
 {
-    int				len;
-
-    len = ft_strlen(str);
     if (flag->width != 0)
     {
-        if (flag->width <= len)
-        {
-            ft_putstr(str);
-            return (len);
-        }
-        return (str_print_minus(flag, str));
+        if (flag->width > ft_strlen(str))
+            return (str_print_minus(flag, str, ' '));
     }
-    ft_putstr(str);
-    return (len);
+    return (str_print(str));
 }
 
-int				ft_print_str(t_flags *flag, va_list ap)
+int            ft_print_str(t_flags *flag, va_list ap)
 {
-    char		*str;
-    int			count;
+    char      *str;
+    int         count;
 
     if (!(str = (char *)va_arg(ap, void *)))
         str = "(null)";
