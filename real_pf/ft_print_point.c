@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:13 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/23 17:11:13 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/23 17:47:36 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static char				*change_to_char_base(unsigned long long pointer, int base, int co
 	return (ft_free_strjoin(prefix, hexa));
 }
 
-static int				point_width_flag(t_flags *flag, char *conv_point)
+static int            point_width_flag(t_flags *flag, char *conv_point)
 {
-   int					length;
+   int               length;
 
-	if ((length = flag->width - ft_strlen(conv_point)) > 0)
-		return (str_print_minus(flag, conv_point));
-	else
-		ft_putstr(conv_point);
-	return (ft_strlen(conv_point));
+   if ((length = flag->width - ft_strlen(conv_point)) > 0)
+      return (str_print_minus(flag, conv_point, ' '));
+   else
+      ft_putstr(conv_point);
+   return (ft_strlen(conv_point));
 }
 
 int						ft_print_point(t_flags *flag, va_list ap)
