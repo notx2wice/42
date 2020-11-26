@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:25:13 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 17:27:53 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/27 01:50:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static char				*change_to_char_base(unsigned long long pointer, int base, int count)
 {
-	char    			*hexa;
+	char				*hexa;
 	unsigned long long	ull;
 
-    ull = pointer;
-    if (!(hexa = (char *)malloc(sizeof(char) * (count + 1))))
+	ull = pointer;
+	if (!(hexa = (char *)malloc(sizeof(char) * (count + 1))))
 		return (0);
 	hexa[count--] = '\0';
 	while (ull > 0)

@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 19:24:19 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/24 17:28:14 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/27 01:54:31 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ char		*ft_left_strcat(char *str, char c, int width)
 	return (result);
 }
 
-int     	ull_length(unsigned long long ull, int base)
+int			ull_length(unsigned long long ull, int base)
 {
-    int     length;
-    unsigned long long tmp;
+	int		length;
+	unsigned long long tmp;
 
-    tmp = ull;
-    length = 0;
-    while (tmp > 0)
-    {
-        tmp = tmp / base;
-        length++;
-    }
-    return (length);
+	tmp = ull;
+	length = 0;
+	while (tmp > 0)
+	{
+		tmp = tmp / base;
+		length++;
+	}
+	return (length);
 }
 
 void	ft_putstr(char *str)
