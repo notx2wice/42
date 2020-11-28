@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 13:33:53 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:41:41 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 12:15:38 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int					g_len = 0;
 char				*g_base_10 = "0123456789";
 char				*g_base_x = "0123456789abcdef";
+char				*g_base_xx = "0123456789ABCDEF";
 
 char				is_option(char *fm)
 {
@@ -37,11 +38,11 @@ static int			do_op(t_flags *flag, char *fm, va_list ap)
 	else if (c == 'd' || c == 'i')
 		g_len += ft_print_digit(flag, ap);
 	else if (c == 'u')
-		g_len += ft_print_ux(flag, ap, g_base_10, 0);
+		g_len += ft_print_ux(flag, ap, g_base_10);
 	else if (c == 'x')
-		g_len += ft_print_ux(flag, ap, g_base_x, 0);
+		g_len += ft_print_ux(flag, ap, g_base_x);
 	else if (c == 'X')
-		g_len += ft_print_ux(flag, ap, g_base_x, 1);
+		g_len += ft_print_ux(flag, ap, g_base_xx);
 	else if (c == 'p')
 		g_len += ft_print_point(flag, ap);
 	else if (c == 's')

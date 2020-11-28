@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:38:58 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 12:15:24 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				ft_print_c(t_flags *flag, va_list ap);
 int				ft_print_digit(t_flags *flag, va_list ap);
 int				ft_print_str(t_flags *flag, va_list ap);
 int				ft_print_point(t_flags *flag, va_list ap);
-int				ft_print_ux(t_flags *flag, va_list ap, char *base, int capital);
+int				ft_print_ux(t_flags *flag, va_list ap, char *base);
 int				ft_print_percent(t_flags *flag);
 
 void			add_zero(char **istr, int minus, t_flags *fg);

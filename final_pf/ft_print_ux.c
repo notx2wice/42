@@ -6,26 +6,11 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:12:27 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:38:33 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 12:15:32 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void			char_to_uppercase(char **str)
-{
-	int				i;
-	char			*tmp;
-
-	tmp = *str;
-	i = 0;
-	while (tmp[i])
-	{
-		if (tmp[i] >= 'a' && tmp[i] <= 'f')
-			tmp[i] -= 32;
-		i++;
-	}
-}
 
 static char			*change_base_to_string(unsigned long long num, char *base)
 {
@@ -70,8 +55,7 @@ static void			ux_width_flag(t_flags *flag, int t_len, char **str)
 	}
 }
 
-int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
-		int capital)
+int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 {
 	int				t_len;
 	unsigned int	num;
@@ -92,8 +76,6 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base, \
 		str = ft_free_strjoin(tmp[0], str);
 	}
 	ux_width_flag(flag, (flag->width - ft_strlen(str)), &str);
-	if (capital == 1)
-		char_to_uppercase(&str);
 	ft_putstr(str);
 	return (ft_strlen(str));
 }
