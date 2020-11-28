@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:19:47 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 12:15:24 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 12:26:33 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_flags
 extern int		g_len;
 extern char		*g_base_10;
 extern char		*g_base_x;
+extern char		*g_base_xx;
 
 int				ft_printf(const char *format, ...);
 int				ft_print_c(t_flags *flag, va_list ap);
