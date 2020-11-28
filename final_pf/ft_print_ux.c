@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_ux.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:12:27 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 12:15:32 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 16:39:54 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ int					ft_print_ux(t_flags *flag, va_list ap, char *base)
 	}
 	ux_width_flag(flag, (flag->width - ft_strlen(str)), &str);
 	ft_putstr(str);
-	return (ft_strlen(str));
+	t_len = ft_strlen(str);
+	free(str);
+	return (t_len);
 }

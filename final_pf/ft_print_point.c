@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_point.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 14:13:00 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:38:22 by ukim             ###   ########.fr       */
+/*   Updated: 2020/11/28 16:57:03 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ char					*change_to_char_null(t_flags *flag)
 	char				*prefix;
 	char				*result;
 
-	if (flag->pf == 1 || flag->dot == 1)
+	if (flag->dot == 1)
 	{
+		len = flag->precision < 0 ? 1 : flag->precision;
 		prefix = ft_strdup("0x");
-		tmp[0] = init_c_malloc('0', flag->precision);
+		tmp[0] = init_c_malloc('0', len);
 		tmp[1] = ft_free_strjoin(prefix, tmp[0]);
 	}
 	else
