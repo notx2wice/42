@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:26:59 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:34:04 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/09 20:49:28 by ukim              #+#    #+#             */
+/*   Updated: 2020/11/28 11:34:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int						ft_atoi(char **str)
+char		*ft_strdup(char *s1)
 {
-	unsigned long long   num;
-	int					sign;
+	int		len;
+	char	*copy;
+	int		i;
 
-	num = 0;
-	sign = 1;
-	if (**str == '-' || **str == '+')
+	len = 0;
+	i = 0;
+	while (s1[len])
+		len++;
+	copy = (char *)malloc(sizeof(char) * (len + 1));
+	if (copy == NULL)
+		return (0);
+	while (s1[i])
 	{
-		if (**str == '-')
-			sign *= -1;
-		(*str)++;
+		copy[i] = s1[i];
+		i++;
 	}
-	while (**str && ft_isdigit(**str))
-	{
-		num *= 10;
-		num += **str - '0';
-		(*str)++;
-	}
-	return (sign * num);
+	copy[i] = 0x00;
+	return (copy);
 }

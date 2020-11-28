@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ukim <ukim@42seoul.kr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 17:26:59 by ukim              #+#    #+#             */
-/*   Updated: 2020/11/28 11:34:04 by ukim             ###   ########.fr       */
+/*   Created: 2020/10/07 15:11:40 by ukim              #+#    #+#             */
+/*   Updated: 2020/11/28 11:35:15 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int						ft_atoi(char **str)
+int			ft_strlen(char *s)
 {
-	unsigned long long   num;
-	int					sign;
+	int		length;
 
-	num = 0;
-	sign = 1;
-	if (**str == '-' || **str == '+')
-	{
-		if (**str == '-')
-			sign *= -1;
-		(*str)++;
-	}
-	while (**str && ft_isdigit(**str))
-	{
-		num *= 10;
-		num += **str - '0';
-		(*str)++;
-	}
-	return (sign * num);
+	length = 0;
+	while (s[length])
+		length++;
+	return (length);
 }
