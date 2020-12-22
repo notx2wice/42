@@ -130,6 +130,7 @@ typedef struct			s_window
 {
 	void				*mlx;
 	void				*win;
+	t_img				pimg;
 	t_img				*img[5];
 	int					*textures[5];
 	t_ray				*ray;
