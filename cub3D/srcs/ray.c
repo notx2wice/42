@@ -43,8 +43,8 @@ void			set_ray_rayDir(double cameraX, t_ray *ray, t_player *player)
 	ray->rayDir.y = player->dir.y + player->plane.y * cameraX;
 
 	//length of ray from current position to next x or y-side
-	ray->deltaDist.x = abs(1 / ray->rayDir.x);
-	ray->deltaDist.y = abs(1 / ray->rayDir.y);
+	ray->deltaDist.x = fabs(1 / ray->rayDir.x);
+	ray->deltaDist.y = fabs(1 / ray->rayDir.y);//abs -?fabs
 }
 
 
@@ -72,7 +72,7 @@ void		set_ray_step_sideDist(t_ray *ray, t_coord_d *pos)
 	}
 }
 
-void			find_and_calc_wall(t_ray *ray, t_cub *cub, t_player *player)
+void			find_and_calc_wall(t_ray *ray, t_cub *cub)
 {
 	while (ray->hit == 0)
 	{
@@ -118,7 +118,7 @@ void			calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub
 		ray->draw_end = cub->res_height - 1;
 }
 
-void			calc_wall_texture(t_window *window, t_cub *cub, t_ray *ray)
+void			calc_wall_texture(t_window *window, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
@@ -156,13 +156,13 @@ void			do_raycasting(t_window *window)
 		set_ray_step_sideDist(window->ray, &window->player->pos);
 
 		//check whether the ray hit the wall or not.
-		find_and_calc_wall(window->ray, window->cub, window->player);
+		find_and_calc_wall(window->ray, window->cub);
 
 		//calculate get perpwallDist, lineheight, drawStart, drawEnd.
-		calc_perp_lineheight_drawS_drawE(window->ray, &window->player->pos, &window->cub);
+		calc_perp_lineheight_drawS_drawE(window->ray, &window->player, window->cub);//&cub
 
 		//define tex_num & tex_x & wall_x
-		calc_wall_texture(window, window->cub, window->ray);
+		calc_wall_texture(window, window->ray);
 
 		//transform each pixel's color to array.
 		wall_to_buffer(window, window->ray, x);
