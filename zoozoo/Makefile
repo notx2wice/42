@@ -17,12 +17,8 @@ SRCS =					./includes/getnextline/get_next_line.c \
 						./srcs/move.c \
 						# ./srcs/draw_sprite.c
 
-INCS =		-I ${INCLUDES_PATH} -I ${LIBFT}
 
-OBJS =		${SRCS:.c=.o}
-
-.c.o:		${LIBFT}
-			${CC} ${CFLAGS} -c -I $< -o $(<:.c=.o)
+OBJS =		${SRCS:%.c=%.o}
 
 all:		${NAME}
 
@@ -31,7 +27,7 @@ ${LIBFT}:
 
 ${NAME}:	${OBJS}
 			make -C ${LIBFT_PATH}
-			$(CC) $(CFLAGS) ${INCS} -o $(NAME) $(OBJS)
+			$(CC)  $(CFLAGS)  $(OBJS) -I ./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
 
 clean:
 		rm -f ${OBJS}
