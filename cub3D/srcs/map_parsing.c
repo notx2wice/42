@@ -98,7 +98,7 @@ int				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_c
 				window->player->pos.x = (double)j + 0.5;
 				window->player->pos.y = (double)idx + 0.5;
 				tmp[j] = '0';
-				*pos_cnt++;
+				(*pos_cnt)++;
 			}
 			else
 				tmp[j] = 'N';
