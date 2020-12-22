@@ -5,9 +5,7 @@ CFLAGS 					= -Wall -Wextra -Werror
 MLX 					= -lmlx -framework OpenGL -framework Appkit
 INCLUDES_PATH			= ./includes/
 LIBFT_PATH				= ./includes/libft/
-GET_NEXT_LINE_PATH		= ./includes/get_next_line/
-SRCS =					./includes/getnextline/get_next_line.c \
-						./includes/getnextline/get_next_line_utils.c \
+SRCS =					./includes/getnextline/get_next_line.c ./includes/getnextline/get_next_line_utils.c \
 						./srcs/main.c \
 						./srcs/init.c \
 						./srcs/map_parsing.c \
@@ -17,17 +15,15 @@ SRCS =					./includes/getnextline/get_next_line.c \
 						./srcs/move.c \
 						# ./srcs/draw_sprite.c
 
-
 OBJS =		${SRCS:%.c=%.o}
 
 all:		${NAME}
 
-${LIBFT}:
-			$(MAKE) -C ${LIBFT_PATH}
-
 ${NAME}:	${OBJS}
 			make -C ${LIBFT_PATH}
-			$(CC)  $(CFLAGS)  $(OBJS) -I ./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) -I ./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+
+all :		${NAME}
 
 clean:
 		rm -f ${OBJS}
