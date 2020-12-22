@@ -22,7 +22,7 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	if (keycode == KEY_LEFT)
 	{
 		player->dir.x = player->dir.x * cos(rotSpeed) \
-			- (player->dir.y * sin(rotSpeed);
+			- (player->dir.y * sin(rotSpeed));
 		player->dir.y = (oldDir_x * sin(rotSpeed)) \
 			+ (player->dir.y * cos(rotSpeed));
 		player->plane.x = (player->plane.x *cos(rotSpeed)) \
@@ -33,7 +33,7 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	else if (keycode == KEY_RIGHT)
 	{
 		player->dir.x = player->dir.x * cos(-rotSpeed) \
-			- (player->dir.y * sin(-rotSpeed);
+			- (player->dir.y * sin(-rotSpeed));
 		player->dir.y = (oldDir_x * sin(-rotSpeed)) \
 			+ (player->dir.y * cos(-rotSpeed));
 		player->plane.x = (player->plane.x *cos(-rotSpeed)) \
