@@ -78,7 +78,7 @@ int				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_c
 {
 	int			j;
 	char		*tmp;
-	
+
 	j = 0;
 	if (!(tmp = (char*)malloc(sizeof(char) * (window->cub->map_col + 1))))
 		exit_program(MEMORY_ALLOC_ERROR);
@@ -115,7 +115,7 @@ void			make_worldmap(char **line, t_window *window)
 	int			pos_cnt;
 	int			idx;
 	char		*tmp;
-	
+
 	pos_cnt = 0;
 	if (!(map = (char**)malloc(sizeof(char*) * (window->cub->map_row + 1))))
 		exit_program(MEMORY_ALLOC_ERROR);
@@ -167,14 +167,14 @@ int				check_player_direction(t_cub *cub)
 	return (0);
 }
 
-int				set_cub(t_window *window, char **path)
+int				set_cub(t_window *window, char *path)
 {
 	char		**cub_file;
 	int			i;
 	char		**tmp;
 	char		**map;
 	int			j;
-
+	int			fd;
 	// read file by fd from main. Return ERROR if failed.b
 	fd = open(path, O_RDONLY);
 	cub_file = read_map_file_to_array(fd);
