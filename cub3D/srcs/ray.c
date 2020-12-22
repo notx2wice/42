@@ -159,7 +159,7 @@ void			do_raycasting(t_window *window)
 		find_and_calc_wall(window->ray, window->cub);
 
 		//calculate get perpwallDist, lineheight, drawStart, drawEnd.
-		calc_perp_lineheight_drawS_drawE(window->ray, &window->player, window->cub);//&cub
+		calc_perp_lineheight_drawS_drawE(window->ray, window->player, window->cub);//&cub
 
 		//define tex_num & tex_x & wall_x
 		calc_wall_texture(window, window->ray);
