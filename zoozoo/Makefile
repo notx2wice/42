@@ -6,7 +6,8 @@ MLX 					= -lmlx -framework OpenGL -framework Appkit
 INCLUDES_PATH			= ./includes/
 LIBFT_PATH				= ./includes/libft/
 GET_NEXT_LINE_PATH		= ./includes/get_next_line/
-SRCS =					./includes/getnextline/get_next_line.c ./includes/getnextline/get_next_line_utils.c \
+SRCS =					./includes/getnextline/get_next_line.c \
+						./includes/getnextline/get_next_line_utils.c \
 						./srcs/main.c \
 						./srcs/init.c \
 						./srcs/map_parsing.c \
