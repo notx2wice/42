@@ -86,7 +86,7 @@ void			wall_to_buffer(t_window *window, t_ray *ray, int x)
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		ray->tex_y = (int)tex_pos & window->img[ray->tex_num]->height - 1);
+		ray->tex_y = (int)tex_pos & window->img[ray->tex_num]->height - 1;
 		tex_pos += step;
 		color = window->textures[ray->tex_num][window->img[ray->tex_num]->height \
 			* ray->tex_y + ray->tex_x];
