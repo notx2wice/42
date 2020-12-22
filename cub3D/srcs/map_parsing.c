@@ -74,7 +74,7 @@ void			set_cub_backgrounds(char **tmp, t_cub *cub)
 	free_char_array(color);
 }
 
-int				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt)
+char				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt)
 {
 	int			j;
 	char		*tmp;
