@@ -173,7 +173,7 @@ int				set_cub(t_window *window, char *path)
 	int			i;
 	char		**tmp;
 	char		**map;
-	int			j;
+	//int			j;
 	int			fd;
 	// read file by fd from main. Return ERROR if failed.b
 	fd = open(path, O_RDONLY);

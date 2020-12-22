@@ -170,7 +170,7 @@ void					free_window(t_window *window);
 char					**read_map_file_to_array(int fd);
 void					set_cub_textures_path(char **tmp, t_cub *cub);
 void					set_cub_backgrounds(char **tmp, t_cub *cub);
-int						*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt);
+char					*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt);//i to c
 void					make_worldmap(char **line, t_window *window);
 void					set_cub_worldmap(char **line, t_window *window);
 int						check_player_direction(t_cub *cub);
