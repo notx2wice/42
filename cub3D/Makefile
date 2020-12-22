@@ -5,7 +5,8 @@ CFLAGS 					= -Wall -Wextra -Werror
 MLX 					= -lmlx -framework OpenGL -framework Appkit
 INCLUDES_PATH			= ./includes/
 LIBFT_PATH				= ./includes/libft/
-SRCS =					./includes/getnextline/get_next_line.c ./includes/getnextline/get_next_line_utils.c \
+SRCS =					./includes/getnextline/get_next_line.c\
+						./includes/getnextline/get_next_line_utils.c \
 						./srcs/main.c \
 						./srcs/init.c \
 						./srcs/map_parsing.c \
@@ -19,7 +20,7 @@ OBJS =		${SRCS:%.c=%.o}
 
 ${NAME}:	${OBJS}
 			make -C ${LIBFT_PATH}
-			$(CC) $(CFLAGS) $(OBJS) -I ./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) -I $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
 
 all:		${NAME}
 
