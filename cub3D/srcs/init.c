@@ -92,7 +92,7 @@ void		init_img(t_img img)
 	img.height = 0;
 }
 
-void		init_window(t_window *window)
+void		init_struct_window(t_window *window)
 {
 	if (!(window = malloc(sizeof(t_window))))
 		exit_program(MEMORY_ALLOC_ERROR);
@@ -100,11 +100,30 @@ void		init_window(t_window *window)
 	window->win_mlx = "";
 
 	init_img(window->img);
-// init_textures?
 	init_ray(window->ray);
 	init_player(window->player);
 	init_cub(window->cub);
 
 	window->rotate_speed = 0.05;
 	window->move_speed = 0.05;
+}
+
+void		init_window(t_window *window, char *path)
+{
+	int		i;
+
+	init_struct_window(window);
+	window->mlx = mlx_init();
+	set_cub(window, path);
+	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
+	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_height)))
+		exit_program(MEMORY_ALLOC_ERROR);
+	i = 0;
+	while (i < window->cub->res_height)
+	{
+		if (!(window->buffer[i] = (int *)malloc(sizeof(int) * window->cub->res_width)))
+			exit_program(MEMORY_ALLOC_ERROR);
+		i++;
+	}
+	load_texture(window);
 }

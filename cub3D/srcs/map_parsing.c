@@ -177,9 +177,7 @@ int				set_cub(t_window *window, char **path)
 
 	// read file by fd from main. Return ERROR if failed.b
 	fd = open(path, O_RDONLY);
-	init_cub(window->cub);
 	cub_file = read_map_file_to_array(fd);
-
 	i = 0;
 	while (i < 8)
 	{
@@ -201,18 +199,6 @@ int				set_cub(t_window *window, char **path)
 	set_cub_worldmap(cub_file, window);
 	if (!check_player_direction(window->cub))
 		exit_program("Player's looking direction is invalid");
-	// i = 0;
-	// while (i < cub->map_row)
-	// {
-	// 	j = 0;
-	// 	while (j < 25)
-	// 	{
-	// 		printf("%2d ", cub->worldmap[i][j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	i++;	
-	// }
 	free_char_array(cub_file);
 	return (1);
 }

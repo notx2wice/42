@@ -56,7 +56,7 @@ void		move_player_forward(t_player *player, t_cub *cub, int moveSpeed)
 		player->pos.y += player->dir.y * moveSpeed;
 }
 
-void		move_player_backword(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_backward(t_player *player, t_cub *cub, int moveSpeed)
 {
 	int		new_pos_x;
 	int		new_pos_y;

@@ -31,22 +31,22 @@ void			draw(t_window *window)
 	mlx_put_image_to_window(window->mlx, window->win, window->img.img, 0, 0);
 }
 
-void			calc(t_window *window)
-{
-	int			x;
-	int			i;
+// void			calc(t_window *window)
+// {
+// 	int			x;
+// 	int			i;
 	
-	x =	0;
-	while (x < window->cub->res_width)
-		floor_ceiling_to_buffer(window, x++);
-	x = 0;
-	while (x < window->cub->res_width)
-		wall_to_buffer(window, x++);
-	sortSprites(window);
-	i = 0;
-	while(i < window->cub->sprite_count)
-		draw_sprite(window, i++);
-}
+// 	x =	0;
+// 	while (x < window->cub->res_width)
+// 		floor_ceiling_to_buffer(window, x++);
+// 	x = 0;
+// 	while (x < window->cub->res_width)
+// 		wall_to_buffer(window, x++);
+// 	sortSprites(window);
+// 	i = 0;
+// 	while(i < window->cub->sprite_cnt)
+// 		draw_sprite(window, i++);
+// }
 
 int				main_loop(t_window *window)
 {
@@ -60,11 +60,11 @@ int				key_press(int key, t_window *window)
 	if (key == KEY_W)
 		move_player_forward(window->player, window->cub, window->moveSpeed);
 	else if (key == KEY_A)
-		move_player_left(window->player, window->cub, window->moveSpeedw);
+		move_player_left(window->player, window->cub, window->moveSpeed);
 	else if (key == KEY_S)
 		move_player_backward(window->player, window->cub, window->moveSpeed);
 	else if (key == KEY_D)
-		move_player_right(window->player, window->cub, window->moveSpeedw);
+		move_player_right(window->player, window->cub, window->moveSpeed);
 	else if (key == KEY_LEFT || key == KEY_RIGHT)
 		rotate_player(window->player, window->rotSpeed, key);
 	else if (key == KEY_ESC)
@@ -85,9 +85,7 @@ int				main(int argc, char **argv)
 	
 	if (argc == 2 && ft_strcmp(argv[1], "./map.cub") == 0)
 	{
-		init_window(window);
-		set_cub(window, argv[1]);
-		load_texture(window);
+		init_window(window, "./map.cub");
 		// init_sprite(window);
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_hook(window->win, KEY_PRESS, 1, key_press, window);

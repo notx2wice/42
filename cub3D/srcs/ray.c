@@ -179,4 +179,5 @@ int			raycasting(t_window *window)
 	floor_ceiling_to_buffer(t_window *window, int x)
 
 	do_raycasting(window);
+	return (0);
 }

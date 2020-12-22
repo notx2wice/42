@@ -17,13 +17,11 @@ SRCS =					./includes/getnextline/get_next_line.c ./includes/getnextline/get_nex
 
 OBJS =		${SRCS:%.c=%.o}
 
-all:		${NAME}
-
 ${NAME}:	${OBJS}
 			make -C ${LIBFT_PATH}
 			$(CC) $(CFLAGS) $(OBJS) -I ./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
 
-all :		${NAME}
+all:		${NAME}
 
 clean:
 		rm -f ${OBJS}

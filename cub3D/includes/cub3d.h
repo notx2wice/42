@@ -54,7 +54,7 @@
 typedef struct			s_img
 {	
 	void				*img;
-	char				*addr;
+	char				*data;
 	int					bpp;
 	int					line_length;
 	int					endian;
@@ -129,7 +129,7 @@ typedef struct			s_ray
 typedef struct			s_window
 {	
 	void				*mlx;
-	void				*win_mlx;
+	void				*win;
 	t_img				img;
 	int					*textures[5];
 	t_ray				*ray;
@@ -162,8 +162,8 @@ int						get_next_line(int fd, char **line);
 char					*ft_free_strjoin(char *s1, char *s2);
 void					exit_program(char *str);
 void					free_char_array(char **str);
-void					free_int_array(int **map, int map_row);
 void					free_cub(t_cub *cub);
+void					free_window(t_window *window);
 
 //map_parsing fucntions
 char					**read_map_file_to_array(int fd);
@@ -186,7 +186,22 @@ void					init_coord_d(t_coord_d coord_d);
 void					init_coord_i(t_coord_i coord_i);
 void					init_ray(t_ray *ray);
 void					init_img(t_img *img);
-void					init_key(t_key *key);
 void					init_window(t_window *window);
+
+//ray
+int						raycasting(t_window *window);
+
+//move
+void					rotate_player(t_player *player, int rotSpeed, int keycode);
+void					move_player_forward(t_player *player, t_cub *cub, int moveSpeed);
+void					move_player_left(t_player *player, t_cub *cub, int moveSpeed);
+void					move_player_backward(t_player *player, t_cub *cub, int moveSpeed);
+void					move_player_right(t_player *player, t_cub *cub, int moveSpeed);
+
+//textures
+int						*loadImage(t_window *window, char *path, t_img *img);
+void					load_texture(t_window *window);
+void					floor_ceiling_to_buffer(t_window *window, int x);
+void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 
 #endif
