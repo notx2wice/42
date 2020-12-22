@@ -20,7 +20,7 @@ int				*loadImage(t_window *window, char *path, t_img *img)
 
 	if (!(img->img = mlx_xpm_file_to_image(window->mlx, path, &img->width, &img->height)))
 		exit_program("mlx_xpm_file_to_image error");
-	if (!(img->data = (int *)mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian)))
+	if (!(img->data = mlx_get_data_addr(img->img, &img->bpp, &img->line_length, &img->endian)))
 		exit_program("mlx_get_data_addr error");
 	if (!(res = (int *)malloc(sizeof(int) * (img->width * img->height))))
 		exit_program(MEMORY_ALLOC_ERROR);
