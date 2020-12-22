@@ -172,7 +172,7 @@ int				set_cub(t_window *window, char *path)
 	char		**cub_file;
 	int			i;
 	char		**tmp;
-	char		**map;
+	//char		**map;
 	//int			j;
 	int			fd;
 	// read file by fd from main. Return ERROR if failed.b
