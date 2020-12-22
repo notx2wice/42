@@ -124,7 +124,7 @@ void		init_window(t_window *window, char *path)
 	set_cub(window, path);
 	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
 	window->pimg.img = mlx_new_image(window->mlx, window->cub->res_width, window->cub->res_height);
-	window->pimg.data = (int *)mlx_get_data_addr(window->pimg.img, &window->pimg.bpp, &window->pimg.line_length, &window->pimg.endian);
+	window->pimg.data = mlx_get_data_addr(window->pimg.img, &window->pimg.bpp, &window->pimg.line_length, &window->pimg.endian);
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_height)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	i = 0;
