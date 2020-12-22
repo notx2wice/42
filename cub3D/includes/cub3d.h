@@ -174,7 +174,7 @@ int						*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos
 void					make_worldmap(char **line, t_window *window);
 void					set_cub_worldmap(char **line, t_window *window);
 int						check_player_direction(t_cub *cub);
-int						set_cub(t_window *window, char **path);
+int						set_cub(t_window *window, char *path);
 
 //player
 void					set_player_dir_plane_coord(t_window *window);
