@@ -91,6 +91,7 @@ int				main(int argc, char **argv)
 		mlx_hook(window->win, KEY_PRESS, 1, key_press, window);
 		mlx_loop(window->mlx);
 	}
+/*	
 	else if (argc == 3 && ft_strcmp(argv[2],"--save") == 0)
 	{
 		init_window(window, argv[1]);
@@ -101,6 +102,7 @@ int				main(int argc, char **argv)
 		save_bmp(window);
 		exit(0);
 	}
+*/
 	else
 		exit_program("A .cub file path not given");
 	return (0);

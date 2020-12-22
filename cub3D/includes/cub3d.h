@@ -186,7 +186,7 @@ void					init_coord_d(t_coord_d coord_d);
 void					init_coord_i(t_coord_i coord_i);
 void					init_ray(t_ray *ray);
 void					init_img(t_img *img);
-void					init_window(t_window *window);
+void					init_window(t_window *window, char *path);
 
 //ray
 int						raycasting(t_window *window);
