@@ -71,7 +71,7 @@ void			set_cub_backgrounds(char **tmp, t_cub *cub)
 		while (color[i])
 			cub->ceiling_color = cub->ceiling_color * 256 + ft_atoi(color[i++]);
 	}
-	free_char_array(color);
+	free_array(color);//free_char_array
 }
 
 char				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt)
@@ -194,11 +194,11 @@ int				set_cub(t_window *window, char *path)
 		else
 			exit_program(ARGUMENT_ERROR);
 		i++;
-		free_char_array(tmp);
+		free_array(tmp);
 	}
 	set_cub_worldmap(cub_file, window);
 	if (!check_player_direction(window->cub))
 		exit_program("Player's looking direction is invalid");
-	free_char_array(cub_file);
+	free_array(cub_file);
 	return (1);
 }

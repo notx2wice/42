@@ -162,7 +162,7 @@ int						get_next_line(int fd, char **line);
 //cub3d utils
 char					*ft_free_strjoin(char *s1, char *s2);
 void					exit_program(char *str);
-void					free_char_array(char **str);
+void					free_array(char **str);
 void					free_cub(t_cub *cub);
 void					free_window(t_window *window);
 
