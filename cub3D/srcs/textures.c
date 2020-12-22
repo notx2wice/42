@@ -36,34 +36,40 @@ int				*loadImage(t_window *window, char *path, t_img *img)
 		y++;
 	}
 	//mlx function -> get image data and destroy it to get another img next time.
-	mlx_destroy_image(window->mlx, img->img);
+	//mlx_destroy_image(window->mlx, img->img); //추후 실행
 	return (res);
 }
 
 void			load_texture(t_window *window)
 {
-	window->textures[NO_IDX] = loadImage(window, window->cub->no_path, window->img);
-	window->textures[SO_IDX] = loadImage(window, window->cub->so_path, window->img);
-	window->textures[WE_IDX] = loadImage(window, window->cub->we_path, window->img);
-	window->textures[EA_IDX] = loadImage(window, window->cub->ea_path, window->img);
-	window->textures[SPRITE_IDX] = loadImage(window, window->cub->sprite_path, window->img);
+	window->textures[NO_IDX] = loadImage(window, window->cub->no_path, window->img[0]);
+	window->textures[SO_IDX] = loadImage(window, window->cub->so_path, window->img[1]);
+	window->textures[WE_IDX] = loadImage(window, window->cub->we_path, window->img[2]);
+	window->textures[EA_IDX] = loadImage(window, window->cub->ea_path, window->img[3]);
+	window->textures[SPRITE_IDX] = loadImage(window, window->cub->sprite_path, window->img[4]);
 }
 
-void			floor_ceiling_to_buffer(t_window *window, int x)
+void			floor_ceiling_to_buffer(t_window *window)
 {
 	int			y;
+	int			x;
 
 	y = 0;
-	while (y < window->cub->res_height / 2)
+	x = 0;
+	while (x < window->cub->res_width)
 	{
-		window->buffer[y][x] = window->cub->celling_color;
-		y++;
-	}
-	y = window->cub->res_height / 2;
-	while (y < window->cub->res_height)
-	{
-		window->buffer[y][x] = window->cub->floor_color;
-		y++;
+		while (y < window->cub->res_height / 2)
+		{
+			window->buffer[y][x] = window->cub->ceiling_color;
+			y++;
+		}
+		y = window->cub->res_height / 2;
+		while (y < window->cub->res_height)
+		{
+			window->buffer[y][x] = window->cub->floor_color;
+			y++;
+		}
+		x++;
 	}
 }
 
@@ -74,15 +80,15 @@ void			wall_to_buffer(t_window *window, t_ray *ray, int x)
 	int			y;
 	int			color;
 
-	step = window->textures[ray->tex_num].height * 1.0 / ray->lineheight;
+	step = window->img[ray->tex_num]->height * 1.0 / ray->lineheight;
 	tex_pos = (ray->draw_start - window->cub->res_height / 2 + \
 		ray->lineheight / 2) * step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)
 	{
-		ray->tex_y = (int)tex_pos & window->textures[ray->tex_num].height - 1);
+		ray->tex_y = (int)tex_pos & window->img[ray->tex_num]->height - 1);
 		tex_pos += step;
-		color = window->textures[ray->tex_num][window->textures[ray->tex_num].height \
+		color = window->textures[ray->tex_num][window->img[ray->tex_num]->height \
 			* ray->tex_y + ray->tex_x];
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;

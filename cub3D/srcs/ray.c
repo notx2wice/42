@@ -48,28 +48,28 @@ void			set_ray_rayDir(double cameraX, t_ray *ray, t_player *player)
 }
 
 
-void		set_ray_step_sideDist(t_ray *ray, t_coord_i *pos)
+void		set_ray_step_sideDist(t_ray *ray, t_coord_d *pos)
 {
 	if (ray->rayDir.x < 0)
 	{
 		ray->step.x = -1;
-		ray->sideDist.x = (pos.x - ray->map.x) * (ray->deltaDist.x);
+		ray->sideDist.x = (pos->x - ray->map.x) * (ray->deltaDist.x);
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->sideDist.x = (ray->map.x + 1.0 - pos.x) * (ray->deltaDist.x);
+		ray->sideDist.x = (ray->map.x + 1.0 - pos->x) * (ray->deltaDist.x);
 	}
-	if (ray->rayDir->y < 0)
+	if (ray->rayDir.y < 0)
 	{
 		ray->step.y = -1;
-		ray->sideDist.y = (pos.y - ray->map.y) * (ray->deltaDist.y);
+		ray->sideDist.y = (pos->y - ray->map.y) * (ray->deltaDist.y);
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->sideDist.y = (ray->map.y + 1 - pos.y) * (ray->deltaDist.y);
-	}	
+		ray->sideDist.y = (ray->map.y + 1 - pos->y) * (ray->deltaDist.y);
+	}
 }
 
 void			find_and_calc_wall(t_ray *ray, t_cub *cub, t_player *player)
@@ -81,7 +81,7 @@ void			find_and_calc_wall(t_ray *ray, t_cub *cub, t_player *player)
 		{
 			ray->sideDist.x += ray->deltaDist.x;
 			ray->map.x += ray->step.x;
-			ray->size = 0;
+			ray->side = 0;
 		}
 		else
 		{
@@ -105,42 +105,41 @@ void			calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub
 	else
 		ray->perpwallDist = (ray->map.y - player->pos.y + \
 			(1 - ray->step.y) / 2) / ray->rayDir.y;
-	
+
 	//calculate height of line to draw on screen
-	ray->lineheight = (int)((double)cub->screen->res_height / ray->perpwallDist);
-	
+	ray->lineheight = (int)((double)cub->res_height / ray->perpwallDist);
+
 	//calculate lowest and highest pixel to fill in current stripe.
 	ray->draw_start = (-1 * ray->lineheight / 2) + (cub->res_height / 2);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = (ray->lineheight / 2) + (ray->res_height / 2);
-	if (ray->draw_end >= ray->res_height)
-		ray->draw_end = ray->res_height - 1;
+	ray->draw_end = (ray->lineheight / 2) + (cub->res_height / 2);
+	if (ray->draw_end >= cub->res_height)
+		ray->draw_end = cub->res_height - 1;
 }
 
-void			calc_wall_texture(t_cub *cub, t_ray *ray)
+void			calc_wall_texture(t_window *window, t_cub *cub, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
 		ray->tex_num = (ray->rayDir.x > 0)? 1: 0; //0북 1남 2서 3동
-		ray->wall_x = player->pos.x + ray->perpwallDist * ray->rayDir.y;
+		ray->wall_x = window->player->pos.x + ray->perpwallDist * ray->rayDir.y;
 	}
 	else
 	{
 		ray->tex_num = (ray->rayDir.y > 0)? 3 : 2;
-		ray->wall_x = player->pos.y + ray->perpwallDist * ray->rayDir.x;
+		ray->wall_x = window->player->pos.y + ray->perpwallDist * ray->rayDir.x;
 	}
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = (int)(ray->wall_x * (double)window->textures[ray->tex_num].width);
-	if ((ray->side == 0 && ray->rayDir.x > 0) \
-		|| (ray->side == 1 && ray->rayDir.y < 0))
-		ray->tex_x = window->textures[ray->tex_num].width - ray->tex_x - 1;
+	ray->tex_x = (int)(ray->wall_x * window->img[ray->tex_num]->width);
+	if ((ray->side == 0 && ray->rayDir.x > 0) || (ray->side == 1 && ray->rayDir.y < 0))
+		ray->tex_x = window->img[ray->tex_num]->width - ray->tex_x - 1;
 }
 
 void			do_raycasting(t_window *window)
 {
 	double		cameraX;
-	int			x;	
+	int			x;
 
 	// which box of the map we're in(initialize)
 	window->ray->map.x = window->player->pos.x;
@@ -154,16 +153,16 @@ void			do_raycasting(t_window *window)
 		set_ray_rayDir(cameraX, window->ray, window->player);
 
 		//calculate step and initial sideDist
-		set_ray_step_sideDist(window->ray, window->player->pos);
-		
+		set_ray_step_sideDist(window->ray, &window->player->pos);
+
 		//check whether the ray hit the wall or not.
 		find_and_calc_wall(window->ray, window->cub, window->player);
 
 		//calculate get perpwallDist, lineheight, drawStart, drawEnd.
-		calc_perp_lineheight_drawS_drawE(window->ray, window->player->pos);
+		calc_perp_lineheight_drawS_drawE(window->ray, &window->player->pos, &window->cub);
 
 		//define tex_num & tex_x & wall_x
-		calc_wall_texture(window->cub, window->ray);
+		calc_wall_texture(window, window->cub, window->ray);
 
 		//transform each pixel's color to array.
 		wall_to_buffer(window, window->ray, x);
@@ -174,9 +173,9 @@ void			do_raycasting(t_window *window)
 int			raycasting(t_window *window)
 {
 	set_player_dir_plane_coord(window);
-	
+
 	//draw wall and ceiling
-	floor_ceiling_to_buffer(t_window *window, int x)
+	floor_ceiling_to_buffer(window);
 
 	do_raycasting(window);
 	return (0);

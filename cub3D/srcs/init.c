@@ -33,14 +33,16 @@ void			init_player(t_player *player)
 	init_coord_d(player->plane);
 }
 
-void			init_sprite(t_sprite *sprite)
-{
-	if (!(sprite = malloc(sizeof(t_sprite))))
-		exit_program(MEMORY_ALLOC_ERROR);
-	sprite.x = 0;
-	sprite.y = 0;
-	sprite.distance = 0;
-}
+/*
+** void			init_sprite(t_sprite *sprite)
+** {
+** 	if (!(sprite = malloc(sizeof(t_sprite))))
+** 		exit_program(MEMORY_ALLOC_ERROR);
+** 	sprite.x = 0;
+** 	sprite.y = 0;
+** 	sprite.distance = 0;
+** }
+*/
 
 void			init_cub(t_cub *cub)
 {
@@ -81,31 +83,36 @@ void        init_ray(t_ray *ray)
 	ray->wall_x = 0;
 }
 
-void		init_img(t_img img)
+void		init_img(t_img *img)
 {
-	img.img = "";
-	img.addr = "";
-	img.bits_per_pixel = 0;
-	img.line_length = 0;
-	img.endian = 0;
-	img.width = 0;
-	img.height = 0;
+	img->img = "";
+	img->data = "";
+	img->bpp = 0;
+	img->line_length = 0;
+	img->endian = 0;
+	img->width = 0;
+	img->height = 0;
 }
 
 void		init_struct_window(t_window *window)
 {
+	int		i;
+
+	i = 0;
 	if (!(window = malloc(sizeof(t_window))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	window->mlx = "";
-	window->win_mlx = "";
 
-	init_img(window->img);
+	while (i < 5)
+	{
+		init_img(window->img[i++]);
+	}
 	init_ray(window->ray);
 	init_player(window->player);
 	init_cub(window->cub);
 
-	window->rotate_speed = 0.05;
-	window->move_speed = 0.05;
+	window->rotSpeed = 0.05;
+	window->moveSpeed = 0.05;
 }
 
 void		init_window(t_window *window, char *path)
@@ -116,6 +123,8 @@ void		init_window(t_window *window, char *path)
 	window->mlx = mlx_init();
 	set_cub(window, path);
 	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
+	window->pimg.img = mlx_new_image(window->mlx, window->cub->res_width, window->cub->res_height);
+	window->pimg.data = (int *)mlx_get_data_addr(window->pimg.img, &window->pimg.bpp, &window->pimg.line_length, &window->pimg.endian);
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_height)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	i = 0;

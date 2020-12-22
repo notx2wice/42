@@ -23,19 +23,19 @@ void			draw(t_window *window)
 	{
 		while (x < window->cub->res_width)
 		{
-			window->img.data[y + window->cub->res_width + x] = window->buffer[y][x];
+			window->pimg.data[y + window->cub->res_width + x] = window->buffer[y][x];
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(window->mlx, window->win, window->img.img, 0, 0);
+	mlx_put_image_to_window(window->mlx, window->win, window->pimg.img, 0, 0);
 }
 
 // void			calc(t_window *window)
 // {
 // 	int			x;
 // 	int			i;
-	
+
 // 	x =	0;
 // 	while (x < window->cub->res_width)
 // 		floor_ceiling_to_buffer(window, x++);
@@ -79,10 +79,10 @@ int				key_press(int key, t_window *window)
 int				main(int argc, char **argv)
 {
 	t_window	*window;
-	
+
 	if (!(window = (t_window *)malloc(sizeof(t_window))))
 		exit_program(MEMORY_ALLOC_ERROR);
-	
+
 	if (argc == 2 && ft_strcmp(argv[1], "./map.cub") == 0)
 	{
 		init_window(window, "./map.cub");
@@ -91,7 +91,7 @@ int				main(int argc, char **argv)
 		mlx_hook(window->win, KEY_PRESS, 1, key_press, window);
 		mlx_loop(window->mlx);
 	}
-/*	
+/*
 	else if (argc == 3 && ft_strcmp(argv[2],"--save") == 0)
 	{
 		init_window(window, argv[1]);

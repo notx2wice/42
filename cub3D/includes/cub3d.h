@@ -52,7 +52,7 @@
 # define OPEN_ERROR "Failed to open file"
 
 typedef struct			s_img
-{	
+{
 	void				*img;
 	char				*data;
 	int					bpp;
@@ -60,36 +60,36 @@ typedef struct			s_img
 	int					endian;
 	int					width;
 	int					height;
-}						t_img;					
+}						t_img;
 
 typedef struct			s_coord_i
-{	
+{
 	int					x;
 	int					y;
 }						t_coord_i;
 
 typedef struct			s_coord_d
-{	
+{
 	double				x;
 	double				y;
 }						t_coord_d;
 
 typedef struct			s_player
-{	
+{
 	t_coord_d			pos;
 	t_coord_d			dir;
 	t_coord_d			plane;
 }						t_player;
 
 typedef struct			s_sprites
-{	
+{
 	int					x;
 	int					y;
 	double				distance;
 }						t_sprites;
 
 typedef struct			s_cub
-{	
+{
 	char				*ea_path;
 	char				*we_path;
 	char				*so_path;
@@ -127,10 +127,10 @@ typedef struct			s_ray
 }						t_ray;
 
 typedef struct			s_window
-{	
+{
 	void				*mlx;
 	void				*win;
-	t_img				img;
+	t_img				*img[5];
 	int					*textures[5];
 	t_ray				*ray;
 	t_player			*player;
@@ -142,7 +142,7 @@ typedef struct			s_window
 }						t_window;
 
 
-// libft functions	
+// libft functions
 char					*ft_strjoin(const char *s1, const char *s2);
 char					*ft_strdup(const char *s1);
 size_t					ft_strlen(const char *s1);
@@ -175,7 +175,7 @@ void					set_cub_worldmap(char **line, t_window *window);
 int						check_player_direction(t_cub *cub);
 int						set_cub(t_window *window, char **path);
 
-//player	
+//player
 void					set_player_dir_plane_coord(t_window *window);
 void					set_player(t_cub *cub);
 
@@ -201,7 +201,7 @@ void					move_player_right(t_player *player, t_cub *cub, int moveSpeed);
 //textures
 int						*loadImage(t_window *window, char *path, t_img *img);
 void					load_texture(t_window *window);
-void					floor_ceiling_to_buffer(t_window *window, int x);
+void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 
 #endif

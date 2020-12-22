@@ -52,7 +52,7 @@ void		move_player_forward(t_player *player, t_cub *cub, int moveSpeed)
 	new_pos_y = (int)(player->pos.y + player->dir.y * moveSpeed);
 	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x += player->dir.x * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][new_pos_y] == '0')
 		player->pos.y += player->dir.y * moveSpeed;
 }
 
@@ -65,7 +65,7 @@ void		move_player_backward(t_player *player, t_cub *cub, int moveSpeed)
 	new_pos_y = (int)(player->pos.y - player->dir.y * moveSpeed);
 	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x -= player->dir.x * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][new_pos_y] == '0')
 		player->pos.y -= player->dir.y * moveSpeed;
 }
 
@@ -78,7 +78,7 @@ void		move_player_right(t_player *player, t_cub *cub, int moveSpeed)
 	new_pos_y = (int)(player->pos.y - player->dir.y * moveSpeed);
 	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x += player->dir.y * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][new_pos_y] == '0')
 		player->pos.y -= player->dir.x * moveSpeed;
 }
 
@@ -91,6 +91,6 @@ void		move_player_left(t_player *player, t_cub *cub, int moveSpeed)
 	new_pos_y = (int)(player->pos.y + player->dir.y * moveSpeed);
 	if (cub->worldmap[new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x -= player->dir.y * moveSpeed;
-	if (cub->worldmap[(int)(player->pos.x)][new_pos_y]) == '0')
+	if (cub->worldmap[(int)(player->pos.x)][new_pos_y] == '0')
 		player->pos.y += player->dir.x * moveSpeed;
 }
