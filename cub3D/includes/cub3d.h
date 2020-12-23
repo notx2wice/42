@@ -19,7 +19,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./getnextline/get_next_line.h"
-# include "./minilbxopengl/mlx.h"
+# include "./minilibxopengl/mlx.h"
 
 // define keycode
 # define KEY_W 13

@@ -2,8 +2,8 @@ NAME					= cub3D
 LIBFT					= libft.a
 CC						= gcc
 CFLAGS 					= -Wall -Wextra -Werror
-LXFLAGS					= ./minilbxopengl
-MLX 					= -lmlx -framework OpenGL -framework Appkit
+LXFLAGS					= ./includes/minilbxopengl/
+MLX 					= -Lincludes/minilbxopengl -lmlx -framework OpenGL -framework Appkit
 INCLUDES_PATH			= ./includes/
 LIBFT_PATH				= ./includes/libft/
 SRCS =					./includes/getnextline/get_next_line.c\
@@ -19,12 +19,13 @@ SRCS =					./includes/getnextline/get_next_line.c\
 
 OBJS =		${SRCS:%.c=%.o}
 
-all:		${NAME}
-
 ${NAME}:	${OBJS}
 			make -C ${LIBFT_PATH}
-			$(CC) $(CFLAGS) -o $(NAME) -I $(LIBFT_PATH)$(LIBFT)  \
-			-L  $(LXFLAGS) $(MLX) $(OBJS)
+			make -C ${LXFLAGS}
+			$(CC) $(CFLAGS) $(OBJS) -I./includes/ $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+
+all:		${NAME}
+
 clean:
 		rm -f ${OBJS}
 		${MAKE} -C .${LIBFT_PATH} clean
