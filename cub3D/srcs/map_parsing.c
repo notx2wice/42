@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/15 19:28:56 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/23 16:49:23 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ int				set_cub(t_window *window, char *path)
 			window->cub->res_width = ft_atoi(tmp[1]);
 			window->cub->res_height = ft_atoi(tmp[2]);
 		}
-		else if (ft_strncmp(tmp[1], "../", 3) == 0)
+		else if (ft_strncmp(tmp[1], "./", 2) == 0)
 			set_cub_textures_path(tmp, window->cub);
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
 			set_cub_backgrounds(tmp, window->cub);

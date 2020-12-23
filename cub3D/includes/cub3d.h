@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/14 20:59:59 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/23 16:43:18 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./getnextline/get_next_line.h"
-# include "./minilibxopengl/mlx.h"
+# include "./minilibx_opengl/mlx.h"
 
 // define keycode
 # define KEY_W 13

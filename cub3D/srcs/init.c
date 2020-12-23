@@ -6,7 +6,7 @@
 /*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:51 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/15 19:28:51 by ekim             ###   ########.fr       */
+/*   Updated: 2020/12/23 17:20:33 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		init_window(t_window *window, char *path)
 	init_struct_window(window);
 	window->mlx = mlx_init();
 	set_cub(window, path);
+	printf("cub->res_width : %d\ncub->res_height: %d\n", window->cub->res_width, window->cub->res_height);
 	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
 	window->pimg.img = mlx_new_image(window->mlx, window->cub->res_width, window->cub->res_height);
 	window->pimg.data = mlx_get_data_addr(window->pimg.img, &window->pimg.bpp, &window->pimg.line_length, &window->pimg.endian);
