@@ -19,8 +19,8 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./getnextline/get_next_line.h"
-# include "./minilibx_opengl/mlx.h"
-
+# include <mlx.h>
+# include <stdio.h>
 // define keycode
 # define KEY_W 13
 # define KEY_A 0
@@ -54,7 +54,7 @@
 typedef struct			s_img
 {
 	void				*img;
-	char				*data;
+	int					*data;
 	int					bpp;
 	int					line_length;
 	int					endian;

@@ -42,6 +42,10 @@ int				*loadImage(t_window *window, char *path, t_img *img)
 
 void			load_texture(t_window *window)
 {
+	printf("%s\n", window->cub->no_path);
+	printf("%s\n", window->cub->so_path);
+	printf("%s\n", window->cub->we_path);
+	printf("%s\n", window->cub->ea_path);
 	window->textures[NO_IDX] = loadImage(window, window->cub->no_path, window->img[0]);
 	window->textures[SO_IDX] = loadImage(window, window->cub->so_path, window->img[1]);
 	window->textures[WE_IDX] = loadImage(window, window->cub->we_path, window->img[2]);

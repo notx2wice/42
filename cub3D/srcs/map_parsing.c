@@ -40,6 +40,7 @@ char			**read_map_file_to_array(int fd)
 
 void			set_cub_textures_path(char **tmp, t_cub *cub)
 {
+	printf("in set_textures");
 	if (ft_strcmp(tmp[0], "NO") == 0)
 		cub->no_path = ft_strdup(tmp[1]);
 	else if (ft_strcmp(tmp[0], "SO") == 0)
@@ -92,7 +93,7 @@ char				*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_
 		}
 		else
 		{
-			if (ft_isalpha(line[j]))
+			if (line[j] >= 'A' && line[j] <= 'Z')
 			{
 				window->cub->p_direction = line[j];
 				window->player->pos.x = (double)j + 0.5;
@@ -150,6 +151,8 @@ void			set_cub_worldmap(char **line, t_window *window)
 	}
 	window->cub->map_row = map_height;
 	window->cub->map_col = max_width;
+	printf("map_height : %d\n", map_height);
+	printf("max_width : %d\n", max_width);
 	make_worldmap(line, window);
 }
 
@@ -172,10 +175,10 @@ int				set_cub(t_window *window, char *path)
 	char		**cub_file;
 	int			i;
 	char		**tmp;
-	//char		**map;
-	//int			j;
 	int			fd;
+
 	// read file by fd from main. Return ERROR if failed.b
+	
 	fd = open(path, O_RDONLY);
 	cub_file = read_map_file_to_array(fd);
 	i = 0;
@@ -189,7 +192,7 @@ int				set_cub(t_window *window, char *path)
 		}
 		else if (ft_strncmp(tmp[1], "./", 2) == 0)
 			set_cub_textures_path(tmp, window->cub);
-		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
+		else if (tmp[0][0] == 'F' || tmp[0][0] == 'C')
 			set_cub_backgrounds(tmp, window->cub);
 		else
 			exit_program(ARGUMENT_ERROR);

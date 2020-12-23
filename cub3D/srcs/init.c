@@ -26,8 +26,6 @@ void			init_coord_i(t_coord_i coord_i)
 
 void			init_player(t_player *player)
 {
-	if (!(player = malloc(sizeof(t_player))))
-		exit_program(MEMORY_ALLOC_ERROR);
 	init_coord_d(player->pos);
 	init_coord_d(player->dir);
 	init_coord_d(player->plane);
@@ -46,8 +44,6 @@ void			init_player(t_player *player)
 
 void			init_cub(t_cub *cub)
 {
-	if (!(cub = malloc(sizeof(t_cub))))
-		exit_program(MEMORY_ALLOC_ERROR);
 	cub->no_path = "";
 	cub->so_path = "";
 	cub->ea_path = "";
@@ -64,8 +60,6 @@ void			init_cub(t_cub *cub)
 
 void        init_ray(t_ray *ray)
 {
-	if (!(ray = malloc(sizeof(t_ray))))
-		exit_program(MEMORY_ALLOC_ERROR);
 	init_coord_i(ray->map);
 	init_coord_i(ray->step);
 	init_coord_d(ray->rayDir);
@@ -99,16 +93,19 @@ void		init_struct_window(t_window *window)
 	int		i;
 
 	i = 0;
-	if (!(window = malloc(sizeof(t_window))))
-		exit_program(MEMORY_ALLOC_ERROR);
-	window->mlx = "";
-
 	while (i < 5)
 	{
+		window->img[i] = (t_img*)malloc(sizeof(t_img));
 		init_img(window->img[i++]);
 	}
-	init_ray(window->ray);
+	if (!(window->player = (t_player *)malloc(sizeof(t_player))))
+		exit_program(MEMORY_ALLOC_ERROR);
 	init_player(window->player);
+	if (!(window->ray = (t_ray *)malloc(sizeof(t_ray))))
+		exit_program(MEMORY_ALLOC_ERROR);
+	init_ray(window->ray);
+	if (!(window->cub = (t_cub *)malloc(sizeof(t_cub))))
+		exit_program(MEMORY_ALLOC_ERROR);
 	init_cub(window->cub);
 
 	window->rotSpeed = 0.05;
