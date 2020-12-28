@@ -12,23 +12,39 @@
 
 #include "../includes/cub3d.h"
 
+void		pixel_put_to_image(int color, int x, int y, t_img *img)
+{
+	unsigned char *src;
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+
+	src = (unsigned char *)&color;
+	r = src[0];
+	g = src[1];
+	b = src[2];
+	img->data[y * img->line_length + x * img->bpp / 8] = r;
+	img->data[y * img->line_length + x * img->bpp / 8 + 1] = g;
+	img->data[y * img->line_length + x * img->bpp / 8 + 2] = b;
+}
+
 void			draw(t_window *window)
 {
 	int			x;
 	int			y;
 
-	x = 0;
 	y = 0;
 	while (y < window->cub->res_height)
 	{
+		x = 0;
 		while (x < window->cub->res_width)
 		{
-			window->pimg.data[y + window->cub->res_width + x] = window->buffer[y][x];
+			pixel_put_to_image(window->buffer[y][x], x, y, window->pimg);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(window->mlx, window->win, window->pimg.img, 0, 0);
+	mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
 }
 
 // void			calc(t_window *window)
@@ -70,7 +86,6 @@ int				key_press(int key, t_window *window)
 	else if (key == KEY_ESC)
 	{
 		free_window(window);
-		printf("bye!\n");
 		exit(0);
 	}
 	return (0);
@@ -81,19 +96,14 @@ int				main(int argc, char **argv)
 	t_window	*window;
 
 	if (!(window = (t_window *)malloc(sizeof(t_window))))
-	{
 	 	exit_program(MEMORY_ALLOC_ERROR);
-	}
-	printf("win address:%p\n", window);
-	 if (argc == 2 && ft_strcmp(argv[1], "map.cub") == 0)
+	if (argc == 2 && ft_strcmp(argv[1], "map.cub") == 0)
 	{
-		printf("win address:%p 2222\n", window);
 		init_window(window, argv[1]);
-		printf("win.xx %s\n", window->cub->so_path);
-	// 	// init_sprite(window);
-	// 	mlx_loop_hook(window->mlx, main_loop, window);
-	// 	mlx_hook(window->win, KEY_PRESS, 1, key_press, window);
-	// 	mlx_loop(window->mlx);
+		// init_sprite(window);
+		mlx_hook(window->win, KEY_PRESS, 1, &key_press, window);
+		mlx_loop_hook(window->mlx, main_loop, window);
+		mlx_loop(window->mlx);
 	}
 /*
 	else if (argc == 3 && ft_strcmp(argv[2],"--save") == 0)
@@ -109,5 +119,5 @@ int				main(int argc, char **argv)
 */
 	// else
 	// 	exit_program("A .cub file path not given");
-	// return (0);
+	return (0);
 }

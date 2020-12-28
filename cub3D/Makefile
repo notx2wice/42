@@ -3,7 +3,7 @@ LIBFT					= libft.a
 CC						= gcc
 CFLAGS 					= -Wall -Wextra -Werror
 
-MLX						= -lmlx -framework OpenGL -framework Appkit
+MLX						= -lmlx -lm -framework OpenGL -framework Appkit
 LIBFT_PATH				= ./includes/libft/
 
 SRCS =					./includes/getnextline/get_next_line.c\
@@ -11,21 +11,23 @@ SRCS =					./includes/getnextline/get_next_line.c\
 						./srcs/main.c \
 						./srcs/init.c \
 						./srcs/map_parsing.c \
+						./srcs/map_parsing2.c \
 						./srcs/ray.c \
 						./srcs/textures.c \
 						./srcs/utils.c \
 						./srcs/move.c \
+						#./srcs/draw.c \
 						# ./srcs/draw_sprite.c
 
-OBJS =		${SRCS:%.c=%.o}
+OBJS =		${SRCS:.c=.o}
 
 $(NAME):	$(OBJS)
 			@echo "\033[33m[Remove last version...]"
 			@rm -rf cub3D
 			@echo "\033[33m[Cub3D compilation...]"
-			@make -C ${LIBFT_PATH}
+			@$(MAKE) -C ${LIBFT_PATH}
 			@echo "\033[33m[Cub3D compilation...]"
-			@$(CC) $(CFLAGS) $(OBJS) -I./includes $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
+			@$(CC) $(CFLAGS) $(OBJS) -I./includes -I./usr/include  $(MLX) $(LIBFT_PATH)$(LIBFT) -o $(NAME)
 			@echo "\033[33m[Done!]"
 
 all:		$(NAME)

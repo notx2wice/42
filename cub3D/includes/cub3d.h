@@ -54,7 +54,7 @@
 typedef struct			s_img
 {
 	void				*img;
-	int					*data;
+	char				*data;
 	int					bpp;
 	int					line_length;
 	int					endian;
@@ -79,6 +79,7 @@ typedef struct			s_player
 	t_coord_d			pos;
 	t_coord_d			dir;
 	t_coord_d			plane;
+	double				cam_height;
 }						t_player;
 
 typedef struct			s_sprites
@@ -87,6 +88,16 @@ typedef struct			s_sprites
 	int					y;
 	double				distance;
 }						t_sprites;
+
+typedef struct			s_line
+{
+	int					x;
+	int					y;
+	int					y0;
+	int					y1;
+	int					tex_x;
+	int					tex_y;
+}						t_line;
 
 typedef struct			s_cub
 {
@@ -130,8 +141,8 @@ typedef struct			s_window
 {
 	void				*mlx;
 	void				*win;
-	t_img				pimg;
 	t_img				*img[5];
+	t_img				*pimg;
 	int					*textures[5];
 	t_ray				*ray;
 	t_player			*player;
@@ -155,6 +166,7 @@ int						ft_isdigit(int c);
 char					*ft_strchr(const char *str, int c);
 void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *str, int fd);
+void					ft_bzero(void *s, size_t n);
 
 // getnextline functions
 int						get_next_line(int fd, char **line);
@@ -170,10 +182,10 @@ void					free_window(t_window *window);
 char					**read_map_file_to_array(int fd);
 void					set_cub_textures_path(char **tmp, t_cub *cub);
 void					set_cub_backgrounds(char **tmp, t_cub *cub);
-char					*fill_one_line_worldmap(char *line, t_window *window, int idx, int *pos_cnt);//i to c
+void					fill_one_line_worldmap(char *line, t_window *window, int idx);//i to c
 void					make_worldmap(char **line, t_window *window);
 void					set_cub_worldmap(char **line, t_window *window);
-int						check_player_direction(t_cub *cub);
+int						check_player_in_map(char c);
 int						set_cub(t_window *window, char *path);
 
 //player
@@ -200,8 +212,16 @@ void					move_player_backward(t_player *player, t_cub *cub, int moveSpeed);
 void					move_player_right(t_player *player, t_cub *cub, int moveSpeed);
 
 //textures
-int						*loadImage(t_window *window, char *path, t_img *img);
+void					loadImage(t_window *window, char *path, int idx);
 void					load_texture(t_window *window);
+void					calc_wall_texture(t_window *window, t_ray *ray);
+void					set_texture(t_window *window, int x);
+
+//draw
+void	  				texture_on_img(t_line *line, t_img *texture, t_window *window, t_ray *ray);
+void					ver_line_texture_image(t_line *line, t_window *window, t_img *texture, t_ray *ray);
+void					pixel_put_to_image(int color, int x, int y, t_img *img);
+void					ver_line_color_image(t_line *line, t_window *window, int color);
 void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 

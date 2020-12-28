@@ -61,7 +61,9 @@ void		free_window(t_window *window)
 
 	i = 0;
 	//ray
+	free(window->ray->z_buffer);
 	free(window->ray);
+	
 	free(window->player);
 	free_cub(window->cub);
 	// free(window->sprite);

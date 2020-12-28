@@ -29,6 +29,7 @@ void			init_player(t_player *player)
 	init_coord_d(player->pos);
 	init_coord_d(player->dir);
 	init_coord_d(player->plane);
+	player->cam_height = 1.0;
 }
 
 /*
@@ -79,8 +80,8 @@ void        init_ray(t_ray *ray)
 
 void		init_img(t_img *img)
 {
-	img->img = "";
-	img->data = "";
+	img->img = 0;
+	img->data = 0;
 	img->bpp = 0;
 	img->line_length = 0;
 	img->endian = 0;
@@ -98,6 +99,9 @@ void		init_struct_window(t_window *window)
 		window->img[i] = (t_img*)malloc(sizeof(t_img));
 		init_img(window->img[i++]);
 	}
+	if (!(window->pimg = (t_img *)malloc(sizeof(t_img))))
+		exit_program(MEMORY_ALLOC_ERROR);
+	init_img(window->pimg);
 	if (!(window->player = (t_player *)malloc(sizeof(t_player))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_player(window->player);
@@ -108,8 +112,18 @@ void		init_struct_window(t_window *window)
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_cub(window->cub);
 
-	window->rotSpeed = 0.05;
-	window->moveSpeed = 0.05;
+	window->rotSpeed = 0.1;
+	window->moveSpeed = 0.1;
+}
+
+void		new_image(t_img *pimg, t_window *window, int w, int h)
+{
+	if (!(pimg->img = mlx_new_image(window->mlx, w, h)))
+		exit_program("mlx_new_image error");
+	pimg->data = mlx_get_data_addr(pimg->img, &pimg->bpp, &pimg->line_length, &pimg->endian);
+	pimg->width = w;
+	pimg->height = h;
+	printf("img line_length : %d\n", pimg->line_length);
 }
 
 void		init_window(t_window *window, char *path)
@@ -117,12 +131,12 @@ void		init_window(t_window *window, char *path)
 	int		i;
 
 	init_struct_window(window);
-	window->mlx = mlx_init();
+	if (!(window->mlx = mlx_init()))
+		exit_program("mlx_init error");
 	set_cub(window, path);
-	printf("cub->res_width : %d\ncub->res_height: %d\n", window->cub->res_width, window->cub->res_height);
 	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
-	window->pimg.img = mlx_new_image(window->mlx, window->cub->res_width, window->cub->res_height);
-	window->pimg.data = mlx_get_data_addr(window->pimg.img, &window->pimg.bpp, &window->pimg.line_length, &window->pimg.endian);
+	load_texture(window);
+	new_image(window->pimg, window, window->cub->res_width, window->cub->res_height);
 	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_height)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	i = 0;
@@ -132,5 +146,4 @@ void		init_window(t_window *window, char *path)
 			exit_program(MEMORY_ALLOC_ERROR);
 		i++;
 	}
-	load_texture(window);
 }
