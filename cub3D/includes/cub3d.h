@@ -32,6 +32,7 @@
 # define KEY_RIGHT 124
 # define KEY_ESC 53
 # define KEY_PRESS 2
+# define KEY_RELEASED 3
 
 //0북 1남 2서 3동
 # define NO_IDX 0
@@ -61,6 +62,16 @@ typedef struct			s_img
 	int					width;
 	int					height;
 }						t_img;
+
+typedef struct			s_key
+{
+	int					forward;
+	int					backward;
+	int					left;
+	int					right;
+	int					turn_left;
+	int					turn_right;
+}						t_key;
 
 typedef struct			s_coord_i
 {
@@ -148,6 +159,7 @@ typedef struct			s_window
 	t_player			*player;
 	t_cub				*cub;
 	t_sprites			**sprite;
+	t_key				*key;
 	int					**buffer;
 	double				moveSpeed;
 	double				rotSpeed;
@@ -204,7 +216,13 @@ void					init_window(t_window *window, char *path);
 //ray
 int						raycasting(t_window *window);
 
+//event
+int						event_destroy_window(void *param);
+int						key_released(int key, void *param);
+int						key_press(int key, void *param);
+
 //move
+int						key_manager(t_window *window);
 void					rotate_player(t_player *player, int rotSpeed, int keycode);
 void					move_player_forward(t_player *player, t_cub *cub, int moveSpeed);
 void					move_player_left(t_player *player, t_cub *cub, int moveSpeed);

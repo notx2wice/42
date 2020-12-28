@@ -41,8 +41,6 @@ void			set_ray_rayDir(double cameraX, t_ray *ray, t_player *player)
 	// calculate ray position and direction
 	ray->rayDir.x = player->dir.x + player->plane.x * cameraX;
 	ray->rayDir.y = player->dir.y + player->plane.y * cameraX;
-	printf("rayDir.x : %f\n", ray->rayDir.x);
-	printf("rayDir.y : %f\n", ray->rayDir.y);
 
 	//length of ray from current position to next x or y-side
 	ray->deltaDist.x = fabs(1 / ray->rayDir.x);
@@ -101,19 +99,15 @@ void			find_and_calc_wall(t_ray *ray, t_cub *cub)
 void			calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub)
 {
 	//calculate distance projected on camera direction
-	printf("pos.x : %f\n", player->pos.x);
-	printf("pos.y : %f\n", player->pos.y);
 	if (ray->side == 0)
 		ray->perpwallDist = ((double)ray->map.x - player->pos.x + \
 			(double)(1 - ray->step.x) / 2.0) / ray->rayDir.x;
 	else
 		ray->perpwallDist = ((double)ray->map.y - player->pos.y + \
 			(double)(1 - ray->step.y) / 2.0) / ray->rayDir.y;
-	printf("perpwalldist : %f\n", ray->perpwallDist);
 	
 	//calculate height of line to draw on screen
 	ray->lineheight = (int)((double)cub->res_height / ray->perpwallDist);
-	printf("lineheight : %d\n", ray->lineheight);
 
 	//calculate lowest and highest pixel to fill in current stripe.
 	ray->draw_start = (-ray->lineheight / 2.0) + (cub->res_height / 2.0);
@@ -122,8 +116,6 @@ void			calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub
 	ray->draw_end = (ray->lineheight / 2) + (cub->res_height / 2);
 	if (ray->draw_end >= cub->res_height)
 		ray->draw_end = cub->res_height - 1;
-	printf("draw_start : %d\n", ray->draw_start);
-	printf("draw_end : %d\n", ray->draw_end);
 }
 
 void			do_raycasting(t_window *window)
@@ -166,10 +158,10 @@ int			raycasting(t_window *window)
 	set_player_dir_plane_coord(window);
 
 	//draw wall and ceiling
-	floor_ceiling_to_buffer(window);
+	// floor_ceiling_to_buffer(window);
 
 	do_raycasting(window);
 
 	mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
-	return (0);
+	return (SUCCESS);
 }

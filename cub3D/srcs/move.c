@@ -12,6 +12,23 @@
 
 #include "../includes/cub3d.h"
 
+int			key_manager(t_window *window)
+{
+	if (window->key->forward == 1)
+		move_player_forward(window->player, window->cub, window->moveSpeed);
+	else if (window->key->left == 1)
+		move_player_left(window->player, window->cub, window->moveSpeed);
+	else if (window->key->backward == 1)
+		move_player_backward(window->player, window->cub, window->moveSpeed);
+	else if (window->key->right == 1)
+		move_player_right(window->player, window->cub, window->moveSpeed);
+	else if (window->key->turn_left == 1)
+		rotate_player(window->player, window->rotSpeed, KEY_LEFT);
+	else if (window->key->turn_right == 1)
+		rotate_player(window->player, window->rotSpeed, KEY_RIGHT);
+	return (SUCCESS);
+}
+
 void		rotate_player(t_player *player, int rotSpeed, int keycode)
 {
 	double	oldDir_x;

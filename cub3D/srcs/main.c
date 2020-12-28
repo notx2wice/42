@@ -12,21 +12,21 @@
 
 #include "../includes/cub3d.h"
 
-void		pixel_put_to_image(int color, int x, int y, t_img *img)
-{
-	unsigned char *src;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
+// void		pixel_put_to_image(int color, int x, int y, t_img *img)
+// {
+// 	unsigned char *src;
+// 	unsigned char r;
+// 	unsigned char g;
+// 	unsigned char b;
 
-	src = (unsigned char *)&color;
-	r = src[0];
-	g = src[1];
-	b = src[2];
-	img->data[y * img->line_length + x * img->bpp / 8] = r;
-	img->data[y * img->line_length + x * img->bpp / 8 + 1] = g;
-	img->data[y * img->line_length + x * img->bpp / 8 + 2] = b;
-}
+// 	src = (unsigned char *)&color;
+// 	r = src[0];
+// 	g = src[1];
+// 	b = src[2];
+// 	img->data[y * img->line_length + x * img->bpp / 8] = r;
+// 	img->data[y * img->line_length + x * img->bpp / 8 + 1] = g;
+// 	img->data[y * img->line_length + x * img->bpp / 8 + 2] = b;
+// }
 
 void			draw(t_window *window)
 {
@@ -64,31 +64,15 @@ void			draw(t_window *window)
 // 		draw_sprite(window, i++);
 // }
 
-int				main_loop(t_window *window)
+int				main_loop(void *param)
 {
-	raycasting(window);
-	draw(window);
-	return (0);
-}
+	t_window	*window;
 
-int				key_press(int key, t_window *window)
-{
-	if (key == KEY_W)
-		move_player_forward(window->player, window->cub, window->moveSpeed);
-	else if (key == KEY_A)
-		move_player_left(window->player, window->cub, window->moveSpeed);
-	else if (key == KEY_S)
-		move_player_backward(window->player, window->cub, window->moveSpeed);
-	else if (key == KEY_D)
-		move_player_right(window->player, window->cub, window->moveSpeed);
-	else if (key == KEY_LEFT || key == KEY_RIGHT)
-		rotate_player(window->player, window->rotSpeed, key);
-	else if (key == KEY_ESC)
-	{
-		free_window(window);
-		exit(0);
-	}
-	return (0);
+	window = (t_window *)param;
+	raycasting(window);
+	// draw(window);
+	key_manager(window);
+	return (SUCCESS);
 }
 
 int				main(int argc, char **argv)
@@ -101,7 +85,9 @@ int				main(int argc, char **argv)
 	{
 		init_window(window, argv[1]);
 		// init_sprite(window);
-		mlx_hook(window->win, KEY_PRESS, 1, &key_press, window);
+		mlx_hook(window->win, KEY_PRESS, 1, key_press, window);
+		mlx_hook(window->win, KEY_RELEASED, 2, key_released, window);
+		mlx_hook(window->win, 17, 1L << 17, event_destroy_window, window);
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_loop(window->mlx);
 	}

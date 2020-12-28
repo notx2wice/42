@@ -32,6 +32,16 @@ void			init_player(t_player *player)
 	player->cam_height = 1.0;
 }
 
+void			init_key(t_key *key)
+{
+	key->forward = 0;
+	key->backward = 0;
+	key->left = 0;
+	key->right = 0;
+	key->turn_left = 0;
+	key->turn_right = 0;
+}
+
 /*
 ** void			init_sprite(t_sprite *sprite)
 ** {
@@ -111,6 +121,9 @@ void		init_struct_window(t_window *window)
 	if (!(window->cub = (t_cub *)malloc(sizeof(t_cub))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_cub(window->cub);
+	if (!(window->key = (t_key *)malloc(sizeof(t_key))))
+		exit_program(MEMORY_ALLOC_ERROR);
+	init_key(window->key);
 
 	window->rotSpeed = 0.1;
 	window->moveSpeed = 0.1;

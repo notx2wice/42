@@ -36,7 +36,7 @@ void			loadImage(t_window *window, char *path, int idx)
 			res[window->img[idx]->width * y + x] \
 				= window->img[idx]->data[window->img[idx]->width * y + x];
 	window->textures[idx] = res;
-	mlx_destroy_image(window->mlx, window->img[idx]->img); //추후 실행
+	// mlx_destroy_image(window->mlx, window->img[idx]->img); //추후 실행
 }
 
 void			load_texture(t_window *window)
@@ -75,21 +75,21 @@ void			set_texture(t_window *window, int x)
 	ft_bzero(line, sizeof(t_line));
 	line->x = x;
 	calc_wall_texture(window, window->ray);
-	wall_to_buffer(window, window->ray, x);
+	// wall_to_buffer(window, window->ray, x);
 
-	// if (window->cub->worldmap[window->ray->map.y][window->ray->map.x] == '1')
-	// {
-	// 	line->y0 = window->ray->draw_end;
-	// 	line->y1 = window->ray->draw_start;
-	// 	line->tex_x = window->ray->tex_x;
-	// 	ver_line_texture_image(line, window, window->img[window->ray->tex_num], window->ray);
-	// }
-	// line->y0 = 0;
-	// line->y1 = window->ray->draw_start;
-	// ver_line_color_image(line, window, window->cub->ceiling_color);
-	// line->y0 = window->cub->res_height;
-	// line->y1 = window->ray->draw_end;
-	// ver_line_color_image(line, window, window->cub->floor_color);
+	if (window->cub->worldmap[window->ray->map.y][window->ray->map.x] == '1')
+	{
+		line->y0 = window->ray->draw_end;
+		line->y1 = window->ray->draw_start;
+		line->tex_x = window->ray->tex_x;
+		ver_line_texture_image(line, window, window->img[window->ray->tex_num], window->ray);
+	}
+	line->y0 = 0;
+	line->y1 = window->ray->draw_start;
+	ver_line_color_image(line, window, window->cub->ceiling_color);
+	line->y0 = window->cub->res_height;
+	line->y1 = window->ray->draw_end;
+	ver_line_color_image(line, window, window->cub->floor_color);
 }
 
 void			floor_ceiling_to_buffer(t_window *window)
