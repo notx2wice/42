@@ -12,30 +12,33 @@
 
 #include "../includes/cub3d.h"
 
+// unsigned int	*char_data_to_int_color(t_img *img, unsigned int *buf)
+// {
+// 	int         x;
+// 	unsigned int 	*color;
+// 	unsigned int	r;
+// 	unsigned int	g;
+// 	unsigned int	b;
+
+// 	x = 0;
+//     while (x < img->line_length * img->height)
+//     {
+// 		r = *((unsigned int *)(img->data + x));
+//         x += 4;
+//     }
+// 	return (buf);
+// }
+
 void			loadImage(t_window *window, char *path, int idx)
 {
-	int			*res;
-	int			x;
-	int			y;
-
 	path[(int)ft_strlen(path) - 1] = '\0';
 	if (!(window->img[idx]->img = mlx_xpm_file_to_image(window->mlx, (char *)path, \
 			&window->img[idx]->width, &window->img[idx]->height)))
 			exit_program("mlx_xpm_file_to_image error");
-	if (!(window->img[idx]->data = mlx_get_data_addr(window->img[idx]->img, \
+	if (!(window->img[idx]->data = (unsigned int *)mlx_get_data_addr(window->img[idx]->img, \
 			&window->img[idx]->bpp, &window->img[idx]->line_length, \
 			&window->img[idx]->endian)))
 		exit_program("mlx_get_data_addr error");
-	if (!(res = (int *)malloc(sizeof(int) * (window->cub->res_width \
-			* window->cub->res_height))))
-		exit_program(MEMORY_ALLOC_ERROR);
-	x = -1;
-	y = -1;
-	while (++y < window->img[idx]->height)
-		while (++x < window->img[idx]->width)
-			res[window->img[idx]->width * y + x] \
-				= window->img[idx]->data[window->img[idx]->width * y + x];
-	window->textures[idx] = res;
 	// mlx_destroy_image(window->mlx, window->img[idx]->img); //추후 실행
 }
 
@@ -68,28 +71,10 @@ void			calc_wall_texture(t_window *window, t_ray *ray)
 
 void			set_texture(t_window *window, int x)
 {
-	t_line		*line;
 
-	if (!(line = malloc(sizeof(t_line))))
-		exit_program(MEMORY_ALLOC_ERROR);
-	ft_bzero(line, sizeof(t_line));
-	line->x = x;
 	calc_wall_texture(window, window->ray);
-	// wall_to_buffer(window, window->ray, x);
+	wall_to_buffer(window, window->ray, x);
 
-	if (window->cub->worldmap[window->ray->map.y][window->ray->map.x] == '1')
-	{
-		line->y0 = window->ray->draw_end;
-		line->y1 = window->ray->draw_start;
-		line->tex_x = window->ray->tex_x;
-		ver_line_texture_image(line, window, window->img[window->ray->tex_num], window->ray);
-	}
-	line->y0 = 0;
-	line->y1 = window->ray->draw_start;
-	ver_line_color_image(line, window, window->cub->ceiling_color);
-	line->y0 = window->cub->res_height;
-	line->y1 = window->ray->draw_end;
-	ver_line_color_image(line, window, window->cub->floor_color);
 }
 
 void			floor_ceiling_to_buffer(t_window *window)
@@ -129,8 +114,7 @@ void			wall_to_buffer(t_window *window, t_ray *ray, int x)
 	{
 		ray->tex_y = (int)tex_pos & window->img[ray->tex_num]->height - 1;
 		tex_pos += step;
-		color = window->textures[ray->tex_num][window->img[ray->tex_num]->height \
-			* ray->tex_y + ray->tex_x];
+		color = window->img[ray->tex_num]->data[window->img[ray->tex_num]->height * ray->tex_y + ray->tex_x];
 		if (ray->side == 1)
 			color = (color >> 1) & 8355711;
 		window->buffer[y][x] = color;

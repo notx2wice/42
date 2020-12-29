@@ -16,23 +16,23 @@ void			set_player_dir_plane_coord(t_window *window)
 {
 	if (window->cub->p_direction == 'W')
 	{
-		window->player->dir.y = -1;
-		window->player->plane.x = -0.66;
-	}
-	else if (window->cub->p_direction == 'E')
-	{
 		window->player->dir.y = 1;
 		window->player->plane.x = 0.66;
 	}
-	else if (window->cub->p_direction == 'S')
+	else if (window->cub->p_direction == 'E')
 	{
-		window->player->dir.x = 1;
-		window->player->plane.y = -0.66;
+		window->player->dir.y = -1;
+		window->player->plane.x = -0.66;
 	}
-	else if (window->cub->p_direction == 'N')
+	else if (window->cub->p_direction == 'S')
 	{
 		window->player->dir.x = -1;
 		window->player->plane.y = 0.66;
+	}
+	else if (window->cub->p_direction == 'N')
+	{
+		window->player->dir.x = 1;
+		window->player->plane.y = -0.66;
 	}
 }
 
@@ -150,18 +150,11 @@ void			do_raycasting(t_window *window)
 
 int			raycasting(t_window *window)
 {
-	if (!(window->ray->z_buffer = (double *)malloc(sizeof(double) * window->cub->res_width)))
-		exit_program(MEMORY_ALLOC_ERROR);
-	ft_bzero(window->ray->z_buffer, sizeof(double) * window->cub->res_width);
-	
-	//basic setting
-	set_player_dir_plane_coord(window);
-
-	//draw wall and ceiling
-	// floor_ceiling_to_buffer(window);
+	// draw wall and ceiling
+	floor_ceiling_to_buffer(window);
 
 	do_raycasting(window);
 
-	mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
+	// mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
 	return (SUCCESS);
 }

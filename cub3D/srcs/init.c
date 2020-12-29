@@ -136,7 +136,6 @@ void		new_image(t_img *pimg, t_window *window, int w, int h)
 	pimg->data = mlx_get_data_addr(pimg->img, &pimg->bpp, &pimg->line_length, &pimg->endian);
 	pimg->width = w;
 	pimg->height = h;
-	printf("img line_length : %d\n", pimg->line_length);
 }
 
 void		init_window(t_window *window, char *path)
@@ -147,15 +146,24 @@ void		init_window(t_window *window, char *path)
 	if (!(window->mlx = mlx_init()))
 		exit_program("mlx_init error");
 	set_cub(window, path);
+
+	//basic setting
+	set_player_dir_plane_coord(window);
+
 	window->win = mlx_new_window(window->mlx, window->cub->res_width, window->cub->res_height, "cub3D");
 	load_texture(window);
 	new_image(window->pimg, window, window->cub->res_width, window->cub->res_height);
-	if (!(window->buffer = (int **)malloc(sizeof(int *) * window->cub->res_height)))
+	
+	if (!(window->ray->z_buffer = (double *)malloc(sizeof(double) * window->cub->res_width)))
+		exit_program(MEMORY_ALLOC_ERROR);
+	ft_bzero(window->ray->z_buffer, sizeof(double) * window->cub->res_width);
+
+	if (!(window->buffer = (unsigned int **)malloc(sizeof(unsigned int *) * window->cub->res_height)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	i = 0;
 	while (i < window->cub->res_height)
 	{
-		if (!(window->buffer[i] = (int *)malloc(sizeof(int) * window->cub->res_width)))
+		if (!(window->buffer[i] = (unsigned int *)malloc(sizeof(unsigned int) * window->cub->res_width)))
 			exit_program(MEMORY_ALLOC_ERROR);
 		i++;
 	}

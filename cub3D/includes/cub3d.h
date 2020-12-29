@@ -33,6 +33,7 @@
 # define KEY_ESC 53
 # define KEY_PRESS 2
 # define KEY_RELEASED 3
+# define KEY_EXIT 17
 
 //0북 1남 2서 3동
 # define NO_IDX 0
@@ -55,7 +56,7 @@
 typedef struct			s_img
 {
 	void				*img;
-	char				*data;
+	unsigned int		*data;
 	int					bpp;
 	int					line_length;
 	int					endian;
@@ -154,13 +155,13 @@ typedef struct			s_window
 	void				*win;
 	t_img				*img[5];
 	t_img				*pimg;
-	int					*textures[5];
+	unsigned int		*textures[5];
 	t_ray				*ray;
 	t_player			*player;
 	t_cub				*cub;
 	t_sprites			**sprite;
 	t_key				*key;
-	int					**buffer;
+	unsigned int		**buffer;
 	double				moveSpeed;
 	double				rotSpeed;
 }						t_window;
@@ -223,11 +224,11 @@ int						key_press(int key, void *param);
 
 //move
 int						key_manager(t_window *window);
-void					rotate_player(t_player *player, int rotSpeed, int keycode);
-void					move_player_forward(t_player *player, t_cub *cub, int moveSpeed);
-void					move_player_left(t_player *player, t_cub *cub, int moveSpeed);
-void					move_player_backward(t_player *player, t_cub *cub, int moveSpeed);
-void					move_player_right(t_player *player, t_cub *cub, int moveSpeed);
+void					rotate_player(t_player *player, double rotSpeed, int keycode);
+void					move_player_forward(t_player *player, t_cub *cub, double moveSpeed);
+void					move_player_left(t_player *player, t_cub *cub, double moveSpeed);
+void					move_player_backward(t_player *player, t_cub *cub, double moveSpeed);
+void					move_player_right(t_player *player, t_cub *cub, double moveSpeed);
 
 //textures
 void					loadImage(t_window *window, char *path, int idx);
@@ -238,7 +239,7 @@ void					set_texture(t_window *window, int x);
 //draw
 void	  				texture_on_img(t_line *line, t_img *texture, t_window *window, t_ray *ray);
 void					ver_line_texture_image(t_line *line, t_window *window, t_img *texture, t_ray *ray);
-void					pixel_put_to_image(int color, int x, int y, t_img *img);
+void					pixel_put_to_image(unsigned int color, int x, int y, t_img *img);
 void					ver_line_color_image(t_line *line, t_window *window, int color);
 void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);

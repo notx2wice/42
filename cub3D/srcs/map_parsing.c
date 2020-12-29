@@ -65,13 +65,11 @@ void			set_cub_backgrounds(char **tmp, t_cub *cub)
 	{
 		while (color[i])
 			cub->floor_color = cub->floor_color * 256 + ft_atoi(color[i++]);
-		printf("floor : %d\n", cub->floor_color);
 	}
 	else if (ft_strcmp(tmp[0], "C") == 0)
 	{
 		while (color[i])
 			cub->ceiling_color = cub->ceiling_color * 256 + ft_atoi(color[i++]);
-		printf("ceiling : %d\n", cub->ceiling_color);
 	}
 	free_array(color);//free_char_array
 }

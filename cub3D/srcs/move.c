@@ -29,7 +29,7 @@ int			key_manager(t_window *window)
 	return (SUCCESS);
 }
 
-void		rotate_player(t_player *player, int rotSpeed, int keycode)
+void		rotate_player(t_player *player, double rotSpeed, int keycode)
 {
 	double	oldDir_x;
 	double	oldPlane_x;
@@ -60,20 +60,29 @@ void		rotate_player(t_player *player, int rotSpeed, int keycode)
 	}
 }
 
-void			move_player_forward(t_player *player, t_cub *cub, int moveSpeed)
+void			move_player_forward(t_player *player, t_cub *cub, double moveSpeed)
 {
 	double		new_pos_x;
 	double		new_pos_y;
 
 	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
+	printf("worldmap : %c\n", cub->worldmap[(int)new_pos_x][(int)(player->pos.y)]);
+
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
+	{
+		printf("before : pos.x - %f\n", player->pos.x);
 		player->pos.x += player->dir.x * moveSpeed;
+		printf("player->dir.x - %f ", player->dir.x);
+		printf("moveSpeed - %f\n", moveSpeed);
+		printf("after : pos.x - %f\n", player->pos.x);
+	}
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y += player->dir.y * moveSpeed;
+
 }
 
-void		move_player_backward(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_backward(t_player *player, t_cub *cub, double moveSpeed)
 {
 	double		new_pos_x;
 	double		new_pos_y;
@@ -86,7 +95,7 @@ void		move_player_backward(t_player *player, t_cub *cub, int moveSpeed)
 		player->pos.y -= player->dir.y * moveSpeed;
 }
 
-void		move_player_right(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_right(t_player *player, t_cub *cub, double moveSpeed)
 {
 	double		new_pos_x;
 	double		new_pos_y;
@@ -99,7 +108,7 @@ void		move_player_right(t_player *player, t_cub *cub, int moveSpeed)
 		player->pos.y -= player->dir.x * moveSpeed;
 }
 
-void		move_player_left(t_player *player, t_cub *cub, int moveSpeed)
+void		move_player_left(t_player *player, t_cub *cub, double moveSpeed)
 {
 	double		new_pos_x;
 	double		new_pos_y;
