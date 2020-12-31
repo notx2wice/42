@@ -12,23 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-void		pixel_put_to_image(unsigned int color, int x, int y, t_img *img)
-{
-	unsigned char *src;
-	unsigned char r;
-	unsigned char g;
-	unsigned char b;
-
-	src = (unsigned char *)&color;
-	r = src[0];
-	g = src[1];
-	b = src[2];
-	img->data[y * img->line_length + x * img->bpp / 8] = r;
-	img->data[y * img->line_length + x * img->bpp / 8 + 1] = g;
-	img->data[y * img->line_length + x * img->bpp / 8 + 2] = b;
-}
-
-void			draw(t_window *window)
+static void		draw(t_window *window)
 {
 	int			x;
 	int			y;
@@ -39,7 +23,7 @@ void			draw(t_window *window)
 		x = 0;
 		while (x < window->cub->res_width)
 		{
-			pixel_put_to_image(window->buffer[y][x], x, y, window->pimg);
+			window->pimg->data[y * window->pimg->width + x] = window->buffer[y][x];
 			x++;
 		}
 		y++;
@@ -47,24 +31,7 @@ void			draw(t_window *window)
 	mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
 }
 
-// void			calc(t_window *window)
-// {
-// 	int			x;
-// 	int			i;
-
-// 	x =	0;
-// 	while (x < window->cub->res_width)
-// 		floor_ceiling_to_buffer(window, x++);
-// 	x = 0;
-// 	while (x < window->cub->res_width)
-// 		wall_to_buffer(window, x++);
-// 	sortSprites(window);
-// 	i = 0;
-// 	while(i < window->cub->sprite_cnt)
-// 		draw_sprite(window, i++);
-// }
-
-int				main_loop(void *param)
+static int		main_loop(void *param)
 {
 	t_window	*window;
 
@@ -73,7 +40,6 @@ int				main_loop(void *param)
 	key_manager(window);
 	raycasting(window);
 	draw(window);
-	
 	return (SUCCESS);
 }
 
@@ -86,26 +52,22 @@ int				main(int argc, char **argv)
 	if (argc == 2 && ft_strcmp(argv[1], "map.cub") == 0)
 	{
 		init_window(window, argv[1]);
-		// init_sprite(window);
 		mlx_hook(window->win, KEY_PRESS, 0, &key_press, window);
 		mlx_hook(window->win, KEY_RELEASED, 1, &key_released, window);
 		mlx_hook(window->win, KEY_EXIT, 1L<<17, &event_destroy_window, window);
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_loop(window->mlx);
 	}
-/*
 	else if (argc == 3 && ft_strcmp(argv[2],"--save") == 0)
 	{
 		init_window(window, argv[1]);
-		init_temp(window);
-		init_sprite(window);
-		calc(window);
+		raycasting(window);
 		draw(window);
-		save_bmp(window);
+		save_screen(window);
+		free_window(window);
 		exit(0);
 	}
-*/
-	// else
-	// 	exit_program("A .cub file path not given");
+	else
+		exit_program("Invalid arguments were given.");
 	return (0);
 }

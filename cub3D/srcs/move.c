@@ -12,23 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-int			key_manager(t_window *window)
-{
-	if (window->key->forward == 1)
-		move_player_forward(window->player, window->cub, window->moveSpeed);
-	else if (window->key->left == 1)
-		move_player_left(window->player, window->cub, window->moveSpeed);
-	else if (window->key->backward == 1)
-		move_player_backward(window->player, window->cub, window->moveSpeed);
-	else if (window->key->right == 1)
-		move_player_right(window->player, window->cub, window->moveSpeed);
-	else if (window->key->turn_left == 1)
-		rotate_player(window->player, window->rotSpeed, KEY_LEFT);
-	else if (window->key->turn_right == 1)
-		rotate_player(window->player, window->rotSpeed, KEY_RIGHT);
-	return (SUCCESS);
-}
-
 void		rotate_player(t_player *player, double rotSpeed, int keycode)
 {
 	double	oldDir_x;
@@ -60,29 +43,30 @@ void		rotate_player(t_player *player, double rotSpeed, int keycode)
 	}
 }
 
-void			move_player_forward(t_player *player, t_cub *cub, double moveSpeed)
+void			move_player_forward
+(
+	t_player *player,
+	t_cub *cub,
+	double moveSpeed
+)
 {
 	double		new_pos_x;
 	double		new_pos_y;
 
 	new_pos_x = (player->pos.x + player->dir.x * moveSpeed);
 	new_pos_y = (player->pos.y + player->dir.y * moveSpeed);
-	printf("worldmap : %c\n", cub->worldmap[(int)new_pos_x][(int)(player->pos.y)]);
-
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
-	{
-		printf("before : pos.x - %f\n", player->pos.x);
 		player->pos.x += player->dir.x * moveSpeed;
-		printf("player->dir.x - %f ", player->dir.x);
-		printf("moveSpeed - %f\n", moveSpeed);
-		printf("after : pos.x - %f\n", player->pos.x);
-	}
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
 		player->pos.y += player->dir.y * moveSpeed;
-
 }
 
-void		move_player_backward(t_player *player, t_cub *cub, double moveSpeed)
+void		move_player_backward
+(
+	t_player *player,
+	t_cub *cub,
+	double moveSpeed
+)
 {
 	double		new_pos_x;
 	double		new_pos_y;

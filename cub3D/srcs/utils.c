@@ -43,34 +43,40 @@ void		free_array(char **str)
 	free(str);
 }
 
-void		free_cub(t_cub *cub)
-{
-	//path free
-	free(cub->ea_path);
-	free(cub->we_path);
-	free(cub->so_path);
-	free(cub->no_path);
-	free(cub->sprite_path);
-	free_array(cub->worldmap);
-	free(cub);
-}
-
-void		free_window(t_window *window)
+static void	free_buffer_img_sprite_cub(t_window *window)
 {
 	int		i;
 
 	i = 0;
-	//ray
+	while (i < window->cub->res_height)
+		free(window->buffer[i++]);
+	free(window->buffer);
+	i = 0;
+	while (i < 5)
+		mlx_destroy_image(window->mlx, window->img[i++]->img);
+	mlx_destroy_image(window->mlx, window->pimg->img);
+	free(window->pimg);
+	free(window->img);
+	i = 0;
+	while (i < window->cub->sprite_cnt)
+		free(window->sprites[i++]);
+	free(window->sprites);
+	free(window->d_sprites);
+	free(window->cub->ea_path);
+	free(window->cub->we_path);
+	free(window->cub->so_path);
+	free(window->cub->no_path);
+	free(window->cub->sprite_path);
+	free_array(window->cub->worldmap);
+}
+
+void		free_window(t_window *window)
+{
 	free(window->ray->z_buffer);
 	free(window->ray);
-	
 	free(window->player);
-	free_cub(window->cub);
-	// free(window->sprite);
-	while (i < 5)
-	{
-		free(window->textures[i]);
-		i++;
-	}
+	free_buffer_img_sprite_cub(window);
+	free(window->cub);
+	free(window->key);
 	free(window);
 }

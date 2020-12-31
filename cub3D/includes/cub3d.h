@@ -40,7 +40,7 @@
 # define SO_IDX 1
 # define WE_IDX 2
 # define EA_IDX 3
-# define SPRITE_IDX 4
+# define S_IDX 4
 
 
 # define ERROR 0
@@ -94,22 +94,26 @@ typedef struct			s_player
 	double				cam_height;
 }						t_player;
 
-typedef struct			s_sprites
+typedef struct			s_sprite
 {
-	int					x;
-	int					y;
+	double				x;
+	double				y;
 	double				distance;
-}						t_sprites;
+}						t_sprite;
 
-typedef struct			s_line
+typedef struct			s_d_sprites
 {
-	int					x;
-	int					y;
-	int					y0;
-	int					y1;
+	double				transformX;
+	double				transformY;
+	int					screenX;
+	int					spriteHeight;
+	int					drawStart_y;
+	int					drawEnd_y;
+	int					spriteWidth;
+	int					drawStart_x;
+	int					drawEnd_x;
 	int					tex_x;
-	int					tex_y;
-}						t_line;
+}						t_d_sprites;
 
 typedef struct			s_cub
 {
@@ -155,12 +159,12 @@ typedef struct			s_window
 	void				*win;
 	t_img				*img[5];
 	t_img				*pimg;
-	unsigned int		*textures[5];
 	t_ray				*ray;
 	t_player			*player;
 	t_cub				*cub;
-	t_sprites			**sprite;
+	t_sprite			**sprites;
 	t_key				*key;
+	t_d_sprites			*d_sprites;
 	unsigned int		**buffer;
 	double				moveSpeed;
 	double				rotSpeed;
@@ -192,29 +196,27 @@ void					free_cub(t_cub *cub);
 void					free_window(t_window *window);
 
 //map_parsing fucntions
-char					**read_map_file_to_array(int fd);
-void					set_cub_textures_path(char **tmp, t_cub *cub);
-void					set_cub_backgrounds(char **tmp, t_cub *cub);
-void					fill_one_line_worldmap(char *line, t_window *window, int idx);//i to c
-void					make_worldmap(char **line, t_window *window);
 void					set_cub_worldmap(char **line, t_window *window);
-int						check_player_in_map(char c);
 int						set_cub(t_window *window, char *path);
 
 //player
-void					set_player_dir_plane_coord(t_window *window);
+
 void					set_player(t_cub *cub);
 
 //init
-void					init_cub(t_cub *cub);
-void					init_player(t_player *player);
 void					init_coord_d(t_coord_d coord_d);
-void					init_coord_i(t_coord_i coord_i);
+void					init_player(t_player *player);
+void					init_cub(t_cub *cub);
+void					init_key(t_key *key);
 void					init_ray(t_ray *ray);
-void					init_img(t_img *img);
 void					init_window(t_window *window, char *path);
 
 //ray
+void					set_player_dir_plane_coord(t_window *window);
+void					set_ray_rayDir(double cameraX, t_ray *ray, t_player *player);
+void					find_and_calc_wall(t_ray *ray, t_cub *cub);
+void					calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub);
+void					set_ray_step_sideDist(t_ray *ray, t_coord_d *pos);
 int						raycasting(t_window *window);
 
 //event
@@ -231,17 +233,12 @@ void					move_player_backward(t_player *player, t_cub *cub, double moveSpeed);
 void					move_player_right(t_player *player, t_cub *cub, double moveSpeed);
 
 //textures
-void					loadImage(t_window *window, char *path, int idx);
 void					load_texture(t_window *window);
 void					calc_wall_texture(t_window *window, t_ray *ray);
-void					set_texture(t_window *window, int x);
-
-//draw
-void	  				texture_on_img(t_line *line, t_img *texture, t_window *window, t_ray *ray);
-void					ver_line_texture_image(t_line *line, t_window *window, t_img *texture, t_ray *ray);
-void					pixel_put_to_image(unsigned int color, int x, int y, t_img *img);
-void					ver_line_color_image(t_line *line, t_window *window, int color);
 void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);
+
+//sprites
+void					draw_sprite(t_window *window);
 
 #endif

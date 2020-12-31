@@ -12,7 +12,26 @@
 
 #include "../includes/cub3d.h"
 
-char			**read_map_file_to_array(int fd)
+static void		check_cub_file(char **lines)
+{
+	int			i;
+	int			j;
+
+	i = 0;
+	while (lines[i])
+	{
+		j = 0;
+		while (lines[i][j])
+		{
+			if (ft_isascii(lines[i][j]) == 0)
+				lines[i][j] = '\0';
+			j++;
+		}
+		i++;
+	}
+}
+
+static char		**read_map_file_to_array(int fd)
 {
 	char		*line;
 	char		*one_line;
@@ -38,7 +57,7 @@ char			**read_map_file_to_array(int fd)
 	return (stack);
 }
 
-void			set_cub_textures_path(char **tmp, t_cub *cub)
+static void		set_cub_textures_path(char **tmp, t_cub *cub)
 {
 	if (ft_strcmp(tmp[0], "NO") == 0)
 		cub->no_path = ft_strdup(tmp[1]);
@@ -54,7 +73,7 @@ void			set_cub_textures_path(char **tmp, t_cub *cub)
 		exit_program(ARGUMENT_ERROR);
 }
 
-void			set_cub_backgrounds(char **tmp, t_cub *cub)
+static void		set_cub_backgrounds(char **tmp, t_cub *cub)
 {
 	char		**color;
 	int			i;
@@ -71,7 +90,7 @@ void			set_cub_backgrounds(char **tmp, t_cub *cub)
 		while (color[i])
 			cub->ceiling_color = cub->ceiling_color * 256 + ft_atoi(color[i++]);
 	}
-	free_array(color);//free_char_array
+	free_array(color);
 }
 
 int				set_cub(t_window *window, char *path)
@@ -81,11 +100,11 @@ int				set_cub(t_window *window, char *path)
 	char		**tmp;
 	int			fd;
 
-	// read file by fd from main. Return ERROR if failed.b
 	fd = open(path, O_RDONLY);
 	cub_file = read_map_file_to_array(fd);
-	i = 0;
-	while (i < 8)
+	check_cub_file(cub_file);
+	i = -1;
+	while (++i < 8)
 	{
 		tmp = ft_split(cub_file[i], ' ');
 		if (*tmp[0] == 'R')
@@ -95,14 +114,13 @@ int				set_cub(t_window *window, char *path)
 		}
 		else if (ft_strlen(tmp[0]) == 2 || *tmp[0] == 'S')
 			set_cub_textures_path(tmp, window->cub);
-		else if (tmp[0][0] == 'F' || tmp[0][0] == 'C')
+		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
 			set_cub_backgrounds(tmp, window->cub);
 		else
 			exit_program(ARGUMENT_ERROR);
-		i++;
 		free_array(tmp);
 	}
 	set_cub_worldmap(cub_file, window);
 	free_array(cub_file);
-	return (1);
+	return (SUCCESS);
 }
