@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 17:15:34 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/02 14:44:00 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/02 22:45:56 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static int	mir_verti(
 		while (++e < f)
 		{
 			save = pimg->data[e + (line_cnt * pimg->width)];
-			pimg->data[e + (line_cnt * pimg->width)] = pimg->data[f + (line_cnt * pimg->width - 1)];
+			pimg->data[e + (line_cnt * pimg->width)] = \
+				pimg->data[f + (line_cnt * pimg->width - 1)];
 			pimg->data[f + (line_cnt * pimg->width - 1)] = save;
 			f--;
 		}

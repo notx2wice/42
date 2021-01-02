@@ -23,13 +23,15 @@ void		draw(t_window *window)
 		x = 0;
 		while (x < window->cub->res_width)
 		{
-			window->pimg->data[y * window->pimg->width + x] = window->buffer[y][x];
+			window->pimg->data[y * window->pimg->width + x] \
+				= window->buffer[y][x];
 			x++;
 		}
 		y++;
 	}
 	if (window->save == 0)
-		mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
+		mlx_put_image_to_window(window->mlx, window->win, \
+								window->pimg->img, 0, 0);
 }
 
 static int		main_loop(void *param)
@@ -55,7 +57,7 @@ int				main(int argc, char **argv)
 		init_window(window, argv[1]);
 		mlx_hook(window->win, KEY_PRESS, 0, &key_press, window);
 		mlx_hook(window->win, KEY_RELEASED, 1, &key_released, window);
-		mlx_hook(window->win, KEY_EXIT, 1L<<17, &event_destroy_window, window);
+		mlx_hook(window->win, KEY_EXIT, 1L<<17, &destroy_window, window);
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_loop(window->mlx);
 	}

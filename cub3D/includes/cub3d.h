@@ -222,7 +222,7 @@ void					set_ray_step_sideDist(t_ray *ray, t_coord_d *pos);
 int						raycasting(t_window *window);
 
 //event
-int						event_destroy_window(void *param);
+int						destroy_window(void *param);
 int						key_released(int key, void *param);
 int						key_press(int key, void *param);
 

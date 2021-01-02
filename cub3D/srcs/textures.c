@@ -49,7 +49,8 @@ void				calc_wall_texture(t_window *window, t_ray *ray)
 						ray->perpwallDist * ray->rayDir.x;
 	}
 	ray->wall_x -= floor(ray->wall_x);
-	ray->tex_x = (int)(ray->wall_x * (double)window->img[ray->tex_num]->width);
+	ray->tex_x \
+		= (int)(ray->wall_x * (double)window->img[ray->tex_num]->width);
 	if ((ray->side == 0 && ray->rayDir.x > 0) || \
 		(ray->side == 1 && ray->rayDir.y < 0))
 		ray->tex_x = window->img[ray->tex_num]->width - ray->tex_x - 1;

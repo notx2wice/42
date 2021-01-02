@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 02:22:57 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/02 14:44:10 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/02 22:46:53 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			key_manager(t_window *window)
 	return (SUCCESS);
 }
 
-int				event_destroy_window(void *param)
+int				destroy_window(void *param)
 {
 	t_window 	*window;
 

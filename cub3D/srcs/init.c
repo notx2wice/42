@@ -91,11 +91,13 @@ void			make_buffer(t_window *window, int w, int h)
 	if (!(window->ray->z_buffer = (double *)malloc(sizeof(double) * w)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	ft_bzero(window->ray->z_buffer, sizeof(double) * w);
-	if (!(window->buffer = (unsigned int **)malloc(sizeof(unsigned int *) * h)))
+	if (!(window->buffer = \
+		(unsigned int **)malloc(sizeof(unsigned int *) * h)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	i = 0;
 	while (i < h)
-		if (!(window->buffer[i++] = (unsigned int *)malloc(sizeof(unsigned int) * w)))
+		if (!(window->buffer[i++] = 
+			(unsigned int *)malloc(sizeof(unsigned int) * w)))
 			exit_program(MEMORY_ALLOC_ERROR);
 }
 
@@ -118,8 +120,9 @@ void			init_window(t_window *window, char *path)
 	load_texture(window);
 	if (!(window->pimg->img = mlx_new_image(window->mlx, width, height)))
 		exit_program("mlx_new_image error");
-	window->pimg->data = (unsigned int *)mlx_get_data_addr(window->pimg->img, \
-		&window->pimg->bpp, &window->pimg->line_length, &window->pimg->endian);
+	window->pimg->data = (unsigned int *)mlx_get_data_addr(window->pimg->img,\
+		&window->pimg->bpp, &window->pimg->line_length, \
+		&window->pimg->endian);
 	window->pimg->width = width;
 	window->pimg->height = height;
 	make_buffer(window, width, height);
