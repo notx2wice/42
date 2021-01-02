@@ -16,23 +16,23 @@ void			set_player_dir_plane_coord(t_window *window)
 {
 	if (window->cub->p_direction == 'W')
 	{
-		window->player->dir.y = 1;
-		window->player->plane.x = 0.66;
-	}
-	else if (window->cub->p_direction == 'E')
-	{
 		window->player->dir.y = -1;
 		window->player->plane.x = -0.66;
 	}
-	else if (window->cub->p_direction == 'S')
+	else if (window->cub->p_direction == 'E')
 	{
-		window->player->dir.x = -1;
-		window->player->plane.y = 0.66;
+		window->player->dir.y = 1;
+		window->player->plane.x = 0.66;
 	}
-	else if (window->cub->p_direction == 'N')
+	else if (window->cub->p_direction == 'S')
 	{
 		window->player->dir.x = 1;
 		window->player->plane.y = -0.66;
+	}
+	else if (window->cub->p_direction == 'N')
+	{
+		window->player->dir.x = -1;
+		window->player->plane.y = 0.66;
 	}
 }
 

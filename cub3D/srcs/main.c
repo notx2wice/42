@@ -12,7 +12,7 @@
 
 #include "../includes/cub3d.h"
 
-static void		draw(t_window *window)
+void		draw(t_window *window)
 {
 	int			x;
 	int			y;
@@ -28,7 +28,8 @@ static void		draw(t_window *window)
 		}
 		y++;
 	}
-	mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
+	if (window->save == 0)
+		mlx_put_image_to_window(window->mlx, window->win, window->pimg->img, 0, 0);
 }
 
 static int		main_loop(void *param)
@@ -58,15 +59,8 @@ int				main(int argc, char **argv)
 		mlx_loop_hook(window->mlx, main_loop, window);
 		mlx_loop(window->mlx);
 	}
-	else if (argc == 3 && ft_strcmp(argv[2],"--save") == 0)
-	{
-		init_window(window, argv[1]);
-		raycasting(window);
-		draw(window);
-		create_bitmap(window->pimg,	"cub3d_bitmap")
-		free_window(window);
-		exit(0);
-	}
+	else if (argc == 3 && ft_strcmp(argv[2], "--save") == 0)
+		take_screenshot(window, argv[1]);
 	else
 		exit_program("Invalid arguments were given.");
 	return (0);

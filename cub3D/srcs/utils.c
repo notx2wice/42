@@ -53,14 +53,15 @@ static void	free_buffer_img_sprite_cub(t_window *window)
 	free(window->buffer);
 	i = 0;
 	while (i < 5)
-		mlx_destroy_image(window->mlx, window->img[i++]->img);
+	{
+		mlx_destroy_image(window->mlx, window->img[i]->img);
+		free(window->img[i++]);
+	}
 	mlx_destroy_image(window->mlx, window->pimg->img);
 	free(window->pimg);
-	free(window->img);
 	i = 0;
 	while (i < window->cub->sprite_cnt)
 		free(window->sprites[i++]);
-	free(window->sprites);
 	free(window->d_sprites);
 	free(window->cub->ea_path);
 	free(window->cub->we_path);

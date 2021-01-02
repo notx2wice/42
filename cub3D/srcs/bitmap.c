@@ -3,79 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   bitmap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ukim <ukim@42SEOUL.KR>                     +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 17:15:34 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/02 13:02:12 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/02 14:44:00 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
 static int	data_to_bitmap(
-	t_image *pimg,
+	t_img *pimg,
 	int fd
 )
 {
 	int i;
 
-	i = pimg->width * pimg->height - 1;
-	while (i >= 0)
+	i = pimg->width * pimg->height * 4 - 1;
+	while (i >= 3)
 	{
-		write(fd, &pimg->data[i * pimg->bpp / 8], 4);
-		i--;
+		write(fd, &((unsigned char*)(pimg->data))[i-3], 1);
+		write(fd, &((unsigned char*)(pimg->data))[i-2], 1);
+		write(fd, &((unsigned char*)(pimg->data))[i-1], 1);
+		write(fd, &((unsigned char*)(pimg->data))[i], 1);
+		i = i - 4;
 	}
-	return (SUCCES);
-}
-
-static void	mir_verti_pixel(
-	t_image *pimg,
-	int line_cnt,
-	int *e,
-	int f
-)
-{
-	char	save;
-	int		k;
-
-	k = 3;
-	while (k >= 0)
-	{
-		save = pimg->data[*e + (line_cnt * pimg->line_length)];
-		pimg->data[*e + (line_cnt * pimg->line_length)] =
-			pimg->data[f - k + (line_cnt * pimg->line_length - 1)];
-		pimg->data[f - k + (line_cnt * pimg->line_length - 1)] =
-			save;
-		k--;
-		*e = *e + 1;
-	}
+	return (SUCCESS);
 }
 
 static int	mir_verti(
-	t_image *pimg
+	t_img *pimg
 )
 {
 	int		line_cnt;
+	unsigned int	save;
 	int		e;
 	int		f;
 
 	line_cnt = 0;
 	while (line_cnt < pimg->height)
 	{
-		e = 0;
-		f = pimg->line_length;
-		while (e < f && e != f)
+		e = -1;
+		f = pimg->width;
+		while (++e < f)
 		{
-			mir_verti_pixel(pimg, line_cnt, &e, f);
-			f -= 4;
+			save = pimg->data[e + (line_cnt * pimg->width)];
+			pimg->data[e + (line_cnt * pimg->width)] = pimg->data[f + (line_cnt * pimg->width - 1)];
+			pimg->data[f + (line_cnt * pimg->width - 1)] = save;
+			f--;
 		}
 		line_cnt++;
 	}
-	return (SUCCES);
+	return (SUCCESS);
 }
 
 static int	bitmap_info_header(
-	t_image *pimg,
+	t_img *pimg,
 	int fd
 )
 {
@@ -97,11 +80,11 @@ static int	bitmap_info_header(
 		write(fd, "\0", 1);
 		o_count++;
 	}
-	return (SUCCES);
+	return (SUCCESS);
 }
 
 int			create_bitmap(
-	t_image *pimg,
+	t_img *pimg,
 	char *name
 )
 {
@@ -125,5 +108,17 @@ int			create_bitmap(
 	data_to_bitmap(pimg, fd);
 	close(fd);
 	free(name);
-	return (SUCCES);
+	return (SUCCESS);
+}
+
+void		take_screenshot(t_window *window, char *cub_path)
+{
+	window->save = 1;
+	init_window(window, cub_path);
+	raycasting(window);
+	draw(window);
+	create_bitmap(window->pimg,	"save");
+	free_window(window);
+	printf("save compelete");
+	exit(0);
 }

@@ -81,43 +81,46 @@ void			init_struct_window(t_window *window)
 	init_key(window->key);
 	window->rotSpeed = 0.05;
 	window->moveSpeed = 0.1;
+	window->save = 0;
 }
 
-void			new_image(t_img *pimg, t_window *window, int w, int h)
+void			make_buffer(t_window *window, int w, int h)
 {
-	if (!(pimg->img = mlx_new_image(window->mlx, w, h)))
-		exit_program("mlx_new_image error");
-	pimg->data = (unsigned int *)mlx_get_data_addr(pimg->img, &pimg->bpp, \
-					&pimg->line_length, &pimg->endian);
-	pimg->width = w;
-	pimg->height = h;
+	int			i;
+
+	if (!(window->ray->z_buffer = (double *)malloc(sizeof(double) * w)))
+		exit_program(MEMORY_ALLOC_ERROR);
+	ft_bzero(window->ray->z_buffer, sizeof(double) * w);
+	if (!(window->buffer = (unsigned int **)malloc(sizeof(unsigned int *) * h)))
+		exit_program(MEMORY_ALLOC_ERROR);
+	i = 0;
+	while (i < h)
+		if (!(window->buffer[i++] = (unsigned int *)malloc(sizeof(unsigned int) * w)))
+			exit_program(MEMORY_ALLOC_ERROR);
 }
 
 void			init_window(t_window *window, char *path)
 {
-	int			i;
+	int			width;
+	int			height;
 
 	init_struct_window(window);
 	if (!(window->mlx = mlx_init()))
 		exit_program("mlx_init error");
-	set_cub(window, path);
+	if (!set_cub(window, path))
+		exit_program("invalid map");
+	width = window->cub->res_width;
+	height = window->cub->res_height;
 	init_sprite(window);
 	set_player_dir_plane_coord(window);
-	window->win = mlx_new_window(window->mlx, window->cub->res_width, \
-								window->cub->res_height, "cub3D");
+	if (window->save == 0)
+		window->win = mlx_new_window(window->mlx, width, height, "cub3D");
 	load_texture(window);
-	new_image(window->pimg, window, window->cub->res_width, \
-			window->cub->res_height);
-	if (!(window->ray->z_buffer = (double *)malloc(sizeof(double) \
-									* window->cub->res_width)))
-		exit_program(MEMORY_ALLOC_ERROR);
-	ft_bzero(window->ray->z_buffer, sizeof(double) * window->cub->res_width);
-	if (!(window->buffer = (unsigned int **)malloc(sizeof(unsigned int *) \
-							* window->cub->res_height)))
-		exit_program(MEMORY_ALLOC_ERROR);
-	i = 0;
-	while (i < window->cub->res_height)
-		if (!(window->buffer[i++] = (unsigned int *)malloc(sizeof(unsigned int) \
-									 * window->cub->res_width)))
-			exit_program(MEMORY_ALLOC_ERROR);
+	if (!(window->pimg->img = mlx_new_image(window->mlx, width, height)))
+		exit_program("mlx_new_image error");
+	window->pimg->data = (unsigned int *)mlx_get_data_addr(window->pimg->img, \
+		&window->pimg->bpp, &window->pimg->line_length, &window->pimg->endian);
+	window->pimg->width = width;
+	window->pimg->height = height;
+	make_buffer(window, width, height);
 }

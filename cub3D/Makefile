@@ -10,14 +10,17 @@ SRCS =					./includes/getnextline/get_next_line.c\
 						./includes/getnextline/get_next_line_utils.c \
 						./srcs/main.c \
 						./srcs/init.c \
+						./srcs/init2.c \
 						./srcs/map_parsing.c \
 						./srcs/map_parsing2.c \
 						./srcs/ray.c \
+						./srcs/ray2.c \
 						./srcs/textures.c \
 						./srcs/utils.c \
 						./srcs/move.c \
 						./srcs/event.c \
-						./srcs/draw_sprite.c
+						./srcs/draw_sprite.c \
+						./srcs/bitmap.c
 
 OBJS =		${SRCS:.c=.o}
 

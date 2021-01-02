@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2020/12/31 20:14:44 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/02 17:00:01 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static int		fill_player_and_worldmap_space
 	if (check_player_in_map(line[i]))
 	{
 		window->cub->p_direction = line[i];
-		window->player->pos.x = (double)i + 0.5;
-		window->player->pos.y = (double)idx - 7.5;
+		window->player->pos.y = (double)i + 0.5;
+		window->player->pos.x = (double)idx - 8 + 0.5;
 		pos_cnt++;
 		window->cub->worldmap[idx - 8][i] = '0';
 	}

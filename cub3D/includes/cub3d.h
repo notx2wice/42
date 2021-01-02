@@ -21,6 +21,7 @@
 # include "./getnextline/get_next_line.h"
 # include <mlx.h>
 # include <stdio.h>
+
 // define keycode
 # define KEY_W 13
 # define KEY_A 0
@@ -157,6 +158,7 @@ typedef struct			s_window
 {
 	void				*mlx;
 	void				*win;
+	int					save;
 	t_img				*img[5];
 	t_img				*pimg;
 	t_ray				*ray;
@@ -241,4 +243,8 @@ void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 //sprites
 void					draw_sprite(t_window *window);
 
+//bitmap
+int						create_bitmap(t_img *pimg, char *name);
+void					take_screenshot(t_window *window, char *cub_path);
+void					draw(t_window *window);
 #endif

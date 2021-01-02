@@ -17,7 +17,7 @@ void		rotate_player(t_player *player, double rotSpeed, int keycode)
 	double	oldDir_x;
 	double	oldPlane_x;
 
-	oldDir_x = player->dir.x;
+	oldDir_x = player->dir.x`;
 	oldPlane_x = player->plane.x;
 	if (keycode == KEY_LEFT)
 	{
