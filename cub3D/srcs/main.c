@@ -36,7 +36,7 @@ static int		main_loop(void *param)
 	t_window	*window;
 
 	window = (t_window *)param;
-	
+
 	key_manager(window);
 	raycasting(window);
 	draw(window);
@@ -63,7 +63,7 @@ int				main(int argc, char **argv)
 		init_window(window, argv[1]);
 		raycasting(window);
 		draw(window);
-		save_screen(window);
+		create_bitmap(window->pimg,	"cub3d_bitmap")
 		free_window(window);
 		exit(0);
 	}
