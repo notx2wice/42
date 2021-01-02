@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/02 22:38:18 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/02 22:44:11 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int						ft_atoi(char *str)
 	i = 0;
 	if (!str)
 		return (0);
-	while (str[i] == ' ')
+	while (str[i] == ' ' || str[i] == '\n')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
