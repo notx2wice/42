@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 21:31:19 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 01:37:51 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void			calc_transform_x_y
 (
 	t_window *window,
 	t_player *player,
-	t_d_sprites *sprites,
+	t_d_sprites *d_sprites,
 	int idx
 )
 {
-	double			sprite_x;
-	double			sprite_y;
-	double			inv_det;
+	double		sprite_x;
+	double		sprite_y;
+	double		inv_det;
 
 	sprite_x = window->sprites[idx]->x - window->player->pos.x;
 	sprite_y = window->sprites[idx]->y - window->player->pos.y;
 	inv_det = 1.0 / (player->plane.x * player->dir.y - player->dir.x
 					* player->plane.y);
-	sprites->transform_x = inv_det * (player->dir.y * sprite_x -
+	d_sprites->transform_x = inv_det * (player->dir.y * sprite_x -
 		player->dir.x * sprite_y);
-	sprites->transform_y = inv_det * (-player->plane.y * sprite_x +
+	d_sprites->transform_y = inv_det * (-player->plane.y * sprite_x +
 		player->plane.x * sprite_y);
-	sprites->screen_x =
+	d_sprites->screen_x =
 		(int)(((double)window->cub->res_width / 2.0) *
-		(1.0 + window->d_sprites->transform_x / sprites->transform_y));
-	sprites->sprite_height = abs((int)(window->cub->res_height /
-		sprites->transform_y));
+		(1.0 + window->d_sprites->transform_x / d_sprites->transform_y));
+	d_sprites->sprite_height = abs((int)(window->cub->res_height /
+		d_sprites->transform_y));
 }
 
 void			calc_screenx_height_draw
@@ -66,7 +66,7 @@ void			calc_screenx_height_draw
 		sprites->draw_end_x = (int)s_width - 1;
 }
 
-void		do_raycasting(t_window *window)
+void			do_raycasting(t_window *window)
 {
 	double		camera_x;
 	int			x;

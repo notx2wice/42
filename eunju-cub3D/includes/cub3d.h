@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 21:30:14 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 01:31:42 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ typedef struct			s_window
 	t_sprite			**sprites;
 	t_key				*key;
 	t_d_sprites			*d_sprites;
+	int					visited_res;
 	unsigned int		**buffer;
 	double				move_speed;
 	double				rot_speed;
@@ -195,6 +196,7 @@ void					init_key(t_key *key);
 void					init_ray(t_ray *ray);
 void					init_window(t_window *window, char *path);
 
+
 int						key_manager(t_window *window);
 void					rotate_player(t_player *player, double	rot_spee,
 	int keycode);
@@ -215,8 +217,6 @@ void					set_cub_worldmap(char **line, t_window *window);
 void					set_cub(t_window *window, char *path);
 int						check_color_valid(char **tmp);
 int						map_size_check(t_window *window, int x, int y);
-void					dfs(int **v, int x, int y, t_window *window, int *res);
-int						**make_visited_array(t_window *window);
 int						check_wall_valid(t_window *window);
 
 void					load_texture(t_window *window);

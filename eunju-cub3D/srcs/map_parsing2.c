@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/06 20:22:22 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 00:02:50 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ static void		make_worldmap(char **line, t_window *window)
 	int			idx;
 	int			i;
 
-	if (!(window->cub->worldmap = (char **)malloc(sizeof(char *) \
-		* (window->cub->map_row + 1))))
+	if (!(window->cub->worldmap = (char **)malloc(sizeof(char *) *
+		(window->cub->map_row + 1))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	idx = 8;
 	i = 0;
 	while (line[idx] && i < window->cub->map_row)
 	{
-		if (!(window->cub->worldmap[i++] = (char *)malloc(sizeof(char) \
-			* (window->cub->map_col + 1))))
+		if (!(window->cub->worldmap[i++] = (char *)malloc(sizeof(char) *
+			(window->cub->map_col + 1))))
 			exit_program(MEMORY_ALLOC_ERROR);
 		fill_one_line_worldmap(line[idx], window, idx);
 		idx++;
