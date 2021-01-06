@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:23:22 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:36:54 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 01:50:35 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ void				sprite_raycast(t_window *window, t_d_sprites *sprites)
 		i++;
 	}
 }
-
 
 void				draw_sprite(t_window *window)
 {
