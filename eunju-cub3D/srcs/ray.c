@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:37:21 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/06 20:05:10 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 21:12:32 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void			set_ray_raydir(double camera_x, t_ray *ray, t_player *player)
 {
 	ray->ray_dir.x = player->dir.x + player->plane.x * camera_x;
 	ray->ray_dir.y = player->dir.y + player->plane.y * camera_x;
-	ray->delta_dist.x = sqrt(1 + (ray->ray_dir.y * ray->ray_dir.y)
-						/ (ray->ray_dir.x * ray->ray_dir.x));
-	ray->delta_dist.y = sqrt(1 + (ray->ray_dir.x * ray->ray_dir.x)
-						/ (ray->ray_dir.y * ray->ray_dir.y));
+	ray->delta_dist.x = sqrt(1 + (ray->ray_dir.y * ray->ray_dir.y) /
+		(ray->ray_dir.x * ray->ray_dir.x));
+	ray->delta_dist.y = sqrt(1 + (ray->ray_dir.x * ray->ray_dir.x) /
+		(ray->ray_dir.y * ray->ray_dir.y));
 }
 
 void			set_ray_step_sidedist(t_ray *ray, t_coord_d *pos)
@@ -56,8 +56,8 @@ void			set_ray_step_sidedist(t_ray *ray, t_coord_d *pos)
 	else
 	{
 		ray->step.x = 1;
-		ray->side_dist.x = ((double)ray->map.x + 1.0 - pos->x)
-							* (ray->delta_dist.x);
+		ray->side_dist.x = ((double)ray->map.x + 1.0 - pos->x) *
+			(ray->delta_dist.x);
 	}
 	if (ray->ray_dir.y < 0)
 	{
@@ -67,8 +67,8 @@ void			set_ray_step_sidedist(t_ray *ray, t_coord_d *pos)
 	else
 	{
 		ray->step.y = 1;
-		ray->side_dist.y = ((double)ray->map.y + 1.0 - pos->y)
-							* (ray->delta_dist.y);
+		ray->side_dist.y = ((double)ray->map.y + 1.0 - pos->y) *
+			(ray->delta_dist.y);
 	}
 }
 
@@ -109,11 +109,11 @@ void			calc_perp_lineheight_draws_drawe
 			(double)(1 - ray->step.y) / 2.0) / ray->ray_dir.y;
 	ray->lineheight = (int)((double)cub->res_height / ray->perpwall_dist);
 	ray->draw_start = (int)(((-1.0) * (double)ray->lineheight / 2.0) +
-						((double)cub->res_height / 2.0));
+		((double)cub->res_height / 2.0));
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = (int)(((double)ray->lineheight / 2.0) +
-					((double)cub->res_height / 2.0));
+		((double)cub->res_height / 2.0));
 	if (ray->draw_end >= cub->res_height)
 		ray->draw_end = cub->res_height - 1;
 }

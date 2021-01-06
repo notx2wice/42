@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/06 20:09:58 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 20:22:22 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,6 @@ void			set_cub_worldmap(char **line, t_window *window)
 	window->cub->map_row = map_height;
 	window->cub->map_col = max_width;
 	make_worldmap(line, window);
+	if (!check_wall_valid(window))
+		exit_program("Map is invalid!");
 }

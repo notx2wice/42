@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/06 20:09:40 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 20:45:47 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				**make_visited_array(t_window *window)
 	return (visited);
 }
 
-void			DFS(int **v, int x, int y, t_window *window, int* res)
+void			dfs(int **v, int x, int y, t_window *window, int *res)
 {
 	int			dx[4] = {0, 0, 1, -1};
 	int			dy[4] = {-1, 1, 0, 0};
@@ -94,7 +94,7 @@ void			DFS(int **v, int x, int y, t_window *window, int* res)
 		if (v[tx][ty] == 0 && window->cub->worldmap[tx][ty] != '1')
 		{
 			v[tx][ty] = 1;
-			DFS(v, tx, ty, window, res);
+			dfs(v, tx, ty, window, res);
 		}
 	}
 }
@@ -113,7 +113,7 @@ int				check_wall_valid(t_window *window)
 	px = (int)window->player->pos.x;
 	py = (int)window->player->pos.y;
 	visited[px][py] = 1;
-	DFS(visited, px, py, window ,&res);
+	dfs(visited, px, py, window, &res);
 	i = 0;
 	while (i < window->cub->map_row)
 		free(visited[i++]);

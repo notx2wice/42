@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:30:28 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/06 19:56:00 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 21:34:01 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,12 @@ void			init_img(t_img *img)
 	img->height = 0;
 }
 
-void			init_sprite(t_window *window)
+void			init_sprite(t_window *window, int s_cnt)
 {
-	int			s_cnt;
 	int			idx;
 	int			x;
 	int			y;
 
-	s_cnt = window->cub->sprite_cnt;
 	if (!(window->sprites = (t_sprite **)malloc(sizeof(t_sprite*) * s_cnt)))
 		exit_program(MEMORY_ALLOC_ERROR);
 	idx = 0;
@@ -79,9 +77,8 @@ void			init_struct_window(t_window *window)
 	if (!(window->key = (t_key *)malloc(sizeof(t_key))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_key(window->key);
-	window->rotSpeed = 0.05;
-	window->moveSpeed = 0.1;
-	window->save = 0;
+	window->rot_speed = 0.05;
+	window->move_speed = 0.1;
 }
 
 void			make_buffer(t_window *window, int w, int h)
@@ -107,13 +104,13 @@ void			init_window(t_window *window, char *path)
 	int			height;
 
 	init_struct_window(window);
+	window->save = 0;
 	if (!(window->mlx = mlx_init()))
 		exit_program("mlx_init error");
-	if (!set_cub(window, path))
-		exit_program("invalid map");
+	set_cub(window, path);
 	width = window->cub->res_width;
 	height = window->cub->res_height;
-	init_sprite(window);
+	init_sprite(window, window->cub->sprite_cnt);
 	set_player_dir_plane_coord(window);
 	if (window->save == 0)
 		window->win = mlx_new_window(window->mlx, width, height, "cub3D");

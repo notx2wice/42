@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:42:21 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/05 00:53:42 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 20:55:54 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ void			init_ray(t_ray *ray)
 	ray->map.y = 0;
 	ray->step.x = 0;
 	ray->step.y = 0;
-	init_coord_d(ray->rayDir);
-	init_coord_d(ray->sideDist);
-	init_coord_d(ray->deltaDist);
-	ray->perpwallDist = 0;
+	init_coord_d(ray->ray_dir);
+	init_coord_d(ray->side_dist);
+	init_coord_d(ray->delta_dist);
+	ray->perpwall_dist = 0;
 	ray->hit = 0;
 	ray->side = 0;
 	ray->lineheight = 0;
