@@ -6,36 +6,39 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/07 01:18:24 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:46:53 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int				check_color_valid(char **tmp)
+int				check_color_valid(char *line)
 {
 	int			i;
-	int			dot_cnt;
-	char		**color;
+	int			j;
+	int			res;
+	int			ret;
 
-	i = 0;
-	dot_cnt = 0;
-	while (tmp[i])
-		i++;
-	if (i != 2)
-		return (0);
-	color = ft_split(tmp[1], ',');
 	i = -1;
-	while (++i < 3 && color[i])
-		if (ft_atoi(color[i]) > 256 || ft_atoi(color[i]) < 0)
-		{
-			free(color);
-			return (0);
-		}
-	free(color);
+	j = 0;
+	res = 1;
+	while (line[++i])
+		if (line[i] == ',')
+			j++;
+	if (j != 2)
+		res = 0;
+	i = 0;
+	j = 1;
+	while (j < (int)ft_strlen(line))
+	{
+		ret = ft_atoi(&line[j], &j);
+		i++;
+		if (ret > 255 || ret < 0)
+			res = 0;
+	}
 	if (i != 3)
-		return (0);
-	return (SUCCESS);
+		res = 0;
+	return (res);
 }
 
 static int		**make_visited_array(t_window *window)

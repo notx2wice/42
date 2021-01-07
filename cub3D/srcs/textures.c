@@ -87,7 +87,7 @@ void				wall_to_buffer(t_window *window, t_ray *ray, int x)
 	unsigned int	color;
 
 	step = window->img[ray->tex_num]->height * 1.0 / ray->lineheight;
-	tex_pos = (ray->draw_start - window->cub->res_height / 2 + \
+	tex_pos = (ray->draw_start - window->cub->res_height / 2 +
 				ray->lineheight / 2) * step;
 	y = ray->draw_start;
 	while (y < ray->draw_end)

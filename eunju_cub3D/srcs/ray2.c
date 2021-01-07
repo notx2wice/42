@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:37:51 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 02:25:51 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			calc_screenx_height_draw
 	double s_height
 )
 {
-	sprites->draw_start_x = (int)((double)(-sprites->sprite_height) /
+	sprites->draw_start_y = (int)((double)(-sprites->sprite_height) /
 		2.0 + window->cub->res_height / 2.0);
 	if (sprites->draw_start_y < 0)
 		sprites->draw_start_y = 0;

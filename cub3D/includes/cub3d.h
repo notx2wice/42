@@ -48,11 +48,7 @@
 # define SUCCESS 1
 # define ERROR_MSG "ERROR\n"
 # define MEMORY_ALLOC_ERROR "Memory allocation failed"
-# define MAP_ERROR "Map is not valid"
-# define RGB_ERROR "RGB is not valid"
-# define PATH_ERROR "Path is not valid"
 # define ARGUMENT_ERROR "Invalid argument(s) is(are) in cub file"
-# define OPEN_ERROR "Failed to open file"
 
 typedef struct			s_img
 {

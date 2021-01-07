@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:23:22 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:50:35 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 02:21:25 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void				sprite_raycast(t_window *window, t_d_sprites *sprites)
 	{
 		calc_transform_x_y(window, window->player, window->d_sprites, i);
 		calc_screenx_height_draw(window, window->d_sprites,
-								(double)window->cub->res_width,
-								(double)window->cub->res_height);
+			(double)window->cub->res_width,
+			(double)window->cub->res_height);
 		stripe = window->d_sprites->draw_start_x;
 		while (stripe < window->d_sprites->draw_end_x)
 		{

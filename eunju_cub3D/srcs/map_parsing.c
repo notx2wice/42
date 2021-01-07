@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:17:29 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:53:03 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,29 +76,25 @@ static void		set_cub_textures_path(char **tmp, t_cub *cub)
 		exit_program(ARGUMENT_ERROR);
 }
 
-static void		set_cub_backgrounds(char **tmp, t_cub *cub)
+static void		set_cub_backgrounds(char *cub_line, t_cub *cub)
 {
-	char		**color;
 	int			i;
-	int			j;
 
-	i = 0;
-	j = 0;
-	if (!check_color_valid(tmp))
+	i = 1;
+	if (!check_color_valid(cub_line))
 		exit_program("Color value is invalid");
-	color = ft_split(tmp[1], ',');
-	if (ft_strcmp(tmp[0], "F") == 0)
+	if (ft_strncmp(cub_line, "F", 1) == 0)
 	{
-		while (color[i])
-			cub->floor_color = cub->floor_color * 256 + ft_atoi(color[i++]);
+		while (cub_line[i])
+			cub->floor_color = cub->floor_color * 256 +
+				ft_atoi(&cub_line[i], &i);
 	}
-	else if (ft_strcmp(tmp[0], "C") == 0)
+	else if (ft_strncmp(cub_line, "C", 1) == 0)
 	{
-		while (color[i])
-			cub->ceiling_color = \
-				cub->ceiling_color * 256 + ft_atoi(color[i++]);
+		while (cub_line[i])
+			cub->ceiling_color = cub->ceiling_color * 256 +
+				ft_atoi(&cub_line[i], &i);
 	}
-	free_array(color);
 }
 
 void			set_cub(t_window *window, char *path)
@@ -114,13 +110,13 @@ void			set_cub(t_window *window, char *path)
 		tmp = ft_split(cub_file[i], ' ');
 		if (*tmp[0] == 'R')
 		{
-			window->cub->res_width = ft_atoi(tmp[1]);
-			window->cub->res_height = ft_atoi(tmp[2]);
+			window->cub->res_width = ft_atoi(tmp[1], 0);
+			window->cub->res_height = ft_atoi(tmp[2], 0);
 		}
 		else if (ft_strlen(tmp[0]) == 2 || *tmp[0] == 'S')
 			set_cub_textures_path(tmp, window->cub);
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
-			set_cub_backgrounds(tmp, window->cub);
+			set_cub_backgrounds(cub_file[i], window->cub);
 		else
 			exit_program(ARGUMENT_ERROR);
 		free_array(tmp);

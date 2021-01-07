@@ -1,16 +1,16 @@
-R 800 800
+R 800   800
 
-NO ./includes/textures/north.xpm
+NO   ./includes/textures/north.xpm
 
-SO ./includes/textures/south.xpm
+SO   ./includes/textures/south.xpm
 
-WE ./includes/textures/west.xpm
+WE   ./includes/textures/west.xpm
 
-EA ./includes/textures/east.xpm
+EA   ./includes/textures/east.xpm
 
-S ./includes/textures/sprite.xpm
+S   ./includes/textures/sprite.xpm
 
-F 220,100,100
+F 220, 100, 100
 
 C 122,122,254
 

@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:31:42 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 21:55:16 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ size_t					ft_strlen(const char *s1);
 char					**ft_split(const char *s, char c);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
-int						ft_atoi(char *str);
+int						ft_atoi(char *str, int *i);
 int						ft_isdigit(int c);
 char					*ft_strchr(const char *str, int c);
 void					ft_putchar_fd(char c, int fd);
@@ -196,7 +196,6 @@ void					init_key(t_key *key);
 void					init_ray(t_ray *ray);
 void					init_window(t_window *window, char *path);
 
-
 int						key_manager(t_window *window);
 void					rotate_player(t_player *player, double	rot_spee,
 	int keycode);
@@ -215,7 +214,7 @@ int						key_press(int key, void *param);
 
 void					set_cub_worldmap(char **line, t_window *window);
 void					set_cub(t_window *window, char *path);
-int						check_color_valid(char **tmp);
+int						check_color_valid(char *cub_line);
 int						map_size_check(t_window *window, int x, int y);
 int						check_wall_valid(t_window *window);
 

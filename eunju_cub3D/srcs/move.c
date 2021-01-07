@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:27:15 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 01:21:03 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/07 02:10:25 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ void			move_player_right
 	double		new_pos_x;
 	double		new_pos_y;
 
-	new_pos_x = (player->pos.x + player->dir.x * move_speed);
-	new_pos_y = (player->pos.y - player->dir.y * move_speed);
+	new_pos_x = (player->pos.x + player->dir.y * move_speed);
+	new_pos_y = (player->pos.y - player->dir.x * move_speed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
@@ -102,8 +102,8 @@ void			move_player_left
 	double		new_pos_x;
 	double		new_pos_y;
 
-	new_pos_x = (player->pos.x - player->dir.x * move_speed);
-	new_pos_y = (player->pos.y + player->dir.y * move_speed);
+	new_pos_x = (player->pos.x - player->dir.y * move_speed);
+	new_pos_y = (player->pos.y + player->dir.x * move_speed);
 	if (cub->worldmap[(int)new_pos_x][(int)(player->pos.y)] == '0')
 		player->pos.x = new_pos_x;
 	if (cub->worldmap[(int)(player->pos.x)][(int)new_pos_y] == '0')
