@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d_utils.c                                      :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 19:28:47 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/15 19:28:47 by ekim             ###   ########.fr       */
+/*   Created: 2021/01/06 19:57:37 by ekim              #+#    #+#             */
+/*   Updated: 2021/01/06 19:59:46 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char		*ft_free_strjoin(char *s1, char *s2)
+char			*ft_free_strjoin(char *s1, char *s2)
 {
-	char	*result;
+	char		*result;
 
 	result = ft_strjoin((const char*)s1, (const char*)s2);
 	free(s1);
@@ -22,7 +22,7 @@ char		*ft_free_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-void		exit_program(char *str)
+void			exit_program(char *str)
 {
 	ft_putstr_fd("Error\n", 1);
 	ft_putstr_fd(str, 1);
@@ -30,9 +30,9 @@ void		exit_program(char *str)
 	exit(EXIT_FAILURE);
 }
 
-void		free_array(char **str)
+void			free_array(char **str)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (str[i])
@@ -43,9 +43,9 @@ void		free_array(char **str)
 	free(str);
 }
 
-static void	free_buffer_img_sprite_cub(t_window *window)
+static void		free_buffer_img_sprite_cub(t_window *window)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (i < window->cub->res_height)
@@ -71,7 +71,7 @@ static void	free_buffer_img_sprite_cub(t_window *window)
 	free_array(window->cub->worldmap);
 }
 
-void		free_window(t_window *window)
+void			free_window(t_window *window)
 {
 	free(window->ray->z_buffer);
 	free(window->ray);

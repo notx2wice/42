@@ -6,32 +6,32 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 02:22:57 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/02 22:46:53 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/06 21:02:50 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int			key_manager(t_window *window)
+int				key_manager(t_window *window)
 {
 	if (window->key->forward == 1)
-		move_player_forward(window->player, window->cub, window->moveSpeed);
+		move_player_forward(window->player, window->cub, window->move_speed);
 	else if (window->key->left == 1)
-		move_player_left(window->player, window->cub, window->moveSpeed);
+		move_player_left(window->player, window->cub, window->move_speed);
 	else if (window->key->backward == 1)
-		move_player_backward(window->player, window->cub, window->moveSpeed);
+		move_player_backward(window->player, window->cub, window->move_speed);
 	else if (window->key->right == 1)
-		move_player_right(window->player, window->cub, window->moveSpeed);
+		move_player_right(window->player, window->cub, window->move_speed);
 	else if (window->key->turn_left == 1)
-		rotate_player(window->player, window->rotSpeed, KEY_LEFT);
+		rotate_player(window->player, window->rot_speed, KEY_LEFT);
 	else if (window->key->turn_right == 1)
-		rotate_player(window->player, window->rotSpeed, KEY_RIGHT);
+		rotate_player(window->player, window->rot_speed, KEY_RIGHT);
 	return (SUCCESS);
 }
 
 int				destroy_window(void *param)
 {
-	t_window 	*window;
+	t_window	*window;
 
 	window = (t_window *)param;
 	mlx_destroy_window(window->mlx, window->win);

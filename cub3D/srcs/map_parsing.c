@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/23 16:49:23 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/07 21:53:03 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ static void		check_cub_file(char **lines)
 	}
 }
 
-static char		**read_map_file_to_array(int fd)
+static char		**read_map_file_to_array(char *path)
 {
+	int			fd;
 	char		*line;
 	char		*one_line;
 	char		**stack;
 	char		*tmp;
 
+	fd = open(path, O_RDONLY);
 	one_line = ft_strdup("");
 	while (get_next_line(fd, &line))
 	{
@@ -54,6 +56,7 @@ static char		**read_map_file_to_array(int fd)
 	stack = ft_split(tmp, '\n');
 	free(tmp);
 	close(fd);
+	check_cub_file(stack);
 	return (stack);
 }
 
@@ -73,162 +76,51 @@ static void		set_cub_textures_path(char **tmp, t_cub *cub)
 		exit_program(ARGUMENT_ERROR);
 }
 
-static int		check_color_valid(char **tmp)
+static void		set_cub_backgrounds(char *cub_line, t_cub *cub)
 {
 	int			i;
-	int			dot_cnt;
-	char		**color;
 
-	i = 0;
-	dot_cnt = 0;
-	while (tmp[i])
-		i++;
-	if (i != 2)
-		return (0);
-	color = ft_split(tmp[1], ',');
-	i = -1;
-	while (++i < 3 && color[i])
-		if (ft_atoi(color[i]) > 256 || ft_atoi(color[i]) < 0)
-		{
-			free(color);
-			return (0);
-		}
-	free(color);
-	if (i != 3)
-		return (0);
-	return (1);
-}
-
-static void		set_cub_backgrounds(char **tmp, t_cub *cub)
-{
-	char		**color;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	if (!check_color_valid(tmp))
+	i = 1;
+	if (!check_color_valid(cub_line))
 		exit_program("Color value is invalid");
-	color = ft_split(tmp[1], ',');
-	if (ft_strcmp(tmp[0], "F") == 0)
+	if (ft_strncmp(cub_line, "F", 1) == 0)
 	{
-		while (color[i])
-			cub->floor_color = cub->floor_color * 256 + ft_atoi(color[i++]);
+		while (cub_line[i])
+			cub->floor_color = cub->floor_color * 256 +
+				ft_atoi(&cub_line[i], &i);
 	}
-	else if (ft_strcmp(tmp[0], "C") == 0)
+	else if (ft_strncmp(cub_line, "C", 1) == 0)
 	{
-		while (color[i])
-			cub->ceiling_color = cub->ceiling_color * 256 + ft_atoi(color[i++]);
-	}
-	free_array(color);
-}
-
-int					map_size_check(t_window* window, int x, int y)
-{
-	if (x <= 0 || x > window->cub->map_col )
-		return (1);
-	if (y <= 0 || y > window->cub->map_row )
-		return (1);
-	return (0);
-}
-
-void				DFS(int **v , int x, int y , t_window *window, int* res)
-{
-	int dx[4] = {0,0,1,-1};
-	int dy[4] = {-1,1,0,0};
-	int i;
-	int tx,ty;
-	printf("x,y = %d , %d \n" , x,y);
-	if (window->cub->worldmap[x][y] == 'N' || map_size_check(window,x,y))
-	{
-		*res = 0;
-		return;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		tx = x + dx[i];
-		ty = y + dy[i];
-
-		if (v[tx][ty] == 0 && window->cub->worldmap[tx][ty] != '1')
-		{
-			v[tx][ty] = 1;
-			DFS(v, tx, ty, window, res);
-		}
-		i++;
+		while (cub_line[i])
+			cub->ceiling_color = cub->ceiling_color * 256 +
+				ft_atoi(&cub_line[i], &i);
 	}
 }
 
-int				check_wall_valid(t_window *window)
-{
-	int **visited;
-	int i;
-	int px,py;
-	int res;
-
-	i = 0;
-	res = 1;
-	visited = (int**)malloc(sizeof(int*) * window->cub->map_row);
-	while (i < window->cub->map_row)
-		visited[i++] = (int*)malloc(sizeof(int) * window->cub->map_col);
-	int x,y;
-	x =0; y = 0;
-	while (x<window->cub->map_row)
-	{
-		y = 0;
-		while (y<window->cub->map_col)
-		{
-			visited[x][y] = 0;
-			printf("%c", window->cub->worldmap[x][y]);
-			y++;
-		}
-		printf("\n");
-		x++;
-	}
-	px = (int)window->player->pos.x;
-	py = (int)window->player->pos.y;
-	visited[px][py] = 1;
-	printf("w,h = %d , %d \n" , window->cub->map_row, window->cub->map_col);
-	printf("px,py = %d , %d \n" , px, py);
-
-	DFS(visited, px, py, window ,&res);
-	i = 0;
-	while (i < window->cub->map_row)
-		free(visited[i++]);
-	free(visited);
-	return (res);
-}
-
-int				set_cub(t_window *window, char *path)
+void			set_cub(t_window *window, char *path)
 {
 	char		**cub_file;
 	int			i;
 	char		**tmp;
-	int			fd;
 
-	fd = open(path, O_RDONLY);
-	cub_file = read_map_file_to_array(fd);
-	check_cub_file(cub_file);
+	cub_file = read_map_file_to_array(path);
 	i = -1;
 	while (++i < 8)
 	{
 		tmp = ft_split(cub_file[i], ' ');
 		if (*tmp[0] == 'R')
 		{
-			window->cub->res_width = ft_atoi(tmp[1]);
-			window->cub->res_height = ft_atoi(tmp[2]);
+			window->cub->res_width = ft_atoi(tmp[1], 0);
+			window->cub->res_height = ft_atoi(tmp[2], 0);
 		}
 		else if (ft_strlen(tmp[0]) == 2 || *tmp[0] == 'S')
 			set_cub_textures_path(tmp, window->cub);
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')
-			set_cub_backgrounds(tmp, window->cub);
+			set_cub_backgrounds(cub_file[i], window->cub);
 		else
 			exit_program(ARGUMENT_ERROR);
 		free_array(tmp);
 	}
 	set_cub_worldmap(cub_file, window);
 	free_array(cub_file);
-	if (!check_wall_valid(window))
-		return (0);
-	return (SUCCESS);
 }

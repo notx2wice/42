@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: seapark <seapark@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/02 22:43:40 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/08 22:03:10 by seapark          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,13 @@ static int		fill_player_and_worldmap_space
 		window->cub->worldmap[idx - 8][i] = '0';
 	}
 	else
-		window->cub->worldmap[idx - 8][i] = 'N';
+		window->cub->worldmap[idx - 8][i] = 'X';
 	return (pos_cnt);
 }
 
-static void		fill_one_line_worldmap(char *line, t_window *window, int idx)
+static void		fill_one_line_worldmap(char *line, t_window *window, int idx, int* pos_cnt)
 {
 	int			i;
-	int			pos_cnt;
 
 	i = 0;
 	while (i < window->cub->map_col)
@@ -67,11 +66,12 @@ static void		fill_one_line_worldmap(char *line, t_window *window, int idx)
 				window->cub->sprite_cnt++;
 		}
 		else
-			pos_cnt = fill_player_and_worldmap_space(line, window, idx, i);
+			*pos_cnt += fill_player_and_worldmap_space(line, window, idx, i);
 		i++;
 	}
 	window->cub->worldmap[idx - 8][i] = '\0';
-	if (pos_cnt > 1)
+	printf("pos_cnt%d\n",*pos_cnt);
+	if (*pos_cnt > 1)
 		exit_program("Player is not identifiable");
 }
 
@@ -79,18 +79,20 @@ static void		make_worldmap(char **line, t_window *window)
 {
 	int			idx;
 	int			i;
+	int			pos_cnt;
 
-	if (!(window->cub->worldmap = (char **)malloc(sizeof(char *) \
-		* (window->cub->map_row + 1))))
+	pos_cnt = 0;
+	if (!(window->cub->worldmap = (char **)malloc(sizeof(char *) *
+		(window->cub->map_row + 1))))
 		exit_program(MEMORY_ALLOC_ERROR);
 	idx = 8;
 	i = 0;
 	while (line[idx] && i < window->cub->map_row)
 	{
-		if (!(window->cub->worldmap[i++] = (char *)malloc(sizeof(char) \
-			* (window->cub->map_col + 1))))
+		if (!(window->cub->worldmap[i++] = (char *)malloc(sizeof(char) *
+			(window->cub->map_col + 1))))
 			exit_program(MEMORY_ALLOC_ERROR);
-		fill_one_line_worldmap(line[idx], window, idx);
+		fill_one_line_worldmap(line[idx], window, idx, &pos_cnt);
 		idx++;
 	}
 	window->cub->worldmap[window->cub->map_row] = NULL;
@@ -105,7 +107,7 @@ void			set_cub_worldmap(char **line, t_window *window)
 	idx = 8;
 	map_height = 0;
 	max_width = 0;
-	while(line[idx])
+	while (line[idx])
 	{
 		if (max_width < (int)ft_strlen(line[idx]))
 			max_width = (int)ft_strlen(line[idx]);
@@ -115,4 +117,6 @@ void			set_cub_worldmap(char **line, t_window *window)
 	window->cub->map_row = map_height;
 	window->cub->map_col = max_width;
 	make_worldmap(line, window);
+	if (!check_wall_valid(window))
+		exit_program("Map is invalid!");
 }

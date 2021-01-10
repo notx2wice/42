@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekim <ekim@student.42seoul.kr>             +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2020/12/23 16:43:18 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/07 21:55:16 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <mlx.h>
 # include <stdio.h>
 
-// define keycode
 # define KEY_W 13
 # define KEY_A 0
 # define KEY_S 1
@@ -36,19 +35,21 @@
 # define KEY_RELEASED 3
 # define KEY_EXIT 17
 
-//0북 1남 2서 3동
 # define NO_IDX 0
 # define SO_IDX 1
 # define WE_IDX 2
 # define EA_IDX 3
 # define S_IDX 4
 
-
 # define ERROR 0
 # define SUCCESS 1
 # define ERROR_MSG "ERROR\n"
 # define MEMORY_ALLOC_ERROR "Memory allocation failed"
+# define MAP_ERROR "Map is not valid"
+# define RGB_ERROR "RGB is not valid"
+# define PATH_ERROR "Path is not valid"
 # define ARGUMENT_ERROR "Invalid argument(s) is(are) in cub file"
+# define OPEN_ERROR "Failed to open file"
 
 typedef struct			s_img
 {
@@ -100,15 +101,15 @@ typedef struct			s_sprite
 
 typedef struct			s_d_sprites
 {
-	double				transformX;
-	double				transformY;
-	int					screenX;
-	int					spriteHeight;
-	int					drawStart_y;
-	int					drawEnd_y;
-	int					spriteWidth;
-	int					drawStart_x;
-	int					drawEnd_x;
+	double				transform_x;
+	double				transform_y;
+	int					screen_x;
+	int					sprite_height;
+	int					draw_start_y;
+	int					draw_end_y;
+	int					sprite_width;
+	int					draw_start_x;
+	int					draw_end_x;
 	int					tex_x;
 }						t_d_sprites;
 
@@ -134,10 +135,10 @@ typedef struct			s_ray
 {
 	t_coord_i			map;
 	t_coord_i			step;
-	t_coord_d			rayDir;
-	t_coord_d			sideDist;
-	t_coord_d			deltaDist;
-	double				perpwallDist;
+	t_coord_d			ray_dir;
+	t_coord_d			side_dist;
+	t_coord_d			delta_dist;
+	double				perpwall_dist;
 	int					hit;
 	int					side;
 	int					lineheight;
@@ -163,45 +164,31 @@ typedef struct			s_window
 	t_sprite			**sprites;
 	t_key				*key;
 	t_d_sprites			*d_sprites;
+	int					visited_res;
 	unsigned int		**buffer;
-	double				moveSpeed;
-	double				rotSpeed;
+	double				move_speed;
+	double				rot_speed;
 }						t_window;
 
-
-// libft functions
 char					*ft_strjoin(const char *s1, const char *s2);
 char					*ft_strdup(const char *s1);
 size_t					ft_strlen(const char *s1);
 char					**ft_split(const char *s, char c);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);
 int						ft_strcmp(const char *s1, const char *s2);
-int						ft_atoi(char *str);
+int						ft_atoi(char *str, int *i);
 int						ft_isdigit(int c);
 char					*ft_strchr(const char *str, int c);
 void					ft_putchar_fd(char c, int fd);
 void					ft_putstr_fd(char *str, int fd);
 void					ft_bzero(void *s, size_t n);
-
-// getnextline functions
 int						get_next_line(int fd, char **line);
-
-//cub3d utils
 char					*ft_free_strjoin(char *s1, char *s2);
 void					exit_program(char *str);
 void					free_array(char **str);
 void					free_cub(t_cub *cub);
 void					free_window(t_window *window);
 
-//map_parsing fucntions
-void					set_cub_worldmap(char **line, t_window *window);
-int						set_cub(t_window *window, char *path);
-
-//player
-
-void					set_player(t_cub *cub);
-
-//init
 void					init_coord_d(t_coord_d coord_d);
 void					init_player(t_player *player);
 void					init_cub(t_cub *cub);
@@ -209,38 +196,51 @@ void					init_key(t_key *key);
 void					init_ray(t_ray *ray);
 void					init_window(t_window *window, char *path);
 
-//ray
-void					set_player_dir_plane_coord(t_window *window);
-void					set_ray_rayDir(double cameraX, t_ray *ray, t_player *player);
-void					find_and_calc_wall(t_ray *ray, t_cub *cub);
-void					calc_perp_lineheight_drawS_drawE(t_ray *ray, t_player *player, t_cub *cub);
-void					set_ray_step_sideDist(t_ray *ray, t_coord_d *pos);
-int						raycasting(t_window *window);
+int						key_manager(t_window *window);
+void					rotate_player(t_player *player, double	rot_spee,
+	int keycode);
+void					move_player_forward(t_player *player, t_cub *cub,
+	double move_peed);
+void					move_player_left(t_player *player, t_cub *cub,
+	double move_peed);
+void					move_player_backward(t_player *player, t_cub *cub,
+	double move_peed);
+void					move_player_right(t_player *player, t_cub *cub,
+	double move_peed);
 
-//event
 int						destroy_window(void *param);
 int						key_released(int key, void *param);
 int						key_press(int key, void *param);
 
-//move
-int						key_manager(t_window *window);
-void					rotate_player(t_player *player, double rotSpeed, int keycode);
-void					move_player_forward(t_player *player, t_cub *cub, double moveSpeed);
-void					move_player_left(t_player *player, t_cub *cub, double moveSpeed);
-void					move_player_backward(t_player *player, t_cub *cub, double moveSpeed);
-void					move_player_right(t_player *player, t_cub *cub, double moveSpeed);
+void					set_cub_worldmap(char **line, t_window *window);
+void					set_cub(t_window *window, char *path);
+int						check_color_valid(char *cub_line);
+int						map_size_check(t_window *window, int x, int y);
+int						check_wall_valid(t_window *window);
 
-//textures
 void					load_texture(t_window *window);
 void					calc_wall_texture(t_window *window, t_ray *ray);
 void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 
-//sprites
+void					set_player_dir_plane_coord(t_window *window);
+void					set_ray_raydir(double camera_x, t_ray *ray,
+	t_player *player);
+void					find_and_calc_wall(t_ray *ray, t_cub *cub);
+void					calc_perp_lineheight_draws_drawe(t_ray *ray,
+	t_player *player, t_cub *cub);
+void					set_ray_step_sidedist(t_ray *ray, t_coord_d *pos);
+void					calc_transform_x_y(t_window *window, t_player *player,
+	t_d_sprites *sprites, int idx);
+void					calc_screenx_height_draw(t_window *window,
+	t_d_sprites *sprites, double s_width, double s_height);
+void					sprite_raycast(t_window *window, t_d_sprites *sprites);
+void					do_raycasting(t_window *window);
 void					draw_sprite(t_window *window);
+int						raycasting(t_window *window);
 
-//bitmap
 int						create_bitmap(t_img *pimg, char *name);
 void					take_screenshot(t_window *window, char *cub_path);
 void					draw(t_window *window);
+
 #endif
