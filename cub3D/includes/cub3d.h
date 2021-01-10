@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 21:55:16 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@
 # define ERROR_MSG "ERROR\n"
 # define MEMORY_ALLOC_ERROR "Memory allocation failed"
 # define MAP_ERROR "Map is not valid"
-# define RGB_ERROR "RGB is not valid"
 # define PATH_ERROR "Path is not valid"
 # define ARGUMENT_ERROR "Invalid argument(s) is(are) in cub file"
 # define OPEN_ERROR "Failed to open file"

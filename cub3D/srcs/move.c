@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seapark <seapark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:27:15 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/08 22:13:09 by seapark          ###   ########.fr       */
+/*   Updated: 2021/01/10 19:07:06 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,23 @@
 
 void			rotate_player(t_player *player, double rot_speed, int keycode)
 {
-	double olddirx;
-	double oldplanex;
-	if (keycode == KEY_LEFT)
-	{
-		olddirx = player->dir.x;
-		player->dir.x = player->dir.x * cos(rot_speed)
-			- (player->dir.y * sin(rot_speed));
-		player->dir.y = (olddirx * sin(rot_speed))
-			+ (player->dir.y * cos(rot_speed));
-		oldplanex = player->plane.x;
-		player->plane.x = (player->plane.x * cos(rot_speed))
-			- (player->plane.y * sin(rot_speed));
-		player->plane.y = (oldplanex * sin(rot_speed))
-			+ (player->plane.y * cos(rot_speed));
-	}
-	else if (keycode == KEY_RIGHT)
-	{
-		olddirx = player->dir.x;
-		player->dir.x = player->dir.x * cos(-rot_speed)
-			- (player->dir.y * sin(-rot_speed));
-		player->dir.y = (olddirx * sin(-rot_speed))
-			+ (player->dir.y * cos(-rot_speed));
-		oldplanex = player->plane.x;
-		player->plane.x = (player->plane.x * cos(-rot_speed))
-			- (player->plane.y * sin(-rot_speed));
-		player->plane.y = (oldplanex * sin(-rot_speed))
-			+ (player->plane.y * cos(-rot_speed));
-	}
+	double old_dir_x;
+	double old_plane_x;
+	double new_rot_speed;
+
+	old_dir_x = player->dir.x;
+	old_plane_x = player->plane.x;
+	new_rot_speed = rot_speed;
+	if (keycode == KEY_RIGHT)
+		new_rot_speed *= -1;
+	player->dir.x = player->dir.x * cos(new_rot_speed)
+		- (player->dir.y * sin(new_rot_speed));
+	player->dir.y = (old_dir_x * sin(new_rot_speed))
+		+ (player->dir.y * cos(new_rot_speed));
+	player->plane.x = (player->plane.x * cos(new_rot_speed))
+		- (player->plane.y * sin(new_rot_speed));
+	player->plane.y = (old_plane_x * sin(new_rot_speed))
+		+ (player->plane.y * cos(new_rot_speed));
 }
 
 void			move_player_forward

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seapark <seapark@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/27 20:09:26 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/08 22:03:10 by seapark          ###   ########.fr       */
+/*   Updated: 2021/01/10 18:46:46 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,11 @@ static int		fill_player_and_worldmap_space
 	return (pos_cnt);
 }
 
-static void		fill_one_line_worldmap(char *line, t_window *window, int idx, int* pos_cnt)
+static void		fill_one_line_worldmap(
+	char *line,
+	t_window *window,
+	int idx,
+	int *pos_cnt)
 {
 	int			i;
 
@@ -70,9 +74,6 @@ static void		fill_one_line_worldmap(char *line, t_window *window, int idx, int* 
 		i++;
 	}
 	window->cub->worldmap[idx - 8][i] = '\0';
-	printf("pos_cnt%d\n",*pos_cnt);
-	if (*pos_cnt > 1)
-		exit_program("Player is not identifiable");
 }
 
 static void		make_worldmap(char **line, t_window *window)
@@ -95,6 +96,8 @@ static void		make_worldmap(char **line, t_window *window)
 		fill_one_line_worldmap(line[idx], window, idx, &pos_cnt);
 		idx++;
 	}
+	if (pos_cnt > 1 || pos_cnt <= 0)
+		exit_program(MAP_ERROR);
 	window->cub->worldmap[window->cub->map_row] = NULL;
 }
 
@@ -118,5 +121,5 @@ void			set_cub_worldmap(char **line, t_window *window)
 	window->cub->map_col = max_width;
 	make_worldmap(line, window);
 	if (!check_wall_valid(window))
-		exit_program("Map is invalid!");
+		exit_program(MAP_ERROR);
 }

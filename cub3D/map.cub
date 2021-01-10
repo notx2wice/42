@@ -1,30 +1,30 @@
-R 800   800
+R 800 800
 
-NO   ./includes/textures/north.xpm
+NO ./includes/textures/north.xpm
 
-SO   ./includes/textures/south.xpm
+SO ./includes/textures/south.xpm
 
-WE   ./includes/textures/west.xpm
+WE ./includes/textures/west.xpm
 
-EA   ./includes/textures/east.xpm
+EA ./includes/textures/east.xpm
 
-S   ./includes/textures/sprite.xpm
+S ./includes/textures/sprite.xpm
 
-F 220, 100, 100
+F 220,100,100
 
 C 122,122,254
 
 111111111111111
 100000100000001
-100000000W00001
-100000100000001
-1100001000W0001
+100000000000001
+100000100000W01
+110000100000001
 110000111111111
 100000000000001
-100011100000101
-10001 100000001
-100011100000001
-100000000000001
+111111110000011
+       11000001111111
+       10001110000001
+111111110000001111111
 100022222220001
 100022222220001
 100022222220001

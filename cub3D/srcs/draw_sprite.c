@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 20:23:22 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 02:21:25 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 18:44:02 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,9 @@ void				sprite_raycast(t_window *window, t_d_sprites *sprites)
 		{
 			window->d_sprites->tex_x =
 				(int)((256.0 * ((double)stripe -
-				((double)(-sprites->sprite_width) /
-				2.0 + (double)sprites->screen_x)) *
-				(double)window->img[S_IDX]->width /
-				(double)sprites->sprite_width) / 256.0);
+				((double)(-sprites->sprite_width) / 2.0 +
+				(double)sprites->screen_x)) * (double)window->img[S_IDX]->width
+				/ (double)sprites->sprite_width) / 256.0);
 			pick_sprites_texture_color(window, window->d_sprites, stripe);
 			stripe++;
 		}

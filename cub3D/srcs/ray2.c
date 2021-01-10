@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 19:53:08 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/07 02:25:51 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void			calc_transform_x_y
 		player->plane.x * sprite_y);
 	d_sprites->screen_x =
 		(int)(((double)window->cub->res_width / 2.0) *
-		(1.0 + window->d_sprites->transform_x / d_sprites->transform_y));
+		(1.0 + d_sprites->transform_x / d_sprites->transform_y));
 	d_sprites->sprite_height = abs((int)(window->cub->res_height /
 		d_sprites->transform_y));
 }

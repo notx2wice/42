@@ -6,7 +6,7 @@
 /*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 19:30:28 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/07 00:52:31 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void		init_struct_window(t_window *window)
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_key(window->key);
 	window->rot_speed = 0.05;
-	window->move_speed = 0.1;
+	window->move_speed = 0.11;
 }
 
 static void		make_buffer(t_window *window, int w, int h)
