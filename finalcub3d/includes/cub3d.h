@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/14 20:59:59 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/15 00:34:29 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/15 20:08:00 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,7 +202,7 @@ void					free_array(char **str);
 void					free_cub(t_cub *cub);
 void					free_window(t_window *window);
 
-void					init_coord_d(t_coord_d coord_d);
+void					init_coord_d(t_coord_d *coord_d);
 void					init_player(t_player *player);
 void					init_cub(t_cub *cub);
 void					init_key(t_key *key);
