@@ -1,4 +1,4 @@
-R 1000 800
+R 4800 800
 
 NO ./includes/textures/north.xpm
 
@@ -9,6 +9,10 @@ WE ./includes/textures/west.xpm
 EA ./includes/textures/east.xpm
 
 S ./includes/textures/sprite.xpm
+
+ST ./includes/textures/sky.xpm
+
+FT ./includes/textures/wood.xpm
 
 F 220,100,100
 

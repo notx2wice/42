@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/19 23:10:14 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/14 20:35:26 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/16 02:28:31 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 static void			load_image(t_window *window, char *path, int idx)
 {
-	path[(int)ft_strlen(path) - 1] = '\0';
 	if (!(window->img[idx]->img = mlx_xpm_file_to_image(window->mlx,
 		(char *)path, &window->img[idx]->width, &window->img[idx]->height)))
 		exit_program("Path name error");

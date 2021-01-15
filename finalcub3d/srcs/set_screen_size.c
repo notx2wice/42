@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 12:52:47 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/14 20:35:14 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/16 02:26:50 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void			set_screen_size(char *line, t_cub *cub)
 
 	idx = 0;
 	width = ft_atoi(line, &idx);
-	if (width > 2560)
-		cub->res_width = 2560;
+	if (width > 1000)
+		cub->res_width = 1000;
 	else
 		cub->res_width = width;
 	height = ft_atoi(&line[idx], &idx);
-	if (height > 1440)
-		cub->res_height = 1440;
+	if (height > 800)
+		cub->res_height = 800;
 	else
 		cub->res_height = height;
 	if (height <= 0 || width <= 0)

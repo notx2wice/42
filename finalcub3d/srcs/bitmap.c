@@ -6,7 +6,7 @@
 /*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/01 17:15:34 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/15 13:27:00 by ukim             ###   ########.fr       */
+/*   Updated: 2021/01/16 02:34:08 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int					create_bitmap(t_img *pimg, char *name)
 	int				first_pix;
 
 	name = ft_strjoin(name, ".bmp");
-	fd = open(name, O_CREAT | O_RDWR);
+	fd = open(name, O_CREAT | O_RDWR, 0777);
 	file_size = 14 + 40 + 4 + (pimg->width * pimg->height) * 4;
 	first_pix = 14 + 40 + 4;
 	write(fd, "BM", 2);
