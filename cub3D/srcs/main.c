@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/18 22:39:57 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 20:28:50 by kim-eunju        ###   ########.fr       */
+/*   Created: 2020/12/18 22:39:57 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/14 20:33:53 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-void			draw(t_window *window)
+void	draw(t_window *window)
 {
 	int			x;
 	int			y;
@@ -34,7 +34,7 @@ void			draw(t_window *window)
 			window->pimg->img, 0, 0);
 }
 
-static int		main_loop(void *param)
+int		main_loop(void *param)
 {
 	t_window	*window;
 
@@ -45,7 +45,7 @@ static int		main_loop(void *param)
 	return (SUCCESS);
 }
 
-int				main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_window	*window;
 

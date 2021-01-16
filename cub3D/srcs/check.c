@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/04 23:36:02 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/07 21:46:53 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/01/04 23:36:02 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/14 21:08:07 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void		dfs(int **visited, int x, int y, t_window *window)
 	int			i;
 	t_coord_i	tpos;
 
-	if (window->cub->worldmap[x][y] == 'N' ||
+	if (window->cub->worldmap[x][y] == 'X' ||
 		(x <= 0 || x > window->cub->map_col) ||
 		(y <= 0 || y > window->cub->map_row))
 	{

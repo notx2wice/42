@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 19:41:09 by ukim              #+#    #+#             */
-/*   Updated: 2021/01/07 21:56:05 by kim-eunju        ###   ########.fr       */
+/*   Updated: 2021/01/14 20:31:02 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int						ft_atoi(char *str, int *idx)
 	num = 0;
 	sign = 1;
 	j = 0;
-	if (str[j] == ' ' || str[j] == ',' || ft_isalpha(str[j]))
+	while (!ft_isdigit(str[j]))
 		j++;
 	while (str[j] && ft_isdigit(str[j]))
 	{

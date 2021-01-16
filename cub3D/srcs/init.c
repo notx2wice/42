@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 19:30:28 by kim-eunju         #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/01/06 19:30:28 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/16 01:33:44 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		init_struct_window(t_window *window)
 	int			i;
 
 	i = 0;
-	while (i < 5)
+	while (i < TEX_CNT)
 	{
 		window->img[i] = (t_img *)malloc(sizeof(t_img));
 		init_img(window->img[i++]);
@@ -78,7 +78,7 @@ static void		init_struct_window(t_window *window)
 		exit_program(MEMORY_ALLOC_ERROR);
 	init_key(window->key);
 	window->rot_speed = 0.05;
-	window->move_speed = 0.11;
+	window->move_speed = 0.13712;
 }
 
 static void		make_buffer(t_window *window, int w, int h)

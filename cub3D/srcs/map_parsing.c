@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 19:28:56 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
+/*   Created: 2020/12/15 19:28:56 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/14 20:34:09 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ static void		set_cub_textures_path(char **tmp, t_cub *cub)
 		cub->we_path = ft_strdup(tmp[1]);
 	else if (ft_strcmp(tmp[0], "S") == 0)
 		cub->sprite_path = ft_strdup(tmp[1]);
+	else if (ft_strcmp(tmp[0], "ST") == 0)
+		cub->st_path = ft_strdup(tmp[1]);
+	else if (ft_strcmp(tmp[0], "FT") == 0)
+		cub->ft_path = ft_strdup(tmp[1]);
 	else
 		exit_program(ARGUMENT_ERROR);
 }
@@ -105,14 +109,13 @@ void			set_cub(t_window *window, char *path)
 
 	cub_file = read_map_file_to_array(path);
 	i = -1;
-	while (++i < 8)
+	while (++i < 3 + TEX_CNT)
 	{
 		tmp = ft_split(cub_file[i], ' ');
 		if (*tmp[0] == 'R')
-		{
-			window->cub->res_width = ft_atoi(tmp[1], 0);
-			window->cub->res_height = ft_atoi(tmp[2], 0);
-		}
+			set_screen_size(&cub_file[i][1], window->cub);
+		else if (!ft_strncmp("ST", *tmp, 2) || !ft_strncmp("FT", *tmp, 2))
+			exit_program(ARGUMENT_ERROR);
 		else if (ft_strlen(tmp[0]) == 2 || *tmp[0] == 'S')
 			set_cub_textures_path(tmp, window->cub);
 		else if (*tmp[0] == 'F' || *tmp[0] == 'C')

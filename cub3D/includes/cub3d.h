@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/14 20:59:59 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/10 18:45:01 by kim-eunju        ###   ########.fr       */
+/*   Created: 2020/12/14 20:59:59 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/16 01:32:39 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <math.h>
 # include "./libft/libft.h"
 # include "./getnextline/get_next_line.h"
-# include <mlx.h>
+# include "/usr/local/include/mlx.h"
 # include <stdio.h>
 
 # define KEY_W 13
@@ -40,6 +40,10 @@
 # define WE_IDX 2
 # define EA_IDX 3
 # define S_IDX 4
+# define ST_IDX 5
+# define FT_IDX 6
+# define TEX_CNT 5
+# define BONUS_TEX_CNT 7
 
 # define ERROR 0
 # define SUCCESS 1
@@ -119,6 +123,8 @@ typedef struct			s_cub
 	char				*so_path;
 	char				*no_path;
 	char				*sprite_path;
+	char				*st_path;
+	char				*ft_path;
 	int					floor_color;
 	int					ceiling_color;
 	int					map_col;
@@ -148,6 +154,14 @@ typedef struct			s_ray
 	int					tex_y;
 	double				wall_x;
 	double				*z_buffer;
+	t_coord_d			ray_dir0;
+	t_coord_d			ray_dir1;
+	int					p;
+	double				pos_z;
+	double				row_dist;
+	t_coord_d			floor_step;
+	t_coord_d			floor;
+	t_coord_i			cell;
 }						t_ray;
 
 typedef struct			s_window
@@ -155,7 +169,7 @@ typedef struct			s_window
 	void				*mlx;
 	void				*win;
 	int					save;
-	t_img				*img[5];
+	t_img				*img[BONUS_TEX_CNT];
 	t_img				*pimg;
 	t_ray				*ray;
 	t_player			*player;
@@ -188,7 +202,7 @@ void					free_array(char **str);
 void					free_cub(t_cub *cub);
 void					free_window(t_window *window);
 
-void					init_coord_d(t_coord_d coord_d);
+void					init_coord_d(t_coord_d *coord_d);
 void					init_player(t_player *player);
 void					init_cub(t_cub *cub);
 void					init_key(t_key *key);
@@ -215,10 +229,12 @@ void					set_cub_worldmap(char **line, t_window *window);
 void					set_cub(t_window *window, char *path);
 int						check_color_valid(char *cub_line);
 int						map_size_check(t_window *window, int x, int y);
+void					set_screen_size(char *line, t_cub *cub);
 int						check_wall_valid(t_window *window);
 
 void					load_texture(t_window *window);
 void					calc_wall_texture(t_window *window, t_ray *ray);
+void					draw_sky_floor(t_window *window);
 void					floor_ceiling_to_buffer(t_window *window);
 void					wall_to_buffer(t_window *window, t_ray *ray, int x);
 

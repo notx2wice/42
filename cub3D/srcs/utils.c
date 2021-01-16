@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kim-eunju <kim-eunju@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ukim <ukim@student.42seoul.kr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/06 19:57:37 by ekim              #+#    #+#             */
-/*   Updated: 2021/01/06 19:59:46 by kim-eunju        ###   ########.fr       */
+/*   Created: 2021/01/06 19:57:37 by ukim              #+#    #+#             */
+/*   Updated: 2021/01/16 02:08:35 by ukim             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void		free_buffer_img_sprite_cub(t_window *window)
 	free(window->cub->so_path);
 	free(window->cub->no_path);
 	free(window->cub->sprite_path);
+	free(window->sprites);
 	free_array(window->cub->worldmap);
 }
 
