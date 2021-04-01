@@ -1,0 +1,6 @@
+{
+    "editor.renderWhitespace": "all",
+    "files.associations": {
+        "push_swap.h": "c"
+    }
+}
