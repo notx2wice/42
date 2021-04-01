@@ -1,0 +1,1 @@
+ARG=$(./rand_generators $N) ; ./push_swap $ARG |./checker $ARG
