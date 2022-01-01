@@ -67,7 +67,7 @@ Inﬂuxdb MySQL의 kind는 “ClusterIP”여야합니다.
 
 
 다음은 설정해야하는 항목의 예입니다.
-<img src="https://user-images.githubusercontent.com/53321189/99756721-1a537100-2b31-11eb-94a1-0cec379337bd.png" width="100px" height="50px" title="Github_Logo"/>
+<img src="https://user-images.githubusercontent.com/53321189/99756721-1a537100-2b31-11eb-94a1-0cec379337bd.png" width="1000px" height="500px" title="Logo"/>
 
 동그라미는 유저가 접근할 수 있는 것들이고, 네모는 유저는 불가, 관리자만 접근 가능합니다.
 
