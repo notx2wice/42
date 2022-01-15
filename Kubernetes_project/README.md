@@ -3,7 +3,6 @@ https://medium.com/dtlpub/minikube-drama-in-mac-os-331a6dc54670
 이번 면접 준비를 하며 이전에 수행했던 이 프로젝트를 실행하니 손볼곳이 많더군요...
 우선 vm을 hyperkit으로 변경하였습니다. 외부 아이피로 접속이 ㄷㅏ시 가능해졌습니다.
 
-
 접속 주소 검색법
 ~~~
 minikube service [service name] 
