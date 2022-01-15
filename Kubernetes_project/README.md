@@ -1,4 +1,4 @@
-## virtualbox업데이트로 인한 오류가 mac os에 존재하고 있습니다.
+## virtualbox업데이트로 인한 오류가 mac os에 존재하고 있습니다. 2022/01/15
 https://medium.com/dtlpub/minikube-drama-in-mac-os-331a6dc54670
 이번 면접 준비를 하며 이전에 수행했던 이 프로젝트를 실행하니 손볼곳이 많더군요...
 우선 vm을 hyperkit으로 변경하였습니다. 외부 아이피로 접속이 가능해졌습니다.
@@ -6,11 +6,10 @@ https://medium.com/dtlpub/minikube-drama-in-mac-os-331a6dc54670
 접속할 주소는 dashboard의 외부 아이피가 아니게 되었습니다. 이부분은 이슈로 만들어서 추후 해결하겠습니다.
 
 접속 주소 검색법
-'''
-minikube service [service name]를 수행하여
-url을 알아냅니다. 
-알아낸 url로 접속 하시면 됩니다.
-'''
+~~~
+minikube service [service name] 
+을 수행하여 url을 알아냅니다. 알아낸 url로 접속 하시면 됩니다.
+~~~
 # 프로젝트 구성도
 <img src="https://user-images.githubusercontent.com/53321189/99756721-1a537100-2b31-11eb-94a1-0cec379337bd.png" width="1000px" height="700px" title="Logo"/>
 동그라미는 유저가 접근할 수 있는 것들이고, 네모는 유저는 불가, 관리자만 접근 가능합니다.
