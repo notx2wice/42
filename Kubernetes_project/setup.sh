@@ -1,14 +1,9 @@
 #!/bin/bash
-
 # export MINIKUBE_HOME=~/goinfre
 export MINIKUBE_HOME=$HOME
 # # SETUP_LOG=~/42cursus/ft_services/setup.log
-SETUP_LOG=~/42cursus/ft_services/setup.log
-
 minikube delete
-
-#start minikube with docker.
-minikube start --driver=virtualbox --hyperv-virtual-switch "Primary Virtual Switch"
+minikube start --vm-driver=hyperkit --extra-config=apiserver.service-node-port-range=1-65535
 
 minikube addons enable metrics-server
 minikube addons enable dashboard
